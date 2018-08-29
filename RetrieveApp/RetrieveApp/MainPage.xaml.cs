@@ -13,6 +13,5 @@ namespace RetrieveApp
         {
             InitializeComponent();
         }
-        public static void Return() { }
     }
 }
