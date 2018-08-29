@@ -12,10 +12,8 @@ namespace RetrieveApp
             InitializeComponent();
             MainPage = new MainPage();
             // Comment
-            //Hello man 
+            Console.WriteLine("Test");
         }
-
-        public void Test() { }
 
         protected override void OnStart()
         {
