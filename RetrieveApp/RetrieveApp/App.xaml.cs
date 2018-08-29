@@ -11,8 +11,7 @@ namespace RetrieveApp
         {
             InitializeComponent();
             MainPage = new MainPage();
-            // Comment
-            //Hello man 
+            //TEST
         }
 
         protected override void OnStart()
