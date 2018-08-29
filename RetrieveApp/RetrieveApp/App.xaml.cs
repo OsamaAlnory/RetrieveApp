@@ -13,6 +13,7 @@ namespace RetrieveApp
             MainPage = new MainPage();
             // Comment
             Console.WriteLine("Test");
+            //Hello Sulaeimn
         }
 
         protected override void OnStart()
