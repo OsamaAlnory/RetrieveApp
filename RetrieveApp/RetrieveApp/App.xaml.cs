@@ -14,6 +14,8 @@ namespace RetrieveApp
             // Comment
         }
 
+        public void Test() { }
+
         protected override void OnStart()
         {
             // Handle when your app starts
