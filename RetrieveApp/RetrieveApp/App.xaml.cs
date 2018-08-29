@@ -10,8 +10,8 @@ namespace RetrieveApp
         public App()
         {
             InitializeComponent();
-
             MainPage = new MainPage();
+            // Comment
         }
 
         protected override void OnStart()
