@@ -12,7 +12,7 @@ namespace RetrieveApp
             InitializeComponent();
             MainPage = new MainPage();
             // Comment
-            //Hello Sulaeiman 
+            //Hello Sulaeimn
         }
 
         public void Test() { }
