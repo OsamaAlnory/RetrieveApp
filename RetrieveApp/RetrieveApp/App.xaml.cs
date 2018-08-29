@@ -12,7 +12,7 @@ namespace RetrieveApp
             InitializeComponent();
             MainPage = new MainPage();
             //TEST
-            //We must Fix This
+            //we got it 
         }
 
         protected override void OnStart()
