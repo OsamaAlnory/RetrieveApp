@@ -11,7 +11,7 @@ namespace RetrieveApp.Elements
         {
             BackgroundColor = Color.Green;
             Text = "6zrk";
-
+            
         }
 
     }
