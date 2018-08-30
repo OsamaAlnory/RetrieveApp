@@ -10,8 +10,7 @@ namespace RetrieveApp
         public App()
         {
             InitializeComponent();
-            MainPage = new MainPage();
-            //TEST 
+            MainPage = new Pages.WelcomePage();
         }
 
         protected override void OnStart()
