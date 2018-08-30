@@ -8,7 +8,7 @@ namespace RetrieveApp.Pages
     {
         public void test()
         {
-            Console.WriteLine("My name is a bozr");
+            Console.WriteLine("Heelo man ");
         }
     }
 }
