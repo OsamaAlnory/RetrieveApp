@@ -1,9 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<CarouselPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RetrieveApp.Pages.WelcomePage"
-             xmlns:path="clr-namespace:RetrieveApp.Elements;assembly=RetrieveApp">
-    <StackLayout>
-        <path:MyButton x:Name="tst"/>
-    </StackLayout>
-</ContentPage>
+             xmlns:gr="clr-namespace:DevsDNA;assembly=DevsDNA.GradientBoxView"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage>
+        <AbsoluteLayout>
+            <gr:GradientBoxView BottomColor="#F3B3FF" TopColor="#BD5BFF"
+              AbsoluteLayout.LayoutFlags="All"
+              AbsoluteLayout.LayoutBounds="0,0,1,1"/>
+            <StackLayout AbsoluteLayout.LayoutFlags="All"
+                   AbsoluteLayout.LayoutBounds="0,0,1,1" Spacing="10">
+                <Label Text="Retrieve App" HorizontalOptions="CenterAndExpand"
+                   FontSize="52" TextColor="White" 
+                       FontFamily="{StaticResource Harlow}"
+                       Margin="0,55,0,0"/>
+                <Image x:Name="icon" Margin="0,15,0,0"/>
+                <Label Text="Welcome to Retrieve App created by"
+                       FontFamily="{StaticResource Baloo}"
+                       HorizontalOptions="CenterAndExpand"
+                       HorizontalTextAlignment="Center"
+                       FontSize="21" TextColor="Black" Margin="0,10,0,0"
+                       />
+                <Button Text="Get started" VerticalOptions="EndAndExpand"
+                        Margin="15,0,15,20" FontSize="29" TextColor="Black"
+                        BackgroundColor="White" Padding="10" FontAttributes="Bold"
+                        BorderRadius="14" x:Name="btn"
+                        FontFamily="{StaticResource Baloo}"/>
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage>
+    <ContentPage>
+        <AbsoluteLayout>
+            <gr:GradientBoxView BottomColor="#F3B3FF" TopColor="#BD5BFF"
+              AbsoluteLayout.LayoutFlags="All"
+              AbsoluteLayout.LayoutBounds="0,0,1,1"/>
+            <StackLayout AbsoluteLayout.LayoutFlags="All"
+                         AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <StackLayout VerticalOptions="CenterAndExpand">
+                    <Label HorizontalOptions="CenterAndExpand"
+                       HorizontalTextAlignment="Center" FontSize="47"
+                    Text="Login as:" FontFamily="{StaticResource Baloo}"/>
+                    <Button Text="User" FontSize="29" BackgroundColor="White"
+                        FontFamily="{StaticResource Baloo}" Margin="15,0,15,0"
+                            Padding="0" BorderRadius="14" x:Name="user"/>
+                    <Button Text="Admin" FontSize="29" BackgroundColor="White"
+                        FontFamily="{StaticResource Baloo}" Margin="15,0,15,0"
+                            Padding="0" BorderRadius="14" x:Name="login"/>
+                </StackLayout>
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage>
+</CarouselPage>
