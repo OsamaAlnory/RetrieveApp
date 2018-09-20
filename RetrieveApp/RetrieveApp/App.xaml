@@ -4,13 +4,12 @@
              x:Class="RetrieveApp.App">
     <Application.Resources>
         <ResourceDictionary>
-            <OnPlatform x:TypeArguments="x:String" x:Key="Harlow">
-                <On Platform="Android" Value="harlow.ttf#Harlow Solid Italic"/>
-                <!--On Platform="UWP" Value="/Assets/OpenSans-Bold.ttf#Open Sans"/>
-                <On Platform="iOS" Value="OpenSans-Bold"/!-->
+            <OnPlatform x:TypeArguments="x:String" x:Key="Harlow"
+                        iOS="Harlow"
+                        Android="harlow.ttf#Harlow Solid Italic">
             </OnPlatform>
-            <OnPlatform x:TypeArguments="x:String" x:Key="Baloo">
-                <On Platform="Android" Value="baloo.ttf#Baloo Tamudu"/>
+            <OnPlatform x:TypeArguments="x:String" x:Key="MFont"
+                        iOS="Oswald" Android="oswald-r.ttf#Oswald">
             </OnPlatform>
         </ResourceDictionary>
     </Application.Resources>

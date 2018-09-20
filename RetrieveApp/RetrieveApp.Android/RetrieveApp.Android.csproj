@@ -47,6 +47,7 @@
     <EnableLLVM>false</EnableLLVM>
     <BundleAssemblies>false</BundleAssemblies>
     <AndroidCreatePackagePerAbi>true</AndroidCreatePackagePerAbi>
+    <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -59,8 +60,14 @@
     <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie">
       <Version>2.5.4</Version>
     </PackageReference>
-    <PackageReference Include="DevsDNA.GradientBoxView">
-      <Version>1.0.1</Version>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>11.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="System.Net.Http">
+      <Version>4.3.3</Version>
+    </PackageReference>
+    <PackageReference Include="Xam.Plugin.Geolocator">
+      <Version>4.5.0.6</Version>
     </PackageReference>
     <PackageReference Include="Xam.Plugin.Media">
       <Version>4.0.1.5</Version>
@@ -80,6 +87,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BButtonRendererAndroid.cs" />
+    <Compile Include="GradientLayoutRenderer.cs" />
+    <Compile Include="IEntryRenderer.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -90,6 +99,8 @@
     <AndroidAsset Include="Assets\checked_done_.json" />
     <AndroidAsset Include="Assets\check_animation.json" />
     <AndroidAsset Include="Assets\success.json" />
+    <AndroidAsset Include="Assets\oswald-r.ttf" />
+    <AndroidAsset Include="Assets\loading.json" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
@@ -117,7 +128,6 @@
     <Folder Include="Resources\drawable-xhdpi\" />
     <Folder Include="Resources\drawable-xxhdpi\" />
     <Folder Include="Resources\drawable-xxxhdpi\" />
-    <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RetrieveApp\RetrieveApp.csproj">
@@ -127,6 +137,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="github.png" />
+    <AndroidResource Include="Resources\drawable\add.png" />
+    <AndroidResource Include="Resources\drawable\settings.png" />
+    <AndroidResource Include="Resources\drawable\reservations.png" />
+    <AndroidResource Include="Resources\drawable\posts.png" />
+    <AndroidResource Include="Resources\drawable\places.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

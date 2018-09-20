@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RetrieveApp.Pages.CreateUserPage"
+             xmlns:dir="clr-namespace:RetrieveApp.Elements">
+    <dir:GradientLayout VerticalOptions="FillAndExpand"
+         HorizontalOptions="FillAndExpand" ColorsList="#CC51F1,#502189"
+         Mode="ToBottom">
+        <StackLayout VerticalOptions="CenterAndExpand" Padding="10">
+            <Frame Padding="0" CornerRadius="20">
+                <dir:GradientLayout ColorsList="#a3c6ff,#00d4ff"
+                                Mode="ToLeft">
+                    <dir:IEntry Placeholder="Konto-ID"
+                                HorizontalTextAlignment="Center"
+                                FontFamily="{StaticResource MFont}"/>
+                </dir:GradientLayout>
+            </Frame>
+            <Frame Padding="0" CornerRadius="20">
+                <dir:GradientLayout ColorsList="#a3c6ff,#00d4ff"
+                                Mode="ToLeft">
+                    <dir:IEntry Placeholder="Lösenord"
+                                HorizontalTextAlignment="Center"
+                                FontFamily="{StaticResource MFont}"/>
+                </dir:GradientLayout>
+            </Frame>
+            <Frame Padding="0" CornerRadius="20">
+                <dir:GradientLayout ColorsList="#a3c6ff,#00d4ff"
+                                Mode="ToLeft">
+                    <dir:IEntry Placeholder="Namn"
+                                HorizontalTextAlignment="Center"
+                                FontFamily="{StaticResource MFont}"/>
+                </dir:GradientLayout>
+            </Frame>
+            <Button Text="Skapa ett konto" FontSize="29"
+                        BackgroundColor="MediumPurple"
+                        FontFamily="{StaticResource MFont}" Margin="15,0,15,0"
+                        Padding="0" BorderRadius="14" x:Name="crt_acc"/>
+        </StackLayout>
+    </dir:GradientLayout>
+</ContentPage>
