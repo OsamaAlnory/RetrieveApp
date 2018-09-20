@@ -24,6 +24,8 @@ namespace RetrieveApp.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             Xamarin.FormsMaps.Init();
+            App.ScreenHeight = (int)UIScreen.MainScreen.Bounds.Height;
+            App.ScreenWidth = (int)UIScreen.MainScreen.Bounds.Width;
             LoadApplication(new App());
             return base.FinishedLaunching(app, options);
         }

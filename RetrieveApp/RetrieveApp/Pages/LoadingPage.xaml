@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RetrieveApp.Pages.LoadingPage"
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             xmlns:dir="clr-namespace:RetrieveApp.Elements"
+             NavigationPage.HasNavigationBar="False">
+    <dir:GradientLayout VerticalOptions="FillAndExpand"
+         HorizontalOptions="FillAndExpand" ColorsList="#CC51F1,#502189"
+         Mode="ToBottom">
+        <forms:AnimationView x:Name="load" WidthRequest="150" HeightRequest="150"
+                  HorizontalOptions="CenterAndExpand" Animation="loading.json"
+                  VerticalOptions="CenterAndExpand" IsVisible="false"
+                  Loop="true" AutoPlay="false"/>
+    </dir:GradientLayout>
+</ContentPage>

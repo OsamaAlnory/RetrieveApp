@@ -1,17 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="RetrieveApp.Pages.MapPage">
-    <AbsoluteLayout>
-        <StackLayout AbsoluteLayout.LayoutFlags="All"
+             x:Class="RetrieveApp.Pages.MapPage" BarBackgroundColor="DarkOrchid"
+            NavigationPage.HasNavigationBar="False">
+    <ContentPage Title="Karta" Icon="places.png">
+        <AbsoluteLayout>
+            <StackLayout AbsoluteLayout.LayoutFlags="All"
                      AbsoluteLayout.LayoutBounds="0,0,1,1"
                      x:Name="st" Spacing="0">
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage>
+    <ContentPage Title="Flöde" Icon="posts.png">
+        <StackLayout Padding="15">
+            <SearchBar x:Name="search" Placeholder="#Sök här"/>
+            <ScrollView>
+                <StackLayout x:Name="fl" Spacing="10"/>
+            </ScrollView>
         </StackLayout>
-        <Button x:Name="t" Text="Hello" AbsoluteLayout.LayoutFlags="All"
-                AbsoluteLayout.LayoutBounds="0,0,1,0.1"/>
-        <!--StackLayout AbsoluteLayout.LayoutFlags="All"
-                     AbsoluteLayout.LayoutBounds="0,0,1,1">
-            
-        </!-->
-    </AbsoluteLayout>
-</ContentPage>
+    </ContentPage>
+    <ContentPage Title="Mina beställningar" Icon="reservations.png">
+    </ContentPage>
+    <ContentPage Title="Lägg till" Icon="add.png" x:Name="pg_admin">
+        <StackLayout>
+            <Entry x:Name="prd_name" Placeholder="Produktnamn"/>
+            <Button Text="Ta en bild" x:Name="btn_img"/>
+            <Button Text="Lägg till"/>
+        </StackLayout>
+    </ContentPage>
+    <ContentPage Title="Inställningar" Icon="settings.png">
+        
+    </ContentPage>
+</TabbedPage>

@@ -2,53 +2,68 @@
 <CarouselPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RetrieveApp.Pages.WelcomePage"
-             xmlns:gr="clr-namespace:DevsDNA;assembly=DevsDNA.GradientBoxView"
+             xmlns:dir="clr-namespace:RetrieveApp.Elements"
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
              NavigationPage.HasNavigationBar="False">
     <ContentPage>
-        <AbsoluteLayout>
-            <gr:GradientBoxView BottomColor="#F3B3FF" TopColor="#BD5BFF"
-              AbsoluteLayout.LayoutFlags="All"
-              AbsoluteLayout.LayoutBounds="0,0,1,1"/>
-            <StackLayout AbsoluteLayout.LayoutFlags="All"
-                   AbsoluteLayout.LayoutBounds="0,0,1,1" Spacing="10">
-                <Label Text="Retrieve App" HorizontalOptions="CenterAndExpand"
+        <dir:GradientLayout ColorsList="#CC51F1,#502189"
+         Mode="ToBottom" Spacing="10">
+            <Label Text="Retrieve It" HorizontalOptions="CenterAndExpand"
                    FontSize="52" TextColor="White" 
-                       FontFamily="{StaticResource Harlow}"
+                       FontFamily="{StaticResource MFont}"
                        Margin="0,55,0,0"/>
-                <Image x:Name="icon" Margin="0,15,0,0"/>
-                <Label Text="Welcome to Retrieve App created by"
-                       FontFamily="{StaticResource Baloo}"
+            <Image x:Name="icon" Margin="0,15,0,0"/>
+            <Label Text="Välkommen till RetrieveIt appen!"
+                       FontFamily="{StaticResource MFont}"
                        HorizontalOptions="CenterAndExpand"
                        HorizontalTextAlignment="Center"
                        FontSize="21" TextColor="Black" Margin="0,10,0,0"
                        />
-                <Button Text="Get started" VerticalOptions="EndAndExpand"
-                        Margin="15,0,15,20" FontSize="29" TextColor="Black"
+            <!-- Margin="15,0,15,50" FontSize="29" -->
+            <Button Text="GET STARTED"
+                        VerticalOptions="EndAndExpand"
+                        TextColor="Black" FontSize="29"
                         BackgroundColor="White" Padding="10" FontAttributes="Bold"
                         BorderRadius="14" x:Name="btn"
-                        FontFamily="{StaticResource Baloo}"/>
-            </StackLayout>
-        </AbsoluteLayout>
+                        FontFamily="{StaticResource MFont}"/>
+        </dir:GradientLayout>
     </ContentPage>
     <ContentPage>
-        <AbsoluteLayout>
-            <gr:GradientBoxView BottomColor="#F3B3FF" TopColor="#BD5BFF"
-              AbsoluteLayout.LayoutFlags="All"
-              AbsoluteLayout.LayoutBounds="0,0,1,1"/>
-            <StackLayout AbsoluteLayout.LayoutFlags="All"
-                         AbsoluteLayout.LayoutBounds="0,0,1,1">
-                <StackLayout VerticalOptions="CenterAndExpand">
+        <dir:GradientLayout VerticalOptions="FillAndExpand"
+         HorizontalOptions="FillAndExpand" ColorsList="#CC51F1,#502189"
+         Mode="ToBottom">
+            <StackLayout VerticalOptions="CenterAndExpand">
+                <StackLayout Padding="10" Spacing="17">
                     <Label HorizontalOptions="CenterAndExpand"
                        HorizontalTextAlignment="Center" FontSize="47"
-                    Text="Login as:" FontFamily="{StaticResource Baloo}"/>
-                    <Button Text="User" FontSize="29" BackgroundColor="White"
-                        FontFamily="{StaticResource Baloo}" Margin="15,0,15,0"
-                            Padding="0" BorderRadius="14" x:Name="user"/>
-                    <Button Text="Admin" FontSize="29" BackgroundColor="White"
-                        FontFamily="{StaticResource Baloo}" Margin="15,0,15,0"
-                            Padding="0" BorderRadius="14" x:Name="login"/>
+                    Text="Retrieve It konto" FontFamily="{StaticResource MFont}"
+                           TextColor="White"/>
+                    <Frame Padding="0" CornerRadius="12" Margin="0,15,0,0">
+                        <dir:IEntry x:Name="e_name"
+                            Placeholder="ID" FontFamily="{StaticResource MFont}"
+                            HorizontalTextAlignment="Center" FontSize="28"
+                            BackgroundColor="White" TextColor="Black"/>
+                    </Frame>
+                    <Frame Padding="0" CornerRadius="12">
+                        <dir:IEntry x:Name="e_pass" IsPassword="True"
+                            Placeholder="LÖSENORD" FontFamily="{StaticResource MFont}"
+                            HorizontalTextAlignment="Center" FontSize="28"
+                            BackgroundColor="White" TextColor="Black"/>
+                    </Frame>
+                    <Button Text="Logga in" FontSize="29" BackgroundColor="MediumPurple"
+                        FontFamily="{StaticResource MFont}" Margin="15,20,15,0"
+                            Padding="0" BorderRadius="14" x:Name="log_btn"/>
+                    <Button Text="Skapa ett konto" FontSize="29"
+                        BackgroundColor="MediumPurple"
+                        FontFamily="{StaticResource MFont}" Margin="15,0,15,0"
+                            Padding="0" BorderRadius="14" x:Name="crt_btn"/>
+                </StackLayout>
+                <StackLayout HeightRequest="120" WidthRequest="120">
+                    <forms:AnimationView x:Name="animationView" 
+	             Animation="success.json" Loop="False" AutoPlay="False"
+                 IsVisible="False" HeightRequest="120" WidthRequest="120"/>
                 </StackLayout>
             </StackLayout>
-        </AbsoluteLayout>
+        </dir:GradientLayout>
     </ContentPage>
 </CarouselPage>
