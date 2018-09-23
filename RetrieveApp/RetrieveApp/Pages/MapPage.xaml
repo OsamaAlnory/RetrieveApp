@@ -2,6 +2,7 @@
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RetrieveApp.Pages.MapPage" BarBackgroundColor="DarkOrchid"
+            xmlns:element="clr-namespace:RetrieveApp.Elements"
             NavigationPage.HasNavigationBar="False">
     <ContentPage Title="Karta" Icon="places.png">
         <AbsoluteLayout>
@@ -12,23 +13,36 @@
         </AbsoluteLayout>
     </ContentPage>
     <ContentPage Title="Flöde" Icon="posts.png">
-        <StackLayout Padding="15">
+        <element:GradientLayout HorizontalOptions="FillAndExpand"
+         VerticalOptions="FillAndExpand" ColorsList="#6724b7,#e5dbff"
+         Mode="ToBottom" Padding="15">
             <SearchBar x:Name="search" Placeholder="#Sök här"/>
             <ScrollView>
                 <StackLayout x:Name="fl" Spacing="10"/>
             </ScrollView>
-        </StackLayout>
+        </element:GradientLayout>
     </ContentPage>
     <ContentPage Title="Mina beställningar" Icon="reservations.png">
+        <element:GradientLayout HorizontalOptions="FillAndExpand"
+         VerticalOptions="FillAndExpand" ColorsList="#6724b7,#e5dbff"
+         Mode="ToBottom">
+
+        </element:GradientLayout>
     </ContentPage>
     <ContentPage Title="Lägg till" Icon="add.png" x:Name="pg_admin">
-        <StackLayout>
+        <element:GradientLayout HorizontalOptions="FillAndExpand"
+         VerticalOptions="FillAndExpand" ColorsList="#6724b7,#e5dbff"
+         Mode="ToBottom">
             <Entry x:Name="prd_name" Placeholder="Produktnamn"/>
             <Button Text="Ta en bild" x:Name="btn_img"/>
             <Button Text="Lägg till"/>
-        </StackLayout>
+        </element:GradientLayout>
     </ContentPage>
     <ContentPage Title="Inställningar" Icon="settings.png">
-        
+        <element:GradientLayout HorizontalOptions="FillAndExpand"
+         VerticalOptions="FillAndExpand" ColorsList="#6724b7,#e5dbff"
+         Mode="ToBottom">
+            
+        </element:GradientLayout>
     </ContentPage>
 </TabbedPage>

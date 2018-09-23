@@ -18,12 +18,10 @@ namespace RetrieveApp.Elements
         {
             this.place = place;
             Type = PinType.SavedPin;
-            Address = place.AddressT;
+            Address = place.Address;
             Label = place.SName;
-            string[] p = place.AddressG.Split(',');
-            double[] d = { double.Parse(p[0], CultureInfo.InvariantCulture)
-            , double.Parse(p[1], CultureInfo.InvariantCulture)};
-            Position = new Position(d[0], d[1]);
+            //double[] d = { double.Parse(p[0], CultureInfo.InvariantCulture)
+            //, double.Parse(p[1], CultureInfo.InvariantCulture)};
             Clicked += (s, e) => OnClicked();
             pins.Add(this);
         }

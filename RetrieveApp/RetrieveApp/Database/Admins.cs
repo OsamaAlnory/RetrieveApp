@@ -9,8 +9,7 @@ namespace RetrieveApp.Database
         public string ID { get; set; }
         public string Password { get; set; }
         public string SName { get; set; }
-        public string AddressT { get; set; }
-        public string AddressG { get; set; }
+        public string Address { get; set; }
         public object Icon { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="X5k-f2-b5h">
+    <device id="retina5_9" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="gAE-YM-kbH">
+            <objects>
+                <viewController id="X5k-f2-b5h" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Y8P-hJ-Z43"/>
+                        <viewControllerLayoutGuide type="bottom" id="9ZL-r4-8FZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yd7-JS-zBw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" image="Image-1" translatesAutoresizingMaskIntoConstraints="NO" id="23" semanticContentAttribute="forceLeftToRight" tag="1">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                <color key="backgroundColor" colorSpace="calibratedRGB" red="0.55686274509803924" green="0.050980392156862744" blue="0.71764705882352942" alpha="1"/>
+                                <color key="tintColor" colorSpace="calibratedRGB" red="0.55686274509803924" green="0.050980392156862744" blue="0.71764705882352942" alpha="1"/>
+                                <constraints>
+                                    <constraint id="243" firstAttribute="width" constant="375"/>
+                                    <constraint id="244" firstAttribute="height" constant="812"/>
+                                    <constraint id="656" firstAttribute="height" constant="812"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="23" firstAttribute="centerY" secondItem="yd7-JS-zBw" secondAttribute="centerY" priority="1" id="39"/>
+                            <constraint firstItem="23" firstAttribute="centerX" secondItem="yd7-JS-zBw" secondAttribute="centerX" priority="1" id="41"/>
+                        </constraints>
+                        <color key="backgroundColor" colorSpace="calibratedRGB" red="0.55686274509803924" green="0.050980392156862744" blue="0.71764705882352942" alpha="1"/>
+                        <color key="tintColor" colorSpace="calibratedRGB" red="0.55686274509803924" green="0.050980392156862744" blue="0.71764705882352942" alpha="1"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XAI-xm-WK6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="349" y="339"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Image-1" width="500" height="500"/>
+    </resources>
+    <color key="tintColor" colorSpace="calibratedRGB" red="0.58431372549019611" green="0.031372549019607843" blue="0.71764705882352942" alpha="1"/>
+</document>
