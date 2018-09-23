@@ -16,7 +16,7 @@ namespace RetrieveApp.Pages
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MapPage : TabbedPage
 	{
-        private static Account _g;
+        public static Account _g;
         public static MapPage mapPage;
         private double LAT;
         private double LON;
@@ -30,6 +30,10 @@ namespace RetrieveApp.Pages
                     mapPage = this;
                 }
                 InitializeComponent();
+            if(_d is Guests)
+            {
+                Children.Remove(pg_admin);
+            }
                 var map = new Map(MapSpan.FromCenterAndRadius(
                     new Position(56.05883, 12.7326381), Distance.FromMiles(3)))
                 {
@@ -37,17 +41,25 @@ namespace RetrieveApp.Pages
                 };
                 map.MapType = MapType.Street;
                 st.Children.Add(map);
-                fl.Children.Add(new ProductCard(
-                    new Product("Hello", 1, 1, 1, DateTime.Now, null)));
-                fl.Children.Add(new ProductCard(
-                    new Product("Hej", 1, 1, 1, DateTime.Now, null)));
                 prd_name.Margin = new Thickness(0, App.ScreenHeight / 24, 0, 0);
-                foreach (Admins a in DBActions.admins)
+                foreach (IPin pin in IPin.pins)
                 {
-                    map.Pins.Add(new IPin(a));
+                    map.Pins.Add(pin);
                 }
+                foreach(Products pr in DBActions.products)
+                {
+                fl.Children.Add(new ProductCard(pr));
+                }
+            btn_img.Clicked += Camera_Clicked;
         }
+        private async void Camera_Clicked(object sender, EventArgs e)
+        {
 
+            var photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions() { });
+
+            if (photo != null) { }
+                //PhotoImage.Source = ImageSource.FromStream(() => { return photo.GetStream(); });
+        }
         private async Task getLocation()
         {
             var loc = CrossGeolocator.Current;

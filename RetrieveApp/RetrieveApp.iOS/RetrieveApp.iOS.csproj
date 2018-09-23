@@ -94,6 +94,7 @@
     <LaunchForBackgroundFetch>false</LaunchForBackgroundFetch>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CloseAppIOS.cs" />
     <Compile Include="GradientLayoutRenderer.cs" />
     <Compile Include="IEntryRenderer.cs" />
     <Compile Include="Main.cs" />
