@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="X5k-f2-b5h">
-    <device id="retina5_9" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="199">
+    <device id="retina5_5" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -8,45 +8,26 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="gAE-YM-kbH">
+        <scene sceneID="198">
             <objects>
-                <viewController id="X5k-f2-b5h" sceneMemberID="viewController">
+                <viewController id="199" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Y8P-hJ-Z43"/>
-                        <viewControllerLayoutGuide type="bottom" id="9ZL-r4-8FZ"/>
+                        <viewControllerLayoutGuide type="top" id="196"/>
+                        <viewControllerLayoutGuide type="bottom" id="197"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="yd7-JS-zBw">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="center" image="Image-1" translatesAutoresizingMaskIntoConstraints="NO" id="23" semanticContentAttribute="forceLeftToRight" tag="1">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                                <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
-                                <color key="backgroundColor" colorSpace="calibratedRGB" red="0.55686274509803924" green="0.050980392156862744" blue="0.71764705882352942" alpha="1"/>
-                                <color key="tintColor" colorSpace="calibratedRGB" red="0.55686274509803924" green="0.050980392156862744" blue="0.71764705882352942" alpha="1"/>
-                                <constraints>
-                                    <constraint id="243" firstAttribute="width" constant="375"/>
-                                    <constraint id="244" firstAttribute="height" constant="812"/>
-                                    <constraint id="656" firstAttribute="height" constant="812"/>
-                                </constraints>
-                            </imageView>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="23" firstAttribute="centerY" secondItem="yd7-JS-zBw" secondAttribute="centerY" priority="1" id="39"/>
-                            <constraint firstItem="23" firstAttribute="centerX" secondItem="yd7-JS-zBw" secondAttribute="centerX" priority="1" id="41"/>
-                        </constraints>
-                        <color key="backgroundColor" colorSpace="calibratedRGB" red="0.55686274509803924" green="0.050980392156862744" blue="0.71764705882352942" alpha="1"/>
-                        <color key="tintColor" colorSpace="calibratedRGB" red="0.55686274509803924" green="0.050980392156862744" blue="0.71764705882352942" alpha="1"/>
-                    </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="688" key="view" image="Logo.png">
+                        <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" colorSpace="calibratedRGB" red="0.5607843137254902" green="0" blue="0.7686274509803922" alpha="1"/>
+                    </imageView>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XAI-xm-WK6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="201" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="349" y="339"/>
+            <point key="canvasLocation" x="721" y="-39"/>
         </scene>
     </scenes>
     <resources>
-        <image name="Image-1" width="500" height="500"/>
+        <image name="Logo.png" width="500" height="500"/>
     </resources>
-    <color key="tintColor" colorSpace="calibratedRGB" red="0.58431372549019611" green="0.031372549019607843" blue="0.71764705882352942" alpha="1"/>
+    <color key="tintColor" colorSpace="calibratedRGB" red="0.58039215686274515" green="0.023529411764705882" blue="0.807843137254902" alpha="1"/>
 </document>
