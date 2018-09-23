@@ -62,7 +62,8 @@ namespace RetrieveApp.Elements
             Button btn = new Button
             {
             Text = "Click Here\n" + product.PName,
-            BackgroundColor = Color.BlueViolet
+            BackgroundColor = Color.BlueViolet,
+            HorizontalOptions = LayoutOptions.Center
             };
             v = new ScrollView
             {
@@ -73,7 +74,8 @@ namespace RetrieveApp.Elements
                     HorizontalOptions = LayoutOptions.CenterAndExpand,
                     VerticalOptions = LayoutOptions.CenterAndExpand,
                     Children ={
-                    new Label {Text = product.Description+"\nTest"},btn}
+                    new Label {Text = product.Description,
+                    HorizontalTextAlignment=TextAlignment.Center},btn}
                 },
                 GestureRecognizers = {tp}
             };
@@ -101,25 +103,20 @@ namespace RetrieveApp.Elements
             HeightRequest = 300;
             HorizontalOptions = LayoutOptions.FillAndExpand;
             Content = new AbsoluteLayout {
-                Children =
-                {
+                Children ={
                     new GradientLayout(true) {
                         ColorsList = "#5eff89,#00c106",
                         Mode = GradientMode.ToBottomRight
                     },
-                    new I("github.png")
-                    {
-                        Aspect = Aspect.AspectFill
-                    },
+                    new I("github.png"){Aspect = Aspect.AspectFill},
                     new L()
                     {
                         Text = DBActions._p(product).SName,
+                        TextColor = Color.Black,
                         HorizontalOptions = LayoutOptions.CenterAndExpand,
                         VerticalOptions = LayoutOptions.CenterAndExpand,
                         HorizontalTextAlignment = TextAlignment.Center,
-                    },
-                    bb
-                }
+                    },bb}
             };
             TapGestureRecognizer tap = new TapGestureRecognizer();
             tap.Tapped += OnTapped;
