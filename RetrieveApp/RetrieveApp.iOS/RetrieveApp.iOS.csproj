@@ -109,6 +109,7 @@
     <BundleResource Include="Resources\success.json" />
     <BundleResource Include="Resources\loading.json" />
     <Compile Include="craptest.cs" />
+    <BundleResource Include="Resources\Logo.png" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
