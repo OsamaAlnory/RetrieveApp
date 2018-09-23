@@ -92,6 +92,7 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SplashActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\harlow.ttf" />
@@ -142,6 +143,7 @@
     <AndroidResource Include="Resources\drawable\reservations.png" />
     <AndroidResource Include="Resources\drawable\posts.png" />
     <AndroidResource Include="Resources\drawable\places.png" />
+    <AndroidResource Include="Resources\drawable\Logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
