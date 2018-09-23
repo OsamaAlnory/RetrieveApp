@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Retrieve" Class="RetrieveDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=Retrieve.mssql.somee.com;Initial Catalog=Retrieve;Persist Security Info=True;User ID=MohanadOsama2000_SQLLogin_1" SettingsObjectName="JsonWebService.Properties.Settings" SettingsPropertyName="RetrieveConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.AdminLogin" Member="AdminLogins">
+    <Type Name="AdminLogin">
+      <Column Name="Username" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

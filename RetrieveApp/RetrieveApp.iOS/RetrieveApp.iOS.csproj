@@ -152,6 +152,8 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon20.png">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\Image-1.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\Image-1.imageset\Logo.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -186,7 +188,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\RetrieveApp\RetrieveApp.csproj">
-      <Project>{43235AAB-3766-4E86-BEC6-DF1B039F8952}</Project>
+      <Project>{8C51A74A-2DBB-41B2-8DD2-B6AD64A2A468}</Project>
       <Name>RetrieveApp</Name>
     </ProjectReference>
   </ItemGroup>
