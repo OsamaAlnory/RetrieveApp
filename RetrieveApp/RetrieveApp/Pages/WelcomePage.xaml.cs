@@ -1,4 +1,5 @@
 ﻿using RetrieveApp.Database;
+using RetrieveApp.Elements;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,21 +17,39 @@ namespace RetrieveApp.Pages
     public partial class WelcomePage : CarouselPage
     {
         private Account ad;
+        private bool signed;
 
-        public WelcomePage()
+        public WelcomePage(string state)
         {
             InitializeComponent();
-            icon.Source = ImageSource.FromResource("RetrieveApp.Images.logo.png",
-                Assembly.GetExecutingAssembly());
-            btn.Clicked += (e, args) => OnButtonClicked();
+            if(state == "LoginOnly")
+            {
+                for(int x = 0; x < Children.Count-1; x++)
+                {
+                    Children.RemoveAt(x);
+                }
+            } else
+            {
+                icon.Source = ImageSource.FromResource(App.PATH + "logo.png",
+                 Assembly.GetExecutingAssembly());
+                btn.Clicked += (e, args) => OnButtonClicked();
+            }
             log_btn.Clicked += (e, args) => ProcessLogin();
             crt_btn.Clicked += (e, args) => CreateAccoutClicked();
             animationView.OnFinish += (e, s) => {
                 animationView.IsVisible = false;
-                    Navigation.PushAsync(new MapPage(ad));
-                
+                Navigation.PushAsync(new MapPage(ad));
+                Navigation.RemovePage(this);
             };
             btn.Margin = new Thickness(15, 0, 15, App.ScreenHeight/24);
+            e_name.HeightRequest = App.ScreenHeight / 12;
+            e_pass.HeightRequest = App.ScreenHeight / 12;
+            fr1.Margin = new Thickness(App.ScreenWidth / 24,
+                15, App.ScreenWidth / 24, 0);
+            fr.Margin = new Thickness(App.ScreenWidth / 24,
+              App.ScreenHeight / 64, App.ScreenWidth / 24, 0);
+            e_name.FontSize = IFont.Calc(e_name.HeightRequest);
+            e_pass.FontSize = IFont.Calc(e_pass.HeightRequest);
         }
 
         private void OnButtonClicked()
@@ -62,8 +81,14 @@ namespace RetrieveApp.Pages
                 }
                 if (found)
                 {
-                    if (!animationView.IsPlaying)
+                    if (!signed)
                     {
+                        signed = true;
+                        if(ad is Guests)
+                        {
+                            Application.Current.Properties["Logged"] = ((Guests)ad).ID;
+                            Application.Current.SavePropertiesAsync();
+                        }
                         animationView.IsVisible = true;
                         animationView.Play();
                     }

@@ -29,10 +29,6 @@ namespace RetrieveApp.Droid
         protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
         {
             base.OnElementChanged(e);
-            if(Control != null)
-            {
-                base.OnElementChanged(e);
-
                 if (Control != null)
                 {
                     GradientDrawable gd = new GradientDrawable();
@@ -41,7 +37,6 @@ namespace RetrieveApp.Droid
                     Control.SetRawInputType(InputTypes.TextFlagNoSuggestions);
                     //Control.SetHintTextColor(ColorStateList.ValueOf(global::Android.Graphics.Color.White));
                 }
-            }
         }
 
     }

@@ -30,6 +30,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
+    <AotAssemblies>false</AotAssemblies>
+    <EnableLLVM>false</EnableLLVM>
+    <BundleAssemblies>false</BundleAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -80,6 +83,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AndroidElements\TimerRenderer_Android.cs" />
     <Compile Include="BButtonRendererAndroid.cs" />
     <Compile Include="CloseAppAndroid.cs" />
     <Compile Include="GradientLayoutRenderer.cs" />
@@ -97,9 +101,13 @@
     <AndroidAsset Include="Assets\success.json" />
     <AndroidAsset Include="Assets\oswald-r.ttf" />
     <AndroidAsset Include="Assets\loading.json" />
+    <AndroidAsset Include="Assets\check.json" />
+    <AndroidAsset Include="Assets\done_button.json" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
-    <None Include="Properties\AndroidManifest.xml" />
+    <None Include="Properties\AndroidManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Tabbar.axml" />
@@ -108,11 +116,11 @@
     <AndroidResource Include="Resources\values\colors.xml" />
     <AndroidResource Include="Resources\mipmap-anydpi-v26\icon.xml" />
     <AndroidResource Include="Resources\mipmap-anydpi-v26\icon_round.xml" />
-    <AndroidResource Include="Resources\mipmap-hdpi\launcher_foreground.png" />
-    <AndroidResource Include="Resources\mipmap-mdpi\launcher_foreground.png" />
-    <AndroidResource Include="Resources\mipmap-xhdpi\launcher_foreground.png" />
-    <AndroidResource Include="Resources\mipmap-xxhdpi\launcher_foreground.png" />
-    <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
+    <AndroidResource Include="Resources\mipmap-hdpi\launcher_foreground1.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\launcher_foreground1.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\launcher_foreground1.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\launcher_foreground1.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground1.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable-hdpi\" />
@@ -127,13 +135,20 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="github.png" />
     <AndroidResource Include="Resources\drawable\add.png" />
     <AndroidResource Include="Resources\drawable\settings.png" />
     <AndroidResource Include="Resources\drawable\reservations.png" />
     <AndroidResource Include="Resources\drawable\posts.png" />
     <AndroidResource Include="Resources\drawable\places.png" />
     <AndroidResource Include="Resources\drawable\Logo.png" />
+    <AndroidResource Include="Resources\mipmap-hdpi\icons.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\icons.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\icons.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\icons.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\icons.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\xml\file_paths.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

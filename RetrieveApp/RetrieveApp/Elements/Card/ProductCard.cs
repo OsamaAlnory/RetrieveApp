@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using Xamarin.Forms;
 
-namespace RetrieveApp.Elements
+namespace RetrieveApp.Elements.Card
 {
     public class ProductCard : Frame
     {
@@ -22,12 +22,16 @@ namespace RetrieveApp.Elements
         }
         private class I : Image
         {
-            public I(string src)
+            public I(byte[] b)
             {
-                Source = ImageSource.FromResource("RetrieveApp.Images."+src,
-                Assembly.GetExecutingAssembly());
-                AbsoluteLayout.SetLayoutFlags(this, AbsoluteLayoutFlags.All);
-                AbsoluteLayout.SetLayoutBounds(this, new Rectangle(0.5, 0.5, 1, 1));
+                if(b != null && b.Length > 0)
+                {
+                    //Source = ImageSource.FromResource("RetrieveApp.Images."+src,
+                    //Assembly.GetExecutingAssembly());
+                    Source = App.ByteToImage(b);
+                    AbsoluteLayout.SetLayoutFlags(this, AbsoluteLayoutFlags.All);
+                    AbsoluteLayout.SetLayoutBounds(this, new Rectangle(0.5, 0.5, 1, 1));
+                }
             }
         }
         private class B : StackLayout
@@ -54,69 +58,30 @@ namespace RetrieveApp.Elements
         private ScrollView v;
         private bool selected;
         private int id;
-        public ProductCard(Products product)
+        private static Random r = new Random();
+        public ProductCard(Products product, string productType)
         {
-            id = new Random().Next(10000, 50540);
+            id = r.Next(1, 50000);
             TapGestureRecognizer tp = new TapGestureRecognizer();
             tp.Tapped += OnTapped;
-            Button btn = new Button
-            {
-            Text = "Click Here\n" + product.PName,
-            BackgroundColor = Color.BlueViolet,
-            HorizontalOptions = LayoutOptions.Center
-            };
-            v = new ScrollView
-            {
-                HorizontalOptions = LayoutOptions.FillAndExpand,
-                VerticalOptions = LayoutOptions.FillAndExpand,
-                Content = new StackLayout
-                {
-                    HorizontalOptions = LayoutOptions.CenterAndExpand,
-                    VerticalOptions = LayoutOptions.CenterAndExpand,
-                    Children ={
-                    new Label {Text = product.Description,
-                    HorizontalTextAlignment=TextAlignment.Center},btn}
-                },
-                GestureRecognizers = {tp}
-            };
-            bbb = new B
-            {
-                IsVisible = false,
-                Children ={v}
-            };
-            b = new B
-            {
-                Opacity = 0,
-                BackgroundColor = Color.LightGray
-            };
-            bb = new B1()
-            {
-             Children =
-              {
-               b,
-               bbb
-              }
-            };
+            v = new CardScrollContent(product,tp,productType);
+            bbb = new B{IsVisible = false,Children ={v}};
+            b = new B{Opacity = 0,BackgroundColor = Color.LightGray};
+            bb = new B1(){Children ={b,bbb}};
             PRODUCT = product;
             Padding = 0;
             CornerRadius = 30;
             HeightRequest = 300;
             HorizontalOptions = LayoutOptions.FillAndExpand;
             Content = new AbsoluteLayout {
-                Children ={
-                    new GradientLayout(true) {
-                        ColorsList = "#5eff89,#00c106",
-                        Mode = GradientMode.ToBottomRight
-                    },
-                    new I("github.png"){Aspect = Aspect.AspectFill},
-                    new L()
-                    {
+              Children={
+                    new I(PRODUCT.Image){Aspect = Aspect.AspectFill},
+                    new L(){
                         Text = DBActions._p(product).SName,
                         TextColor = Color.Black,
                         HorizontalOptions = LayoutOptions.CenterAndExpand,
                         VerticalOptions = LayoutOptions.CenterAndExpand,
-                        HorizontalTextAlignment = TextAlignment.Center,
-                    },bb}
+                        HorizontalTextAlignment = TextAlignment.Center},bb}
             };
             TapGestureRecognizer tap = new TapGestureRecognizer();
             tap.Tapped += OnTapped;
@@ -128,11 +93,12 @@ namespace RetrieveApp.Elements
             {
                 lastClicked = null;
             }
-            if (lastClicked != null && lastClicked.id != id) {
-                lastClicked.Sel();
-            }
-            if (!selected)
+            else
             {
+                if (lastClicked != null && lastClicked.id != id)
+                {
+                    lastClicked.Sel();
+                }
                 lastClicked = this;
             }
             Sel();
@@ -151,10 +117,6 @@ namespace RetrieveApp.Elements
                 bbb.IsVisible = true;
                 b.FadeTo(0.7, 400);
             }
-        }
-        public bool IsSelected()
-        {
-            return selected;
         }
 
     }

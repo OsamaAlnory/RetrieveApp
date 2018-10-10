@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RetrieveApp.Pages.MapPage" BarBackgroundColor="DarkOrchid"
             xmlns:element="clr-namespace:RetrieveApp.Elements"
+            xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+            xmlns:local="clr-namespace:RetrieveApp.Pages"
             NavigationPage.HasNavigationBar="False">
     <ContentPage Title="Karta" Icon="places.png">
         <AbsoluteLayout>
@@ -14,35 +16,108 @@
     </ContentPage>
     <ContentPage Title="Flöde" Icon="posts.png">
         <element:GradientLayout HorizontalOptions="FillAndExpand"
-         VerticalOptions="FillAndExpand" ColorsList="#6724b7,#e5dbff"
-         Mode="ToBottom" Padding="15">
+         VerticalOptions="FillAndExpand" ColorsList="#b92dff,#9000d8"
+         Mode="ToBottom" Padding="20">
             <SearchBar x:Name="search" Placeholder="#Sök här"/>
-            <ScrollView>
+            <ScrollView x:Name="sc">
                 <StackLayout x:Name="fl" Spacing="10"/>
             </ScrollView>
+            <StackLayout Orientation="Horizontal" Padding="10" Spacing="0"
+                 HorizontalOptions="CenterAndExpand" x:Name="stk_btns">
+                <Button Text="&lt;&lt;" WidthRequest="{x:Static local:MapPage.BUTTON_WIDTH}"/>
+                <Button Text="1" WidthRequest="45"/>
+                <Button Text="2" WidthRequest="45"/>
+                <Button Text="3" WidthRequest="45"/>
+                <Button Text="4" WidthRequest="45"/>
+                <Button Text="5" WidthRequest="45"/>
+                <Button Text=">>" WidthRequest="45"/>
+            </StackLayout>
         </element:GradientLayout>
     </ContentPage>
-    <ContentPage Title="Mina beställningar" Icon="reservations.png">
+    <ContentPage x:Name="pg_b" Title="Mina beställningar" Icon="reservations.png">
         <element:GradientLayout HorizontalOptions="FillAndExpand"
-         VerticalOptions="FillAndExpand" ColorsList="#6724b7,#e5dbff"
-         Mode="ToBottom">
-
+         VerticalOptions="FillAndExpand" ColorsList="#b92dff,#9000d8"
+         Mode="ToBottom" Padding="20">
+            <SearchBar x:Name="search1" Placeholder="#Sök här"/>
+            <ScrollView x:Name="sc1">
+                <StackLayout x:Name="fl1" Spacing="10"/>
+            </ScrollView>
+            <StackLayout Orientation="Horizontal" Padding="10" Spacing="0"
+                 HorizontalOptions="CenterAndExpand" x:Name="stk_btns2">
+                <Button Text="&lt;&lt;" WidthRequest="45"/>
+                <Button Text="1" WidthRequest="45"/>
+                <Button Text="2" WidthRequest="45"/>
+                <Button Text="3" WidthRequest="45"/>
+                <Button Text="4" WidthRequest="45"/>
+                <Button Text="5" WidthRequest="45"/>
+                <Button Text=">>" WidthRequest="45"/>
+            </StackLayout>
         </element:GradientLayout>
     </ContentPage>
     <ContentPage Title="Lägg till" Icon="add.png" x:Name="pg_admin">
         <element:GradientLayout HorizontalOptions="FillAndExpand"
-         VerticalOptions="FillAndExpand" ColorsList="#6724b7,#e5dbff"
-         Mode="ToBottom">
-            <Entry x:Name="prd_name" Placeholder="Produktnamn"/>
-            <Button Text="Ta en bild" x:Name="btn_img"/>
-            <Button Text="Lägg till"/>
+         VerticalOptions="FillAndExpand" ColorsList="#b92dff,#9000d8"
+         Mode="ToBottomRight" Padding="15">
+            <ScrollView>
+                <StackLayout>
+                    <Label Text="Vad säljer du?" HorizontalOptions="CenterAndExpand"
+                           TextColor="White" FontSize="28"
+                           FontFamily="{StaticResource MFont}"/>
+                    <element:IEntry x:Name="prd_name" Placeholder="Produktnamn"
+                   BackgroundColor="White" TextColor="Black"
+                   FontFamily="{StaticResource MFont}"
+                   HorizontalTextAlignment="Center"/>
+                    <Image x:Name="image" HorizontalOptions="CenterAndExpand"
+                   HeightRequest="150" WidthRequest="150"/>
+                    <Button Text="Ta en bild" x:Name="btn_img"/>
+                    <StackLayout HorizontalOptions="CenterAndExpand"
+                                 Orientation="Horizontal">
+                        <element:IEntry Placeholder="Antal"
+                                        BackgroundColor="White"/>
+                        <element:IEntry Placeholder="Pris"
+                                        BackgroundColor="White"/>
+                        <element:IEntry Placeholder="Originalpris"
+                                        BackgroundColor="White"/>
+                    </StackLayout>
+                    <element:ITimer x:Name="tmr" BackgroundColor="White"/>
+                    <Editor Placeholder="Produkt beskrivning" MaxLength="128"
+                    TextColor="Black" AutoSize="TextChanges" x:Name="desc"
+                    BackgroundColor="White"/>
+                    <Button Text="Lägg till" Clicked="Btn_add"/>
+                    <StackLayout WidthRequest="100" HeightRequest="100"
+                                 HorizontalOptions="CenterAndExpand">
+                        <forms:AnimationView x:Name="icon_r" AutoPlay="False"
+                     IsVisible="False" Animation="check.json"
+                         WidthRequest="100"
+                          HeightRequest="100"/>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
         </element:GradientLayout>
     </ContentPage>
     <ContentPage Title="Inställningar" Icon="settings.png">
         <element:GradientLayout HorizontalOptions="FillAndExpand"
-         VerticalOptions="FillAndExpand" ColorsList="#6724b7,#e5dbff"
-         Mode="ToBottom">
-            
+         VerticalOptions="FillAndExpand" ColorsList="#b92dff,#9000d8"
+         Mode="ToBottom" Padding="10">
+            <StackLayout Orientation="Horizontal" Spacing="0" Margin="0,10,0,0">
+                <StackLayout BackgroundColor="Gold" HorizontalOptions="FillAndExpand">
+                    <Label Text="Inloggad som"
+                       HorizontalOptions="CenterAndExpand"
+                       VerticalOptions="CenterAndExpand"
+                       TextColor="White" FontSize="22" FontAttributes="Bold"
+                       FontFamily="{StaticResource MFont}"/>
+                </StackLayout>
+                <StackLayout BackgroundColor="White" HorizontalOptions="FillAndExpand">
+                    <Label x:Name="lbl_lg" TextColor="Gold" FontAttributes="Bold"
+                       FontSize="22" HorizontalOptions="CenterAndExpand"
+                       VerticalOptions="CenterAndExpand"
+                       FontFamily="{StaticResource MFont}"/>
+                </StackLayout>
+            </StackLayout>
+            <Button Text="Logga ut" HorizontalOptions="FillAndExpand"
+                    VerticalOptions="EndAndExpand" BackgroundColor="Crimson"
+                    TextColor="White" FontAttributes="Bold" FontSize="30"
+                    FontFamily="{StaticResource MFont}" x:Name="logout"/>
         </element:GradientLayout>
     </ContentPage>
 </TabbedPage>

@@ -14,8 +14,11 @@ namespace RetrieveApp.Pages
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class LoadingPage : ContentPage, Loadable
 	{
+        public static LoadingPage page;
+
 		public LoadingPage ()
 		{
+            page = this;
 			InitializeComponent ();
             App.Register(this);
             state.Text = "Loading";
@@ -25,13 +28,18 @@ namespace RetrieveApp.Pages
                     DBActions.GetAccounts();
                 } else
                 {
-                    DisplayAlert("Fel", "Appen kunde inte startas!\n\nKolla ditt nätverk.", "Avbryt");
-                    var closer = DependencyService.Get<ICloseApp>();
-                    closer?.close();
+                    Crash("Appen kunde inte startas!\n\nKolla ditt nätverk.");
                 }
                 return false;
             });
 		}
+
+        private async void Crash(string reason)
+        {
+            await DisplayAlert("Fel", reason, "Avbryt");
+            var closer = DependencyService.Get<ICloseApp>();
+            closer?.close();
+        }
 
         public void OnLoadStarted(string type)
         {
@@ -40,10 +48,10 @@ namespace RetrieveApp.Pages
                 load.IsVisible = true;
                 load.Play();
             } else if (type == "Products") {
-                state.Text = "Loading products";
+                state.Text = "Laddar produkter";
             } else if (type == "Pins")
             {
-                state.Text = "Loading pins";
+                state.Text = "Laddar pins";
             }
         }
 
@@ -53,9 +61,27 @@ namespace RetrieveApp.Pages
             {
                 load.Pause();
                 load.IsVisible = false;
-                //Navigation.PushAsync(new WelcomePage());
-                Navigation.PushAsync(new MapPage(DBActions.admins[0]));
+                //Navigation.PushAsync(new WelcomePage("Default"));
+                //Navigation.PushAsync(new MapPage(DBActions.admins[0]));
+                Navigation.PushAsync(new MapPage(DBActions.guests[0]));
+                //Navigation.PushAsync(new ProductView(DBActions.products[0]));
+                /*
+                if(Application.Current.Properties.ContainsKey("Logged"))
+                {
+                    int Id = (int)Application.Current.Properties["Logged"];
+                    Navigation.PushAsync(new MapPage(DBActions.GetUserById(Id)));
+                }
+                else
+                {
+                    Navigation.PushAsync(new WelcomePage("Default"));
+                }*/
+                Navigation.RemovePage(this);
             }
+        }
+
+        public void Quit()
+        {
+            Crash("App is in dev mode!");
         }
 
     }

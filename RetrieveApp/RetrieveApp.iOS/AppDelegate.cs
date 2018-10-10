@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using Plugin.Media;
 using UIKit;
 
 namespace RetrieveApp.iOS
@@ -24,10 +25,15 @@ namespace RetrieveApp.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             Xamarin.FormsMaps.Init();
+            Camera();
             App.ScreenHeight = (int)UIScreen.MainScreen.Bounds.Height;
             App.ScreenWidth = (int)UIScreen.MainScreen.Bounds.Width;
             LoadApplication(new App());
             return base.FinishedLaunching(app, options);
+        }
+        private async void Camera()
+        {
+            await CrossMedia.Current.Initialize();
         }
     }
 }

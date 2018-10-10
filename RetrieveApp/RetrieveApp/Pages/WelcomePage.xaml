@@ -6,8 +6,10 @@
              xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
              NavigationPage.HasNavigationBar="False">
     <ContentPage>
-        <dir:GradientLayout ColorsList="#CC51F1,#502189"
-         Mode="ToBottom" Spacing="10">
+        <dir:GradientLayout ColorsList="#7651e8,#50abe8"
+         Mode="ToBottomRight" Spacing="10">
+            <!--Button BackgroundColor="Transparent" Text="Skippa" HorizontalOptions="EndAndExpand"
+                   VerticalOptions="StartAndExpand" TextColor="White"/-->
             <Label Text="Retrieve It" HorizontalOptions="CenterAndExpand"
                    FontSize="52" TextColor="White" 
                        FontFamily="{StaticResource MFont}"
@@ -19,8 +21,7 @@
                        HorizontalTextAlignment="Center"
                        FontSize="21" TextColor="Black" Margin="0,10,0,0"
                        />
-            <!-- Margin="15,0,15,50" FontSize="29" -->
-            <Button Text="GET STARTED"
+            <Button Text="KOMMA IGÅNG"
                         VerticalOptions="EndAndExpand"
                         TextColor="Black" FontSize="29"
                         BackgroundColor="White" Padding="10" FontAttributes="Bold"
@@ -38,23 +39,24 @@
                        HorizontalTextAlignment="Center" FontSize="47"
                     Text="Retrieve It konto" FontFamily="{StaticResource MFont}"
                            TextColor="White"/>
-                    <Frame Padding="0" CornerRadius="12" Margin="0,15,0,0">
+                    <Frame Padding="0" CornerRadius="20" x:Name="fr1">
                         <dir:IEntry x:Name="e_name"
                             Placeholder="ID" FontFamily="{StaticResource MFont}"
                             HorizontalTextAlignment="Center" FontSize="28"
                             BackgroundColor="White" TextColor="Black"/>
                     </Frame>
-                    <Frame Padding="0" CornerRadius="12">
+                    <Frame Padding="0" CornerRadius="20" x:Name="fr">
                         <dir:IEntry x:Name="e_pass" IsPassword="True"
                             Placeholder="LÖSENORD" FontFamily="{StaticResource MFont}"
                             HorizontalTextAlignment="Center" FontSize="28"
                             BackgroundColor="White" TextColor="Black"/>
                     </Frame>
-                    <Button Text="Logga in" FontSize="29" BackgroundColor="MediumPurple"
+                    <Button Text="Logga in" FontSize="29" BackgroundColor="#471b7c"
                         FontFamily="{StaticResource MFont}" Margin="15,20,15,0"
-                            Padding="0" BorderRadius="14" x:Name="log_btn"/>
+                            Padding="0" BorderRadius="14" x:Name="log_btn"
+                            TextColor="White"/>
                     <Button Text="Skapa ett konto" FontSize="29"
-                        BackgroundColor="MediumPurple"
+                        BackgroundColor="#471b7c" TextColor="White"
                         FontFamily="{StaticResource MFont}" Margin="15,0,15,0"
                             Padding="0" BorderRadius="14" x:Name="crt_btn"/>
                 </StackLayout>

@@ -2,39 +2,33 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RetrieveApp.Pages.CreateUserPage"
-             xmlns:dir="clr-namespace:RetrieveApp.Elements">
+             xmlns:dir="clr-namespace:RetrieveApp.Elements"
+             xmlns:an="clr-namespace:Lottie.Forms;assembly=Lottie.Forms">
     <dir:GradientLayout VerticalOptions="FillAndExpand"
          HorizontalOptions="FillAndExpand" ColorsList="#CC51F1,#502189"
          Mode="ToBottom">
         <StackLayout VerticalOptions="CenterAndExpand" Padding="10">
-            <Frame Padding="0" CornerRadius="20">
-                <dir:GradientLayout ColorsList="#a3c6ff,#00d4ff"
-                                Mode="ToLeft">
-                    <dir:IEntry Placeholder="Konto-ID"
-                                HorizontalTextAlignment="Center"
-                                FontFamily="{StaticResource MFont}"/>
-                </dir:GradientLayout>
+            <Frame Padding="0" CornerRadius="20" x:Name="fr1">
+                <dir:IEntry Placeholder="Namn" x:Name="e_name"
+                 HorizontalTextAlignment="Center" FontAttributes="Bold"
+                 FontFamily="{StaticResource MFont}"/>
             </Frame>
-            <Frame Padding="0" CornerRadius="20">
-                <dir:GradientLayout ColorsList="#a3c6ff,#00d4ff"
-                                Mode="ToLeft">
-                    <dir:IEntry Placeholder="Lösenord"
-                                HorizontalTextAlignment="Center"
-                                FontFamily="{StaticResource MFont}"/>
-                </dir:GradientLayout>
-            </Frame>
-            <Frame Padding="0" CornerRadius="20">
-                <dir:GradientLayout ColorsList="#a3c6ff,#00d4ff"
-                                Mode="ToLeft">
-                    <dir:IEntry Placeholder="Namn"
-                                HorizontalTextAlignment="Center"
-                                FontFamily="{StaticResource MFont}"/>
-                </dir:GradientLayout>
+            <Frame Padding="0" CornerRadius="20" x:Name="fr">
+                <dir:IEntry Placeholder="Lösenord" x:Name="e_pass"
+                 HorizontalTextAlignment="Center" IsPassword="True"
+                 FontAttributes="Bold"
+                 FontFamily="{StaticResource MFont}"/>
             </Frame>
             <Button Text="Skapa ett konto" FontSize="29"
-                        BackgroundColor="MediumPurple"
+                        BackgroundColor="MediumPurple" Opacity="1"
                         FontFamily="{StaticResource MFont}" Margin="15,0,15,0"
-                        Padding="0" BorderRadius="14" x:Name="crt_acc"/>
+                        Padding="0" BorderRadius="14" x:Name="crt_acc"
+                    Clicked="Button_Create_Clicked" TextColor="White"/>
+            <StackLayout HeightRequest="160" WidthRequest="160">
+                <an:AnimationView Animation="loading.json" IsVisible="false"
+                 WidthRequest="100" HeightRequest="100" Loop="True"
+                                  x:Name="an"/>
+            </StackLayout>
         </StackLayout>
     </dir:GradientLayout>
 </ContentPage>

@@ -9,17 +9,20 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using RetrieveApp.Droid;
 using RetrieveApp.Elements;
 using Xamarin.Forms;
 
+[assembly: Dependency(typeof(CloseAppAndroid))]
 namespace RetrieveApp.Droid
 {
     public class CloseAppAndroid : ICloseApp
     {
         public void close()
         {
-            var activity = (Activity)Forms.Context;
-            activity.FinishAffinity();
+            Process.KillProcess(Process.MyPid());
+            //var activity = (Activity)Forms.Context;
+            //activity.FinishAffinity();
         }
     }
 }
