@@ -49,7 +49,7 @@ namespace RetrieveApp.Pages
                         ID = 3,
                         AdminID = "Admin",
                         Description = "Crap",
-                        PName = "Cookies asdsadasdadjkl",
+                        PName = "Cookies asdsadasdadjkl", OldPrice=20, NewPrice=10,
                         Quantity = 10, ExpireTime=t});
             }
             InitializeComponent();

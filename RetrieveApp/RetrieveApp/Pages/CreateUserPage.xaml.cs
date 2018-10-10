@@ -82,7 +82,7 @@ namespace RetrieveApp.Pages
                 }
                 created = true;
                 App.StartLoading("Register");
-                await DBActions.LoadAccount();
+                await DBActions.LoadAccounts();
                 bool found = true;
                 foreach(Admins admin in DBActions.admins)
                 {
@@ -105,7 +105,7 @@ namespace RetrieveApp.Pages
                     await DBActions.AddUser(new Guests {
                         Name = n, Password = p
                     });
-                    await DBActions.LoadAccount();
+                    await DBActions.LoadAccounts();
                 } else
                 {
                     created = false;

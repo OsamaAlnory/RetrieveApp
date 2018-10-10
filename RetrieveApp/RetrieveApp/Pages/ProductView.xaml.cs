@@ -39,6 +39,8 @@ namespace RetrieveApp.Pages
                 qu.Items.Add(""+(x+1));
             }
             qu.SelectedIndex = 0;
+            p_o.Text = product.OldPrice + " kr";
+            p_n.Text = product.NewPrice + " kr";
             tid.Text = product.ExpireTime.ToString();
             btn.Clicked += async (s, e) => {
                 if (!loading)
@@ -51,7 +53,12 @@ namespace RetrieveApp.Pages
                     Guests g = MapPage._g as Guests;
                     if(!DBActions.hasBooked(g, product))
                     {
-                        // Put in cart
+                        int Q = int.Parse(qu.SelectedItem.ToString());
+                        DBActions.book(g, product, Q);
+                        await DisplayAlert("Success","You've booked "+Q+" of "
+                            +product.PName+"!\n"+"You've saved "+
+                            ((product.OldPrice-product.NewPrice)*Q)+" kr!","Ok");
+                        Navigation.RemovePage(this);
                     } else
                     {
                         DisplayAlert("Error", "You've already booked this!", "Cancel");

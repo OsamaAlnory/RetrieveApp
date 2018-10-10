@@ -14,14 +14,14 @@
                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                     <Label>Originala Priset:</Label>
                     <Grid>
-                        <Label VerticalOptions="Center" Text="10 kr"/>
+                        <Label VerticalOptions="Center" x:Name="p_o"/>
                         <BoxView HeightRequest="3" VerticalOptions="Center"
                          Opacity="0.5" Color="Black"/>
                     </Grid>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                     <Label>Nya Priset:</Label>
-                    <Label>5 kr</Label>
+                    <Label x:Name="p_n"/>
                 </StackLayout>
                 <Picker x:Name="qu"/>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">

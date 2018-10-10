@@ -64,7 +64,7 @@ namespace RetrieveApp.Database
             App.FinishLoading("Pins");
         }
 
-        public static async Task LoadAccount()
+        public static async Task LoadAccounts()
         {
             App.StartLoading("Users");
             admins.Clear();
@@ -102,9 +102,19 @@ namespace RetrieveApp.Database
             }
             return ints;
         }
-        public static bool hasBooked(Guests g, Products product)
+        public static void book(Guests user, Products product, int quantity)
         {
-            return getCart(g).Contains(product.ID);
+            addToCart(user, product, quantity);
+            product.Quantity -= quantity;
+            // Save to db
+        }
+        public static void addToCart(Guests user, Products product, int quantity)
+        {
+            user.Cart += product.ID+","+quantity;
+        }
+        public static bool hasBooked(Guests user, Products product)
+        {
+            return getCart(user).Contains(product.ID);
         }
         public static Admins _p(Products p) {
             foreach(Admins a in admins)
