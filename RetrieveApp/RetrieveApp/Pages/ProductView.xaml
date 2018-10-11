@@ -11,6 +11,8 @@
                     VerticalOptions="FillAndExpand">
             <StackLayout HorizontalOptions="CenterAndExpand">
                 <Image x:Name="img"/>
+                <Label x:Name="lbl_name"/>
+                <Label x:Name="lbl_desc"/>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                     <Label>Originala Priset:</Label>
                     <Grid>
@@ -23,13 +25,16 @@
                     <Label>Nya Priset:</Label>
                     <Label x:Name="p_n"/>
                 </StackLayout>
-                <Picker x:Name="qu"/>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                    <Label Text="Antal:"/>
+                    <Picker x:Name="qu"/>
+                </StackLayout>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                     <Label Text="Hämtningstid:"/>
                     <Label x:Name="tid"/>
                 </StackLayout>
                 <Button Text="Bekräfta bokningen" x:Name="btn"
-                       Style="{StaticResource Btn}"/>
+                       Style="{StaticResource Btn}" FontFamily="{StaticResource MFont}"/>
                 <StackLayout HeightRequest="100" HorizontalOptions="FillAndExpand">
                     <an:AnimationView HeightRequest="100" IsVisible="False"
                      HorizontalOptions="FillAndExpand" Animation="loading.json"

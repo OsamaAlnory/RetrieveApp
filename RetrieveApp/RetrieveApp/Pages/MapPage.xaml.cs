@@ -91,6 +91,7 @@ namespace RetrieveApp.Pages
             }
             layout_b.AddItems();
             la_2.AddItems();
+            Designer.DesignPageButtons(stk_btns);
         }
 
         private void TextChanged(object s, TextChangedEventArgs a)
@@ -169,6 +170,7 @@ namespace RetrieveApp.Pages
                 {
                     file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
                     {
+                        AllowCropping = true,
                         CompressionQuality = 0,
                         PhotoSize = PhotoSize.Small
                     });

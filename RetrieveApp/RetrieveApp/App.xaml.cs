@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Reflection;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -45,6 +46,11 @@ namespace RetrieveApp
         public static void Register(Loadable page)
         {
             loadables.Add(page);
+        }
+
+        public static ImageSource GetSource(string name)
+        {
+            return ImageSource.FromResource(PATH+name, Assembly.GetExecutingAssembly());
         }
 
         public static void StartLoading(string type)

@@ -24,11 +24,11 @@ namespace RetrieveApp.Elements.Card
         {
             public I(byte[] b)
             {
-                if(b != null && b.Length > 0)
+                //if(b != null && b.Length > 0)
                 {
-                    //Source = ImageSource.FromResource("RetrieveApp.Images."+src,
-                    //Assembly.GetExecutingAssembly());
-                    Source = App.ByteToImage(b);
+                    Source = ImageSource.FromResource("RetrieveApp.Images.b2.png",
+                    Assembly.GetExecutingAssembly());
+                    //Source = App.ByteToImage(b);
                     AbsoluteLayout.SetLayoutFlags(this, AbsoluteLayoutFlags.All);
                     AbsoluteLayout.SetLayoutBounds(this, new Rectangle(0.5, 0.5, 1, 1));
                 }
@@ -40,6 +40,11 @@ namespace RetrieveApp.Elements.Card
             {
                 AbsoluteLayout.SetLayoutFlags(this, AbsoluteLayoutFlags.All);
                 AbsoluteLayout.SetLayoutBounds(this, new Rectangle(0, 0, 1, 1));
+            }
+            public B(double a, double b, double c, double d)
+            {
+                AbsoluteLayout.SetLayoutFlags(this, AbsoluteLayoutFlags.All);
+                AbsoluteLayout.SetLayoutBounds(this, new Rectangle(a, b, c, d));
             }
         }
         private class B1 : AbsoluteLayout
@@ -76,6 +81,12 @@ namespace RetrieveApp.Elements.Card
             Content = new AbsoluteLayout {
               Children={
                     new I(PRODUCT.Image){Aspect = Aspect.AspectFill},
+                    new B(0,0.2,1,0.1){
+                        Children =
+                        {
+                            new Image {Source=App.GetSource("sign.png")}
+                        }
+                    },
                     new L(){
                         Text = DBActions._p(product).SName,
                         TextColor = Color.Black,

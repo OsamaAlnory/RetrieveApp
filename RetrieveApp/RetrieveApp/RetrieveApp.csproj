@@ -10,15 +10,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Images\github.png" />
+    <None Remove="Images\b2.png" />
     <None Remove="Images\logo.png" />
     <None Remove="Images\noimage.png" />
+    <None Remove="Images\sign.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Images\github.png" />
+    <EmbeddedResource Include="Images\b2.png" />
     <EmbeddedResource Include="Images\logo.png" />
     <EmbeddedResource Include="Images\noimage.png" />
+    <EmbeddedResource Include="Images\sign.png" />
   </ItemGroup>
 
   <ItemGroup>
