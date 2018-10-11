@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RetrieveApp.Pages.ProductView"
+             xmlns:gr="clr-namespace:RetrieveApp.Elements"
+             xmlns:an="clr-namespace:Lottie.Forms;assembly=Lottie.Forms">
+    <gr:GradientLayout ColorsList="#663399,#663399" Mode="ToBottom"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalOptions="FillAndExpand">
+        <ScrollView HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+            <StackLayout HorizontalOptions="CenterAndExpand">
+                <Image x:Name="img"/>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                    <Label>Originala Priset:</Label>
+                    <Grid>
+                        <Label VerticalOptions="Center" x:Name="p_o"/>
+                        <BoxView HeightRequest="3" VerticalOptions="Center"
+                         Opacity="0.5" Color="Black"/>
+                    </Grid>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                    <Label>Nya Priset:</Label>
+                    <Label x:Name="p_n"/>
+                </StackLayout>
+                <Picker x:Name="qu"/>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                    <Label Text="Hämtningstid:"/>
+                    <Label x:Name="tid"/>
+                </StackLayout>
+                <Button Text="Bekräfta bokningen" x:Name="btn"
+                       Style="{StaticResource Btn}"/>
+                <StackLayout HeightRequest="100" HorizontalOptions="FillAndExpand">
+                    <an:AnimationView HeightRequest="100" IsVisible="False"
+                     HorizontalOptions="FillAndExpand" Animation="loading.json"
+                     AutoPlay="False" Loop="True" x:Name="anim"/>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </gr:GradientLayout>
+</ContentPage>

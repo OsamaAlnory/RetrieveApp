@@ -4,11 +4,9 @@ using System.Text;
 
 namespace RetrieveApp.Database
 {
-    public class Guests : Account
+    public class Options
     {
-        public int ID { get; set; }
         public string Name { get; set; }
-        public string Password { get; set; }
-        public string Cart { get; set; }
+        public object Value { get; set; }
     }
 }

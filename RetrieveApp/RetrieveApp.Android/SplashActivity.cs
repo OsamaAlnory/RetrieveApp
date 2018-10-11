@@ -12,12 +12,12 @@ using Android.Widget;
 
 namespace RetrieveApp.Droid
 {
-    [Activity(Icon = "@mipmap/icon", Theme ="@style/Theme.Splash",MainLauncher = true,  NoHistory =true  )]
+    [Activity(Icon = "@mipmap/icon",Theme ="@style/Theme.Splash",MainLauncher = false,  NoHistory =true )]
     public class SplashActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            base.OnCreate(savedInstanceState);      
+            base.OnCreate(savedInstanceState);
         }
 
         protected override void OnResume()
@@ -29,7 +29,7 @@ namespace RetrieveApp.Droid
 
         async void SimulateStartup()
         {
-            await Task.Delay(500);
+            await Task.Delay(1000);
             StartActivity(new Intent(Application.Context, typeof(MainActivity)));
         }
     }

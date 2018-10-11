@@ -1,8 +1,10 @@
-﻿using RetrieveApp.Database;
+﻿using Plugin.Media.Abstractions;
+using RetrieveApp.Database;
 using RetrieveApp.Elements;
 using RetrieveApp.Pages;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -16,12 +18,28 @@ namespace RetrieveApp
         public static int ScreenWidth { get; set; }
         public static Page CURRENT_PAGE;
         public static List<Loadable> loadables = new List<Loadable>();
+        public static readonly string PATH = "RetrieveApp.Images.";
         public App()
         {
             InitializeComponent();
             
              MainPage = new NavigationPage(new LoadingPage());
             CURRENT_PAGE = MainPage;
+        }
+
+        public static byte[] ImageToByte(MediaFile file)
+        {
+            using (var memoryStream = new System.IO.MemoryStream())
+            {
+                file.GetStream().CopyTo(memoryStream);
+                // file.Dispose();
+                byte[] i = memoryStream.ToArray();
+                return i;
+            }
+        }
+        public static ImageSource ByteToImage(byte[] b)
+        {
+            return ImageSource.FromStream(() => new MemoryStream(b));
         }
 
         public static void Register(Loadable page)

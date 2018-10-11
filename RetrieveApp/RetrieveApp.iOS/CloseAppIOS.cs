@@ -5,8 +5,11 @@ using System.Text;
 using System.Threading;
 using Foundation;
 using RetrieveApp.Elements;
+using RetrieveApp.iOS;
 using UIKit;
+using Xamarin.Forms;
 
+[assembly: Dependency(typeof(CloseAppIOS))]
 namespace RetrieveApp.iOS
 {
     public class CloseAppIOS : ICloseApp
