@@ -47,7 +47,9 @@ namespace RetrieveApp.Database
                 SName = "WOW"
             });
             guests.Add(new Guests {
-                ID = 5, Name = "Osama"
+                ID = 5, Name = "Osama",
+                Password = "123"
+
             });
             Geocoder g = new Geocoder();
             foreach (Admins place in admins)

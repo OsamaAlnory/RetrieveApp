@@ -5,30 +5,112 @@
              xmlns:dir="clr-namespace:RetrieveApp.Elements"
              xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
              NavigationPage.HasNavigationBar="False">
+    
+    
+    <!--Welcome Page-->
     <ContentPage>
-        <dir:GradientLayout ColorsList="#7651e8,#50abe8"
-         Mode="ToBottomRight" Spacing="10">
-            <!--Button BackgroundColor="Transparent" Text="Skippa" HorizontalOptions="EndAndExpand"
-                   VerticalOptions="StartAndExpand" TextColor="White"/-->
+        <dir:GradientLayout ColorsList="#CC51F1,#502189"
+         Mode="ToBottom" Spacing="10">
+            <!--`Skip button-->
+            <Button Text="Skippa" HorizontalOptions="End" VerticalOptions="End" Margin="20,20,20,20"></Button>
+            
+            
             <Label Text="Retrieve It" HorizontalOptions="CenterAndExpand"
                    FontSize="52" TextColor="White" 
                        FontFamily="{StaticResource MFont}"
                        Margin="0,55,0,0"/>
-            <Image x:Name="icon" Margin="0,15,0,0"/>
+            <Image x:Name="icon1" Margin="0,15,0,0"/>
             <Label Text="Välkommen till RetrieveIt appen!"
                        FontFamily="{StaticResource MFont}"
                        HorizontalOptions="CenterAndExpand"
                        HorizontalTextAlignment="Center"
-                       FontSize="21" TextColor="Black" Margin="0,10,0,0"
+                       FontSize="29" TextColor="Black" Margin="0,10,0,0"
                        />
+            
+                        
+            
+            <Label VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand" x:Name="vnr" 
+                  FontFamily="{StaticResource MFont}"  />
+
             <Button Text="KOMMA IGÅNG"
                         VerticalOptions="EndAndExpand"
                         TextColor="Black" FontSize="29"
                         BackgroundColor="White" Padding="10" FontAttributes="Bold"
                         BorderRadius="14" x:Name="btn"
-                        FontFamily="{StaticResource MFont}"/>
+                        FontFamily="{StaticResource MFont}" Margin="20,20,20,20"/>
         </dir:GradientLayout>
     </ContentPage>
+
+     <!--Description page-->
+    
+    <ContentPage>
+         <dir:GradientLayout VerticalOptions="FillAndExpand"
+         HorizontalOptions="FillAndExpand" ColorsList="#CC51F1,#502189"
+         Mode="ToBottom">
+             
+            <!--`Skip button-->
+                 <Button Text="Skippa" HorizontalOptions="End" VerticalOptions="End" Margin="20,20,20,20"></Button>
+ 
+              <!--Instruktioner-->
+
+            <StackLayout>
+                  <Frame Padding="0" CornerRadius="15" Margin="20,20,20,20" BackgroundColor="MediumPurple">
+                      <Label Text="Instruktioner" HorizontalOptions="CenterAndExpand"
+                     FontSize="24" TextColor="Black" FontAttributes="Bold" HorizontalTextAlignment="Center"   
+                     FontFamily="{StaticResource MFont}" Margin="20,20,20,20" 
+                     />
+                 </Frame>
+            </StackLayout>
+             
+             
+             <!--Logo-->
+            <Image x:Name="icon" Margin="0,15,0,0"/>
+
+
+
+            <!--Descriptions-->
+            <StackLayout HorizontalOptions="Center" VerticalOptions="CenterAndExpand"  >
+                
+            <Frame Padding="0" CornerRadius="15" Margin="15,0,15,15" >
+                    <StackLayout BackgroundColor="Black" Spacing="15" >
+                        <ScrollView>
+                            <StackLayout BackgroundColor="BlueViolet">
+                                <Frame Padding="0" CornerRadius="15" Margin="10,10,10,10" BackgroundColor="MediumPurple" >
+                                    <Label Text="Den här appen ger dig möjlgheten till att Reservera olika sorter mat för billigare pris." HorizontalTextAlignment="Center"
+                     FontSize="20" TextColor="Black"  FontFamily="{StaticResource MFont}"
+                     FontAttributes="Bold" Margin="20,20,20,20"/>
+                                </Frame>
+
+                                <Frame Padding="0" CornerRadius="15" Margin="10,10,10,10" BackgroundColor="MediumPurple" >
+                                    <Label Text="Samt ger den dig möjlgheten till att hitta butikens address som säljer varan på kartan." 
+                     HorizontalOptions="CenterAndExpand"  FontFamily="{StaticResource MFont}"
+                     FontSize="20" TextColor="Black" FontAttributes="Bold" HorizontalTextAlignment="Center"
+                     Margin="20,20,20,20"/>
+                                </Frame>
+                              </StackLayout>
+                        </ScrollView>
+                    </StackLayout>
+                </Frame>
+              </StackLayout>
+
+
+            <Button Text="Nästa"
+                        VerticalOptions="EndAndExpand"
+                        TextColor="Black" FontSize="29"
+                        BackgroundColor="White" Padding="10" FontAttributes="Bold"
+                        BorderRadius="14"  x:Name="btn1"
+                        FontFamily="{StaticResource MFont}" Margin="20,20,20,20"/>
+
+
+
+
+
+        </dir:GradientLayout>
+    </ContentPage>
+
+    
+    <!--Create accound and login pages-->
+    
     <ContentPage>
         <dir:GradientLayout VerticalOptions="FillAndExpand"
          HorizontalOptions="FillAndExpand" ColorsList="#CC51F1,#502189"
@@ -68,4 +150,6 @@
             </StackLayout>
         </dir:GradientLayout>
     </ContentPage>
+    
+    
 </CarouselPage>

@@ -14,6 +14,7 @@ namespace RetrieveApp
 {
     public partial class App : Application
     {
+        public const string VERSION = "1.0.0";
         public static int ScreenHeight { get; set; }
         public static int ScreenWidth { get; set; }
         public static Page CURRENT_PAGE;

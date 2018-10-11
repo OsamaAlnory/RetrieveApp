@@ -1,0 +1,1 @@
+﻿1>------ Clean started: Project: RetrieveApp, Configuration: Debug Any CPU ------

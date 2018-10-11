@@ -141,10 +141,10 @@
     <AndroidResource Include="Resources\drawable\places.png" />
     <AndroidResource Include="Resources\drawable\Logo.png" />
     <AndroidResource Include="Resources\mipmap-hdpi\icons.png" />
-    <AndroidResource Include="Resources\mipmap-mdpi\icons.png" />
-    <AndroidResource Include="Resources\mipmap-xhdpi\icons.png" />
-    <AndroidResource Include="Resources\mipmap-xxxhdpi\icons.png" />
-    <AndroidResource Include="Resources\mipmap-xxhdpi\icons.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\icon.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\icon.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\icon.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\xml\file_paths.xml" />

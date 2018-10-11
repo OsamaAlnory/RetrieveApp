@@ -33,6 +33,8 @@ namespace RetrieveApp.Pages
                 icon.Source = ImageSource.FromResource(App.PATH + "logo.png",
                  Assembly.GetExecutingAssembly());
                 btn.Clicked += (e, args) => OnButtonClicked();
+                btn1.Clicked += (e, args) => OnButtonClicked();
+                icon1.Source = ImageSource.FromResource(App.PATH + "logo.png");
             }
             log_btn.Clicked += (e, args) => ProcessLogin();
             crt_btn.Clicked += (e, args) => CreateAccoutClicked();
@@ -50,12 +52,16 @@ namespace RetrieveApp.Pages
               App.ScreenHeight / 64, App.ScreenWidth / 24, 0);
             e_name.FontSize = IFont.Calc(e_name.HeightRequest);
             e_pass.FontSize = IFont.Calc(e_pass.HeightRequest);
+
+            vnr.Text = "Version: " + App.VERSION;
         }
 
         private void OnButtonClicked()
         {
             CurrentPage = Children[1];
         }
+
+        // Fika knappen "Nästa"
         private void ProcessLogin()
         {
             string u = e_name.Text;
