@@ -70,7 +70,9 @@
 
             <!--Descriptions-->
             <StackLayout HorizontalOptions="Center" VerticalOptions="CenterAndExpand"  >
-                
+                <ScrollView>
+                    
+               
             <Frame Padding="0" CornerRadius="15" Margin="15,0,15,15" >
                     <StackLayout BackgroundColor="Black" Spacing="15" >
                         <ScrollView>
@@ -91,7 +93,8 @@
                         </ScrollView>
                     </StackLayout>
                 </Frame>
-              </StackLayout>
+                </ScrollView>
+            </StackLayout>
 
 
             <Button Text="Nästa"
