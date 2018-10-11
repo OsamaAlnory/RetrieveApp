@@ -4,7 +4,6 @@
              x:Class="RetrieveApp.Pages.MapPage" BarBackgroundColor="DarkOrchid"
             xmlns:element="clr-namespace:RetrieveApp.Elements"
             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
-            xmlns:local="clr-namespace:RetrieveApp.Pages"
             NavigationPage.HasNavigationBar="False">
     <ContentPage Title="Karta" Icon="places.png">
         <AbsoluteLayout>
@@ -15,24 +14,21 @@
         </AbsoluteLayout>
     </ContentPage>
     <ContentPage Title="Flöde" Icon="posts.png">
-        <element:GradientLayout HorizontalOptions="FillAndExpand"
-         VerticalOptions="FillAndExpand" ColorsList="#b92dff,#9000d8"
-         Mode="ToBottom" Padding="20">
-            <SearchBar x:Name="search" Placeholder="#Sök här"/>
+        <StackLayout Padding="20">
+            <Frame Padding="0" BorderColor="#50abe8" CornerRadius="20">
+                <SearchBar x:Name="search" Placeholder="Sök ställen"
+                 CancelButtonColor="#CC51F1" FontFamily="{StaticResource MFont}"/>
+            </Frame>
             <ScrollView x:Name="sc">
                 <StackLayout x:Name="fl" Spacing="10"/>
             </ScrollView>
-            <StackLayout Orientation="Horizontal" Padding="10" Spacing="0"
+            <StackLayout Orientation="Horizontal" Padding="10" Spacing="5"
                  HorizontalOptions="CenterAndExpand" x:Name="stk_btns">
-                <Button Text="&lt;&lt;" WidthRequest="{x:Static local:MapPage.BUTTON_WIDTH}"/>
-                <Button Text="1" WidthRequest="45"/>
-                <Button Text="2" WidthRequest="45"/>
-                <Button Text="3" WidthRequest="45"/>
-                <Button Text="4" WidthRequest="45"/>
-                <Button Text="5" WidthRequest="45"/>
-                <Button Text=">>" WidthRequest="45"/>
+                <Button Text="&lt;&lt;"/><Button Text="1"/>
+                <Button Text="2"/><Button Text="3"/><Button Text="4"/>
+                <Button Text="5"/><Button Text=">>"/>
             </StackLayout>
-        </element:GradientLayout>
+        </StackLayout>
     </ContentPage>
     <ContentPage x:Name="pg_b" Title="Mina beställningar" Icon="reservations.png">
         <element:GradientLayout HorizontalOptions="FillAndExpand"

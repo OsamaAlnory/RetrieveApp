@@ -13,8 +13,8 @@ namespace RetrieveApp.Elements.Card
         private int SLOT = 3;
         private StackLayout stk_btns;
         int page = 1;
-        public static Color[] BTN_C = new Color[] { Color.Green,
-        Color.DarkRed,Color.Green,Color.DarkSalmon,Color.Yellow};
+        public static Color[] BTN_C = new Color[] { Color.FromHex("#b600ff"),
+        Color.FromHex("#8300b7")};
         private StackLayout fl;
         private ScrollView sc;
         public List<Products> visible = new List<Products>();
@@ -63,7 +63,6 @@ namespace RetrieveApp.Elements.Card
                 for (int x = 1; x < 6; x++)
                 {
                     btns[x].Text = "" + x;
-                    btns[x].TextColor = Color.White;
                 }
             }
             else

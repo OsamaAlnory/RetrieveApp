@@ -12,8 +12,8 @@
                         iOS="Oswald" Android="oswald-r.ttf#Oswald">
             </OnPlatform>
             <Style x:Key="Btn" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="#27A9E1" />
-                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#27A9E1"/>
+                <Setter Property="TextColor" Value="White"/>
                 <Setter Property="FontSize">
                     <Setter.Value>
                         <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="16"/>
