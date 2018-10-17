@@ -61,8 +61,8 @@ namespace RetrieveApp.Pages
             {
                 load.Pause();
                 load.IsVisible = false;
-                Navigation.PushAsync(new FirstLogin());
-                //Navigation.PushAsync(new WelcomePage("Default"));
+                 //Navigation.PushAsync(new FirstLogin());
+                Navigation.PushAsync(new WelcomePage("Default"));
                 //Navigation.PushAsync(new MapPage(DBActions.admins[0]));
                 //Navigation.PushAsync(new MapPage(DBActions.guests[0]));
                 //Navigation.PushAsync(new ProductView(DBActions.products[0]));
