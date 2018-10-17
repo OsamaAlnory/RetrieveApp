@@ -21,7 +21,7 @@ namespace RetrieveApp.Pages
             page = this;
 			InitializeComponent ();
             App.Register(this);
-            state.Text = "Loading";
+            state.Text = "Laddar";
             Device.StartTimer(TimeSpan.FromSeconds(1), () => {
                 if (App.CheckInternetConnection())
                 {
@@ -61,8 +61,8 @@ namespace RetrieveApp.Pages
             {
                 load.Pause();
                 load.IsVisible = false;
+                Navigation.PushAsync(new FirstLogin());
                 //Navigation.PushAsync(new WelcomePage("Default"));
-                Navigation.PushAsync(new Vinst());
                 //Navigation.PushAsync(new MapPage(DBActions.admins[0]));
                 //Navigation.PushAsync(new MapPage(DBActions.guests[0]));
                 //Navigation.PushAsync(new ProductView(DBActions.products[0]));

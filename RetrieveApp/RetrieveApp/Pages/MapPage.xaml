@@ -22,7 +22,7 @@
             <ScrollView x:Name="sc">
                 <StackLayout x:Name="fl" Spacing="10"/>
             </ScrollView>
-            <StackLayout Orientation="Horizontal" Padding="10" Spacing="5"
+            <StackLayout Orientation="Horizontal" Padding="8" Spacing="3"
                  HorizontalOptions="CenterAndExpand" x:Name="stk_btns">
                 <Button Text="&lt;&lt;"/><Button Text="1"/>
                 <Button Text="2"/><Button Text="3"/><Button Text="4"/>
@@ -31,9 +31,7 @@
         </StackLayout>
     </ContentPage>
     <ContentPage x:Name="pg_b" Title="Mina beställningar" Icon="reservations.png">
-        <element:GradientLayout HorizontalOptions="FillAndExpand"
-         VerticalOptions="FillAndExpand" ColorsList="#b92dff,#9000d8"
-         Mode="ToBottom" Padding="20">
+        <StackLayout Padding="20">
             <SearchBar x:Name="search1" Placeholder="#Sök här"/>
             <ScrollView x:Name="sc1">
                 <StackLayout x:Name="fl1" Spacing="10"/>
@@ -48,12 +46,10 @@
                 <Button Text="5" WidthRequest="45"/>
                 <Button Text=">>" WidthRequest="45"/>
             </StackLayout>
-        </element:GradientLayout>
+        </StackLayout>
     </ContentPage>
     <ContentPage Title="Lägg till" Icon="add.png" x:Name="pg_admin">
-        <element:GradientLayout HorizontalOptions="FillAndExpand"
-         VerticalOptions="FillAndExpand" ColorsList="#b92dff,#9000d8"
-         Mode="ToBottomRight" Padding="15">
+        <StackLayout Padding="15">
             <ScrollView>
                 <StackLayout>
                     <Label Text="Vad säljer du?" HorizontalOptions="CenterAndExpand"
@@ -89,12 +85,10 @@
                     </StackLayout>
                 </StackLayout>
             </ScrollView>
-        </element:GradientLayout>
+        </StackLayout>
     </ContentPage>
     <ContentPage Title="Inställningar" Icon="settings.png">
-        <element:GradientLayout HorizontalOptions="FillAndExpand"
-         VerticalOptions="FillAndExpand" ColorsList="#b92dff,#9000d8"
-         Mode="ToBottom" Padding="10">
+        <StackLayout Padding="10">
             <StackLayout Orientation="Horizontal" Spacing="0" Margin="0,10,0,0">
                 <StackLayout BackgroundColor="Gold" HorizontalOptions="FillAndExpand">
                     <Label Text="Inloggad som"
@@ -114,6 +108,6 @@
                     VerticalOptions="EndAndExpand" BackgroundColor="Crimson"
                     TextColor="White" FontAttributes="Bold" FontSize="30"
                     FontFamily="{StaticResource MFont}" x:Name="logout"/>
-        </element:GradientLayout>
+        </StackLayout>
     </ContentPage>
 </TabbedPage>

@@ -1,8 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="RetrieveApp.Pages.FirstLogin">
-    <StackLayout>
-        
-    </StackLayout>
+             xmlns:gr="clr-namespace:RetrieveApp.Elements"
+             x:Class="RetrieveApp.Pages.FirstLogin" NavigationPage.HasNavigationBar="False">
+    <gr:GradientLayout VerticalOptions="FillAndExpand"
+         HorizontalOptions="FillAndExpand" ColorsList="#CC51F1,#502189"
+         Mode="ToBottom" Padding="20" Spacing="50">
+        <Label Text="Ange bild och adress" TextColor="White" Margin="0,50,0,0"
+               FontFamily="{StaticResource MFont}" FontAttributes="Bold"
+               HorizontalOptions="CenterAndExpand" FontSize="30"/>
+        <Frame Padding="0" CornerRadius="45" HorizontalOptions="Center"
+         BackgroundColor="White" IsClippedToBounds="True">
+            <Image x:Name="icon" Aspect="AspectFill" HeightRequest="90"
+                   WidthRequest="90"/>
+        </Frame>
+        <Frame Padding="0" CornerRadius="10" IsClippedToBounds="True">
+            <gr:IEntry x:Name="loc" Placeholder="Adress" HorizontalOptions="FillAndExpand"
+         BackgroundColor="White" FontFamily="{StaticResource MFont}"
+                   HorizontalTextAlignment="Center"/>
+        </Frame>
+        <Button Text="Fortsätt" Style="{StaticResource Btn}"
+         BackgroundColor="White" TextColor="Red" VerticalOptions="EndAndExpand"
+                HorizontalOptions="FillAndExpand" x:Name="btn"/>
+    </gr:GradientLayout>
 </ContentPage>

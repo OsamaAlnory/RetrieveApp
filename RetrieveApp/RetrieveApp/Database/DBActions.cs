@@ -44,25 +44,14 @@ namespace RetrieveApp.Database
             admins.Add(new Admins
             {
                 ID = "Admin",Address = "Helsingborg Rönnegatan 5e",
-                SName = "WOW"
+                SName = "WOW", Password = "123"
             });
             guests.Add(new Guests {
                 ID = 5, Name = "Osama",
                 Password = "123"
 
             });
-            Geocoder g = new Geocoder();
-            foreach (Admins place in admins)
-            {
-                Position pos = new Position();
-                IEnumerable<Position> result = await g.GetPositionsForAddressAsync(place.Address);
-                foreach (Position p in result)
-                {
-                    pos = p;
-                    break;
-                }
-                new IPin(place) { Position = pos};
-            }
+            await App.ReloadPins();
             App.FinishLoading("Pins");
         }
 

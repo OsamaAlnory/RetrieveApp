@@ -81,7 +81,7 @@ namespace RetrieveApp.Elements.Card
             Content = new AbsoluteLayout {
               Children={
                     new I(PRODUCT.Image){Aspect = Aspect.AspectFill},
-                    new B(0,0.2,1,0.1){
+                    new B(0.1,0.1,0.1,0.1){
                         Children =
                         {
                             new Image {Source=App.GetSource("sign.png")}

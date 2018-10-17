@@ -20,8 +20,6 @@ namespace RetrieveApp.Elements
             Type = PinType.SavedPin;
             Address = place.Address;
             Label = place.SName;
-            //double[] d = { double.Parse(p[0], CultureInfo.InvariantCulture)
-            //, double.Parse(p[1], CultureInfo.InvariantCulture)};
             Clicked += (s, e) => OnClicked();
             pins.Add(this);
         }
