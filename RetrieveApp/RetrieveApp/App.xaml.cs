@@ -1,4 +1,5 @@
-﻿using Plugin.Media.Abstractions;
+﻿using Plugin.Geolocator;
+using Plugin.Media.Abstractions;
 using RetrieveApp.Database;
 using RetrieveApp.Elements;
 using RetrieveApp.Pages;
@@ -7,8 +8,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Reflection;
+using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
+using System.Linq;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace RetrieveApp
@@ -21,6 +25,10 @@ namespace RetrieveApp
         public static Page CURRENT_PAGE;
         public static List<Loadable> loadables = new List<Loadable>();
         public static readonly string PATH = "RetrieveApp.Images.";
+        private static double LAT;
+        private static double LON;
+        private static double ALT;
+
         public App()
         {
             InitializeComponent();
@@ -42,6 +50,30 @@ namespace RetrieveApp
         public static ImageSource ByteToImage(byte[] b)
         {
             return ImageSource.FromStream(() => new MemoryStream(b));
+        }
+        public static async Task ReloadPins()
+        {
+            foreach (Admins place in DBActions.admins)
+            {
+                new IPin(place)
+                {
+                    Position = (await App.GetPositions(place.Address))[0]
+                };
+            }
+        }
+        public static async Task<List<Position>> GetPositions(string address)
+        {
+            Geocoder g = new Geocoder();
+            return (await g.GetPositionsForAddressAsync(address)).ToList();
+        }
+        private static async Task getLocation()
+        {
+            var loc = CrossGeolocator.Current;
+            loc.DesiredAccuracy = 20;
+            var pos = await loc.GetPositionAsync(TimeSpan.FromMilliseconds(1000));
+            LAT = pos.Latitude;
+            LON = pos.Longitude;
+            ALT = pos.Altitude;
         }
 
         public static void Register(Loadable page)

@@ -6,6 +6,7 @@ using Plugin.Permissions.Abstractions;
 using RetrieveApp.Database;
 using RetrieveApp.Elements;
 using RetrieveApp.Elements.Card;
+using RetrieveApp.Events;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,15 +26,8 @@ namespace RetrieveApp.Pages
 	{
         public static Account _g;
         public static MapPage mapPage;
-        public static double BUTTON_WIDTH = 45;
-        private double LAT;
-        private double LON;
-        private double ALT;
         private MediaFile file;
-        private LayoutButtons layout_b;
-        private LayoutButtons la_2;
-        private List<Products> vis1 = new List<Products>();
-        private List<Products> vis_admin = new List<Products>();
+        private MapPageEvents events;
 
 		public MapPage (Account _d)
 		{
@@ -79,78 +73,24 @@ namespace RetrieveApp.Pages
             btn_img.Clicked += Camera_Clicked;
             logout.Clicked += ProcessLogOut;
             search.TextChanged += TextChanged;
-            layout_b = new LayoutButtons(stk_btns, fl, sc, null);
-            la_2 = new LayoutButtons(stk_btns2, fl1, sc1, "admin");
-            rel("");
+            events = new MapPageEvents(new LayoutButtons(stk_btns, fl, sc, null)
+                , new LayoutButtons(stk_btns2, fl1, sc1, "admin"));
+            events.rel("");
             if(_d is Admins)
             {
-                rel_admin("");
+                events.rel_admin("");
             } else
             {
 
             }
-            layout_b.AddItems();
-            la_2.AddItems();
+            events.AddItems();
             Designer.DesignPageButtons(stk_btns);
         }
 
         private void TextChanged(object s, TextChangedEventArgs a)
         {
             string f = a.NewTextValue;
-            rel(f);
-        }
-
-        private void rel(string f)
-        {
-            vis1.Clear();
-            if (f != null && f != "")
-            {
-                f = f.ToLower();
-                foreach (Products p in DBActions.products)
-                {
-                    Admins ad = DBActions._p(p);
-                    if (ad.SName.ToLower().StartsWith(f))
-                    {
-                        vis1.Add(p);
-                    }
-                }
-            }
-            else
-            {
-                foreach (Products p in DBActions.products)
-                {
-                    vis1.Add(p);
-                }
-            }
-            layout_b.visible = vis1;
-            layout_b.OpenPage(1);
-        }
-
-        private void rel_admin(string f)
-        {
-            vis_admin.Clear();
-            List<Products> list = DBActions._a((Admins)_g);
-            if (f != null && f != "")
-            {
-                f = f.ToLower();
-                foreach (Products p in list)
-                {
-                    Admins ad = DBActions._p(p);
-                    if (ad.SName.ToLower().StartsWith(f))
-                    {
-                        vis_admin.Add(p);
-                    }
-                }
-            }
-            else
-            {
-                foreach (Products p in list)
-                {
-                    vis_admin.Add(p);
-                }
-            }
-            la_2.visible = vis_admin;
-            la_2.OpenPage(1);
+            events.rel(f);
         }
 
         private async void Camera_Clicked(object sender, EventArgs e)
@@ -177,14 +117,8 @@ namespace RetrieveApp.Pages
                     image.Source = ImageSource.FromStream(() => { return file.GetStream(); });
                 } catch(Exception ex)
                 {
-                    
-                    DisplayAlert("daw", "" + ex.Message, "dawd");
+                    DisplayAlert("Fel",ex.Message,"Avbryt");
                 }
-                //if (!CrossMedia.Current.IsCameraAvailable ||
-                //!CrossMedia.Current.IsTakePhotoSupported)
-                //{
-                //    DisplayAlert("ERR", "Not supported!", "Cancel");
-                //}
             }
         }
         private void ProcessLogOut(object s, object a)
@@ -209,15 +143,6 @@ namespace RetrieveApp.Pages
                 Description = desc.Text,
                 Image = App.ImageToByte(file)
             });
-        }
-        private async Task getLocation()
-        {
-            var loc = CrossGeolocator.Current;
-            loc.DesiredAccuracy = 20;
-            var pos = await loc.GetPositionAsync(TimeSpan.FromMilliseconds(1000));
-            LAT = pos.Latitude;
-            LON = pos.Longitude;
-            ALT = pos.Altitude;
         }
         public static Page GetPageByName(string title)
         {
