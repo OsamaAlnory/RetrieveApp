@@ -23,10 +23,18 @@ namespace RetrieveApp
         public static readonly string PATH = "RetrieveApp.Images.";
         public App()
         {
-            InitializeComponent();
             
-             MainPage = new NavigationPage(new LoadingPage());
-            CURRENT_PAGE = MainPage;
+
+
+
+                InitializeComponent();
+
+                MainPage = new NavigationPage(new LoadingPage());
+                CURRENT_PAGE = MainPage;
+            
+            
+
+             
         }
 
         public static byte[] ImageToByte(MediaFile file)

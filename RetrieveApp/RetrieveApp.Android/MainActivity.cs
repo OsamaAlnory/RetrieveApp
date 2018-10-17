@@ -33,22 +33,30 @@ namespace RetrieveApp.Droid
         private static App app;
         protected override async void OnCreate(Bundle savedInstanceState)
         {
-            TabLayoutResource = Resource.Layout.Tabbar;
-            ToolbarResource = Resource.Layout.Toolbar;
-            base.OnCreate(savedInstanceState);
-            CrossCurrentActivity.Current.Init(this, savedInstanceState);
-            await CrossMedia.Current.Initialize();
-            CrossCurrentActivity.Current.Activity = this;
-            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            App.ScreenHeight = (int)(Resources.DisplayMetrics.HeightPixels / Resources.DisplayMetrics.Density);
-            App.ScreenWidth = (int)(Resources.DisplayMetrics.WidthPixels / Resources.DisplayMetrics.Density);
-            Xamarin.FormsMaps.Init(this, savedInstanceState);
-            if(app == null)
-            {
-                app = new App();
+           
+                TabLayoutResource = Resource.Layout.Tabbar;
+                ToolbarResource = Resource.Layout.Toolbar;
+                base.OnCreate(savedInstanceState);
+                CrossCurrentActivity.Current.Init(this, savedInstanceState);
+           
+                await CrossMedia.Current.Initialize();
+                CrossCurrentActivity.Current.Activity = this;
+                global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+                App.ScreenHeight = (int)(Resources.DisplayMetrics.HeightPixels / Resources.DisplayMetrics.Density);
+                App.ScreenWidth = (int)(Resources.DisplayMetrics.WidthPixels / Resources.DisplayMetrics.Density);
+                 Xamarin.FormsMaps.Init(this, savedInstanceState);
+           
+                if (app == null)
+                {
+                    app = new App();
+                }
+                LoadApplication(app);
             }
-            LoadApplication(app);
-        }
+            
+
+             
+           
+         
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
         {
             Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
