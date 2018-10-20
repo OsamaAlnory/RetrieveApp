@@ -63,10 +63,8 @@ namespace RetrieveApp.Elements.Card
         private ScrollView v;
         private bool selected;
         private int id;
-        private static Random r = new Random();
         public ProductCard(Products product, string productType)
         {
-            id = r.Next(1, 50000);
             TapGestureRecognizer tp = new TapGestureRecognizer();
             tp.Tapped += OnTapped;
             v = new CardScrollContent(product,tp,productType);
@@ -77,6 +75,7 @@ namespace RetrieveApp.Elements.Card
             Padding = 0;
             CornerRadius = 30;
             HeightRequest = 300;
+            IsClippedToBounds = true;
             HorizontalOptions = LayoutOptions.FillAndExpand;
             Content = new AbsoluteLayout {
               Children={

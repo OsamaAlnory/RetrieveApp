@@ -79,6 +79,20 @@ namespace RetrieveApp.Database
             }
             return null;
         }
+
+        public static List<Guests> GetBookers(Products p)
+        {
+            var list = new List<Guests>();
+            foreach(Guests g in guests)
+            {
+                if(hasBooked(g, p))
+                {
+                    list.Add(g);
+                }
+            }
+            return list;
+        }
+
         public static List<int> getCart(Guests g)
         {
             List<int> ints = new List<int>();
@@ -129,19 +143,6 @@ namespace RetrieveApp.Database
             }
             return list;
         }
-        /*
-        public static Guests _g(Products p)
-        {
-            foreach (Guests a in guests)
-            {
-                if (a.ID == p.Guest)
-                {
-                    return a;
-                }
-            }
-            return null;
-        }
-        */
 
         public static async Task AddUser(Guests user)
         {
@@ -156,8 +157,9 @@ namespace RetrieveApp.Database
         }
         public static async void RemoveProduct(Products product)
         {
-            HttpClient client = new HttpClient();
-            var r = await client.DeleteAsync("http://fannylovisa.somee.com/api/Products/"+product.ID);
+            products.Remove(product);
+            //HttpClient client = new HttpClient();
+            //var r = await client.DeleteAsync("http://fannylovisa.somee.com/api/Products/"+product.ID);
         }
         public static async void AddProduct(Products product)
         {

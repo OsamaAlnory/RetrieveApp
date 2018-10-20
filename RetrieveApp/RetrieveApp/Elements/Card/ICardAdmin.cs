@@ -7,13 +7,10 @@ using Xamarin.Forms;
 
 namespace RetrieveApp.Elements.Card
 {
-    public class ICardAdmin : ICardDefault
+    public class ICardAdmin
     {
-        public ICardAdmin(Products product) : base(product)
-        {
-        }
-
-        public override StackLayout getContent()
+        private Products product;
+        public StackLayout getContent()
         {
             Button btn = new Button
             {

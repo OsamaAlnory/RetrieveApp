@@ -1,4 +1,5 @@
 ﻿using RetrieveApp.Database;
+using RetrieveApp.Design;
 using RetrieveApp.Pages;
 using System;
 using System.Collections.Generic;
@@ -12,20 +13,21 @@ namespace RetrieveApp.Elements.Card
         public static StackLayout GEN(string cardType, Products product,
             TapGestureRecognizer tap)
         {
-            ICardDefault card = null;
+            StackLayout card = null;
             if(cardType != null && cardType == "admin")
             {
-                card = new ICardAdmin(product);
+                card = new CardOwner(product);
             } else
             {
-                card = new ICardDefault(product);
+                //card = new CardBook(product);
+                card = new CardDefault(product);
             }
             StackLayout st = new StackLayout
             {
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 VerticalOptions = LayoutOptions.FillAndExpand,
                 Children ={
-                    card.getContent()
+                    card
                 },
                 GestureRecognizers = {tap}
             };

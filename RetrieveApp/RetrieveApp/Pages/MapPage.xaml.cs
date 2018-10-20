@@ -37,13 +37,14 @@ namespace RetrieveApp.Pages
                     mapPage = this;
                 }
             TimeSpan t = TimeSpan.FromHours(9);
-            for (int x = 0; x < 100; x++)
+            for (int x = 0; x < 1000; x++)
             {
                 DBActions.products.Add(new Products{
                         ID = 3,
                         AdminID = "Admin",
                         Description = "Crap",
-                        PName = "Cookies asdsadasdadjkl", OldPrice=20, NewPrice=10,
+                        PName = new Random().Next(9999)+"Cookies",
+                        OldPrice =20, NewPrice=10,
                         Quantity = 10, ExpireTime=t});
             }
             InitializeComponent();
@@ -52,6 +53,7 @@ namespace RetrieveApp.Pages
             if(_d is Guests)
             {
                 Children.Remove(pg_admin);
+                filters.IsVisible = false;
             } else
             {
                 pg_b.Title = "Mina produkter";
@@ -73,8 +75,9 @@ namespace RetrieveApp.Pages
             btn_img.Clicked += Camera_Clicked;
             logout.Clicked += ProcessLogOut;
             search.TextChanged += TextChanged;
+            search1.TextChanged += TextChanged1;
             events = new MapPageEvents(new LayoutButtons(stk_btns, fl, sc, null)
-                , new LayoutButtons(stk_btns2, fl1, sc1, "admin"));
+             ,new LayoutButtons(stk_btns2, fl1, sc1, "admin"));
             events.rel("");
             if(_d is Admins)
             {
@@ -85,12 +88,24 @@ namespace RetrieveApp.Pages
             }
             events.AddItems();
             Designer.DesignPageButtons(stk_btns);
+            Designer.DesignPageButtons(stk_btns2);
+            filter_all.FontSize = Device.GetNamedSize(NamedSize.Small, filter_all);
+            filter_b.FontSize = Device.GetNamedSize(NamedSize.Small, filter_b);
         }
 
         private void TextChanged(object s, TextChangedEventArgs a)
         {
-            string f = a.NewTextValue;
-            events.rel(f);
+            events.rel(a.NewTextValue);
+        }
+
+        private void TextChanged1(object s, TextChangedEventArgs a)
+        {
+            events.rel_admin(a.NewTextValue);
+        }
+
+        public string TXT()
+        {
+            return search1.Text;
         }
 
         private async void Camera_Clicked(object sender, EventArgs e)
@@ -117,15 +132,19 @@ namespace RetrieveApp.Pages
                     image.Source = ImageSource.FromStream(() => { return file.GetStream(); });
                 } catch(Exception ex)
                 {
-                    DisplayAlert("Fel",ex.Message,"Avbryt");
+                    await DisplayAlert("Fel",ex.Message,"Avbryt");
                 }
             }
         }
-        private void ProcessLogOut(object s, object a)
+        private async void ProcessLogOut(object s, object a)
         {
-            Application.Current.Properties.Remove("Logged");
-            Navigation.PushAsync(new WelcomePage("LoginOnly"));
-            Navigation.RemovePage(this);
+            bool IS = await App.SendSure(this);
+            if (IS)
+            {
+                Application.Current.Properties.Remove("Logged");
+                await Navigation.PushAsync(new WelcomePage("LoginOnly"));
+                Navigation.RemovePage(this);
+            }
         }
 
         private void Btn_add(object s, EventArgs a)

@@ -13,6 +13,7 @@ namespace RetrieveApp.Events
         private LayoutButtons la_2;
         private List<Products> vis1 = new List<Products>();
         private List<Products> vis_admin = new List<Products>();
+        private string filter = "all";
 
 
         public MapPageEvents(LayoutButtons l1, LayoutButtons l2)
@@ -25,6 +26,18 @@ namespace RetrieveApp.Events
         {
             layout_b.AddItems();
             la_2.AddItems();
+        }
+
+        public void ChangeFilter(string filter)
+        {
+            this.filter = filter;
+            rel_admin(MapPage.mapPage.TXT());
+            // Refresh
+        }
+
+        public void rel_guestB()
+        {
+
         }
 
         public void rel(string f)
@@ -60,13 +73,18 @@ namespace RetrieveApp.Events
             if (f != null && f != "")
             {
                 f = f.ToLower();
-                foreach (Products p in list)
+                if(filter == "all")
                 {
-                    Admins ad = DBActions._p(p);
-                    if (ad.SName.ToLower().StartsWith(f))
+                    foreach (Products p in list)
                     {
-                        vis_admin.Add(p);
+                        if (Check_A(p, f))
+                        {
+                            vis_admin.Add(p);
+                        }
                     }
+                } else if(filter == "book")
+                {
+                    
                 }
             }
             else
@@ -79,5 +97,15 @@ namespace RetrieveApp.Events
             la_2.visible = vis_admin;
             la_2.OpenPage(1);
         }
+
+        private bool Check_A(Products p, string text)
+        {
+            if (p.PName.ToLower().StartsWith(text))
+            {
+                return true;
+            }
+            return false;
+        }
+
     }
 }

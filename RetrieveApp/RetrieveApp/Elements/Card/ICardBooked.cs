@@ -7,13 +7,11 @@ using Xamarin.Forms;
 
 namespace RetrieveApp.Elements.Card
 {
-    public class ICardBooked : ICardDefault
+    public class ICardBooked
     {
-        public ICardBooked(Products product) : base(product)
-        {
-        }
+        Products product;
 
-        public override StackLayout getContent()
+        public StackLayout getContent()
         {
             Button btn = new Button
             {

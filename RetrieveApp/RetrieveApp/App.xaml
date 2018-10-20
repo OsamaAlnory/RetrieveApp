@@ -4,6 +4,7 @@
              x:Class="RetrieveApp.App">
     <Application.Resources>
         <ResourceDictionary>
+            <Color x:Key="P">#9e42f4</Color>
             <OnPlatform x:TypeArguments="x:String" x:Key="Harlow"
                         iOS="Harlow"
                         Android="harlow.ttf#Harlow Solid Italic">
