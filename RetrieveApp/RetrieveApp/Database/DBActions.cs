@@ -13,6 +13,7 @@ namespace RetrieveApp.Database
 {
     internal class DBActions
     {
+        private const string LINK = "http://windows.u7979705.fsdata.se/api/";
         public static List<Admins> admins = new List<Admins>();
         public static List<Guests> guests = new List<Guests>();
         public static List<Products> products = new List<Products>();
@@ -20,8 +21,9 @@ namespace RetrieveApp.Database
 
         public static async void GetAccounts()
         {
+
+            //await LoadAccounts();
             /*
-            await LoadAccount();
             HttpClient client = new HttpClient();
             var responce4 = await client.GetStringAsync("http://fannylovisa.somee.com/api/options");
             List<Options> op = JsonConvert.DeserializeObject<List<Options>>(responce4);
@@ -35,22 +37,26 @@ namespace RetrieveApp.Database
                 LoadingPage.page.Quit();
                 return;
             }
-            App.StartLoading("Products");
-            var responce3 = await client.GetStringAsync("http://fannylovisa.somee.com/api/Products");
-            products = JsonConvert.DeserializeObject<List<Products>>(responce3);
-            App.FinishLoading("Products");
             */
+            await LoadProducts();
             App.StartLoading("Pins");
             admins.Add(new Admins
             {
                 ID = "Admin",Address = "Helsingborg Rönnegatan 5e",
                 SName = "WOW", Password = "123"
             });
+            admins.Add(new Admins { ID="Test", Address="Lund Storgatan",
+                SName ="Lidl",Password="123"});
             guests.Add(new Guests {
                 ID = 5, Name = "Osama",
                 Password = "123"
-
             });
+            products.Add(new Products { ID = 12432, AdminID = "Test", PName="Burger",
+            Description="dwad"});
+            TimeSpan t = TimeSpan.FromHours(9);
+            products.Add(new Products{ID=11,AdminID="Admin",PName="Cookie",
+            OldPrice=10, NewPrice=5, Quantity=18, Description="Hello!"});
+            addToCart(guests[0], products[0], 10);
             await App.ReloadPins();
             App.FinishLoading("Pins");
         }
@@ -61,11 +67,21 @@ namespace RetrieveApp.Database
             admins.Clear();
             guests.Clear();
             HttpClient client = new HttpClient();
-            var responce1 = await client.GetStringAsync("http://fannylovisa.somee.com/api/Admins");
-            admins = JsonConvert.DeserializeObject<List<Admins>>(responce1);
-            var responce2 = await client.GetStringAsync("http://fannylovisa.somee.com/api/Users");
+            //var responce1 = await client.GetStringAsync("http://windows.u7979705.fsdata.se/api/Users");
+            //admins = JsonConvert.DeserializeObject<List<Admins>>(responce1);
+            var responce2 = await client.GetStringAsync(LINK+"Users");
             guests = JsonConvert.DeserializeObject<List<Guests>>(responce2);
             App.FinishLoading("Users");
+        }
+
+        public static async Task LoadProducts()
+        {
+            App.StartLoading("Products");
+            products.Clear();
+            HttpClient client = new HttpClient();
+            var responce3 = await client.GetStringAsync(LINK+"Products");
+            products = JsonConvert.DeserializeObject<List<Products>>(responce3);
+            App.FinishLoading("Products");
         }
 
         public static Guests GetUserById(int id)
@@ -88,6 +104,19 @@ namespace RetrieveApp.Database
                 if(hasBooked(g, p))
                 {
                     list.Add(g);
+                }
+            }
+            return list;
+        }
+
+        public static List<Products> GetProducts(Guests g)
+        {
+            var list = new List<Products>();
+            foreach(Products p in products)
+            {
+                if (GetBookers(p).Contains(g))
+                {
+                    list.Add(p);
                 }
             }
             return list;
@@ -149,7 +178,7 @@ namespace RetrieveApp.Database
             var json = JsonConvert.SerializeObject(user);
             var c = new StringContent(json, Encoding.UTF8, "application/json");
             HttpClient client = new HttpClient();
-            var r = await client.PostAsync("http://fannylovisa.somee.com/api/Users", c);
+            var r = await client.PostAsync(LINK+"Users", c);
             if(r.StatusCode == HttpStatusCode.Created)
             {
                 
@@ -158,19 +187,20 @@ namespace RetrieveApp.Database
         public static async void RemoveProduct(Products product)
         {
             products.Remove(product);
-            //HttpClient client = new HttpClient();
-            //var r = await client.DeleteAsync("http://fannylovisa.somee.com/api/Products/"+product.ID);
+            HttpClient client = new HttpClient();
+            var r = await client.DeleteAsync(LINK+"Products/"+product.ID);
         }
-        public static async void AddProduct(Products product)
+        public static async Task AddProduct(Products product)
         {
             var json = JsonConvert.SerializeObject(product);
             var c = new StringContent(json, Encoding.UTF8, "application/json");
             HttpClient client = new HttpClient();
-            var r = await client.PostAsync("http://fannylovisa.somee.com/api/Products", c);
+            var r = await client.PostAsync(LINK+"Products", c);
             if (r.StatusCode == HttpStatusCode.Created)
             {
                 //
             }
+            MapPage.mapPage.DisplayAlert("dwad", ""+r.StatusCode,"dwa");
         }
 
     }

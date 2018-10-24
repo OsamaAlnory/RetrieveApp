@@ -8,12 +8,12 @@ namespace RetrieveApp.Elements.Card
 {
     class CardScrollContent : ScrollView
     {
-        public CardScrollContent(Products product, TapGestureRecognizer tap, string cardType)
+        public CardScrollContent(Binary b, TapGestureRecognizer tap, string cardType)
         {
             HorizontalOptions = LayoutOptions.FillAndExpand;
             VerticalOptions = LayoutOptions.FillAndExpand;
             Padding = 10;
-            Content = CardInside.GEN(cardType, product, tap);
+            Content = CardInside.GEN(cardType, b, tap);
         }
     }
 }

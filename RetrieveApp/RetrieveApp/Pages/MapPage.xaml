@@ -15,14 +15,24 @@
         </AbsoluteLayout>
     </ContentPage>
     <ContentPage Title="Flöde" Icon="posts.png">
-        <StackLayout Padding="20">
+        <StackLayout Padding="5" Spacing="0">
+            <StackLayout Orientation="Horizontal" Spacing="0">
+                <Button Text="Alla" HorizontalOptions="FillAndExpand" x:Name="filter_all"
+                        BackgroundColor="{StaticResource P}" CornerRadius="0"
+                        TextColor="White" FontFamily="{StaticResource MFont}"
+                        Clicked="FilterButtonAll"/>
+                <Button Text="Mina produkter" HorizontalOptions="FillAndExpand"
+                 x:Name="filter_b" BackgroundColor="{StaticResource P}" CornerRadius="0"
+                        TextColor="White" FontFamily="{StaticResource MFont}"
+                        Clicked="FilterButtonB"/>
+            </StackLayout>
+            <StackLayout Padding="15">
             <Frame Padding="0" BorderColor="#50abe8" CornerRadius="20">
                 <SearchBar x:Name="search" Placeholder="Sök ställen"
                  CancelButtonColor="#CC51F1" FontFamily="{StaticResource MFont}"/>
             </Frame>
-            <pull:PullToRefreshLayout IsPullToRefreshEnabled="True"
-                                      RefreshColor="Red"
-                                      RefreshBackgroundColor="Blue">
+            <pull:PullToRefreshLayout IsPullToRefreshEnabled="True" x:Name="refr"
+                                      RefreshColor="Blue">
                 <ScrollView x:Name="sc">
                     <StackLayout x:Name="fl" Spacing="10"/>
                 </ScrollView>
@@ -34,27 +44,22 @@
                 <Button Text="5"/><Button Text=">>"/>
             </StackLayout>
         </StackLayout>
+        </StackLayout>
     </ContentPage>
-    <ContentPage x:Name="pg_b" Title="Mina beställningar" Icon="reservations.png">
+
+    <ContentPage x:Name="pg_b" Title="Beställningar" Icon="reservations.png">
         <StackLayout Padding="5">
-            <StackLayout Orientation="Horizontal" Spacing="0" x:Name="filters">
-                <Button Text="Alla" HorizontalOptions="FillAndExpand"
-                        BackgroundColor="{StaticResource P}" CornerRadius="0"
-                        TextColor="White" FontFamily="{StaticResource MFont}"
-                        x:Name="filter_all"/>
-                <Button Text="Beställningar" HorizontalOptions="FillAndExpand"
-                        BackgroundColor="{StaticResource P}" CornerRadius="0"
-                        TextColor="White" FontFamily="{StaticResource MFont}"
-                        x:Name="filter_b"/>
-            </StackLayout>
             <StackLayout Padding="15">
                 <Frame Padding="0" BorderColor="#50abe8" CornerRadius="20">
                     <SearchBar x:Name="search1" Placeholder="Sök ställen"
                  CancelButtonColor="#CC51F1" FontFamily="{StaticResource MFont}"/>
                 </Frame>
-                <ScrollView x:Name="sc1">
-                    <StackLayout x:Name="fl1" Spacing="10"/>
-                </ScrollView>
+                <pull:PullToRefreshLayout IsPullToRefreshEnabled="True" x:Name="refr1"
+                                      RefreshColor="Blue">
+                    <ScrollView x:Name="sc1">
+                        <StackLayout x:Name="fl1" Spacing="10"/>
+                    </ScrollView>
+                </pull:PullToRefreshLayout>
                 <StackLayout Orientation="Horizontal" Padding="8" Spacing="3"
                  HorizontalOptions="CenterAndExpand" x:Name="stk_btns2">
                     <Button Text="&lt;&lt;"/>
@@ -68,6 +73,7 @@
             </StackLayout>
         </StackLayout>
     </ContentPage>
+
     <ContentPage Title="Lägg till" Icon="add.png" x:Name="pg_admin">
         <StackLayout Padding="15">
             <ScrollView>

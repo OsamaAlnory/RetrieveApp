@@ -1,4 +1,5 @@
 ﻿using RetrieveApp.Database;
+using RetrieveApp.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,25 +12,23 @@ using Xamarin.Forms.Xaml;
 namespace RetrieveApp.Design
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class CardBook : StackLayout
+	public partial class CardAdmin : StackLayout
 	{
         public Products product;
 
-		public CardBook (Products product)
+		public CardAdmin(Products product)
 		{
             this.product = product;
 			InitializeComponent ();
 		}
 
-        private void ButtonRetrieved(object s, EventArgs a)
+        private async void RemoveProduct(object s, EventArgs a)
         {
-            // Remove product from user
-            //DBActions.RemoveProduct(product);
-        }
-
-        private void ButtonUnRetrieved(object s, EventArgs a)
-        {
-            
+            var A = await App.SendSure(MapPage.mapPage);
+            if (A)
+            {
+                DBActions.RemoveProduct(product);
+            }
         }
 
 	}

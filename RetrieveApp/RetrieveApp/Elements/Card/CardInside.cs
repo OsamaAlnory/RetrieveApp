@@ -10,17 +10,22 @@ namespace RetrieveApp.Elements.Card
 {
     class CardInside
     {
-        public static StackLayout GEN(string cardType, Products product,
+        public static StackLayout GEN(string cardType, Binary b,
             TapGestureRecognizer tap)
         {
             StackLayout card = null;
-            if(cardType != null && cardType == "admin")
+            if(cardType == "default")
             {
-                card = new CardOwner(product);
-            } else
+                card = new CardDefault(b.PRODUCT);
+            } else if(cardType == "admin")
             {
-                //card = new CardBook(product);
-                card = new CardDefault(product);
+                card = new CardAdmin(b.PRODUCT);
+            } else if(cardType == "admin")
+            {
+                
+            } else if(cardType == "book")
+            {
+
             }
             StackLayout st = new StackLayout
             {

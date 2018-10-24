@@ -26,8 +26,14 @@ namespace RetrieveApp.Elements.Card
             {
                 //if(b != null && b.Length > 0)
                 {
-                    Source = ImageSource.FromResource("RetrieveApp.Images.b2.png",
-                    Assembly.GetExecutingAssembly());
+                    if(b != null)
+                    {
+                        Source = App.ByteToImage(b);
+                    } else
+                    {
+                        Source = ImageSource.FromResource("RetrieveApp.Images.b2.png",
+                        Assembly.GetExecutingAssembly());
+                    }
                     //Source = App.ByteToImage(b);
                     AbsoluteLayout.SetLayoutFlags(this, AbsoluteLayoutFlags.All);
                     AbsoluteLayout.SetLayoutBounds(this, new Rectangle(0.5, 0.5, 1, 1));
@@ -55,7 +61,7 @@ namespace RetrieveApp.Elements.Card
                 SetLayoutBounds(this, new Rectangle(0, 0, 1, 1));
             }
         }
-        public Products PRODUCT;
+        public Binary binary;
         private static ProductCard lastClicked;
         private B b;
         private B1 bb;
@@ -63,15 +69,17 @@ namespace RetrieveApp.Elements.Card
         private ScrollView v;
         private bool selected;
         private int id;
-        public ProductCard(Products product, string productType)
+        private static Random r = new Random();
+        public ProductCard(Binary binary, string cardType)
         {
+            id = r.Next(9999);
+            this.binary = binary;
             TapGestureRecognizer tp = new TapGestureRecognizer();
             tp.Tapped += OnTapped;
-            v = new CardScrollContent(product,tp,productType);
+            v = new CardScrollContent(binary,tp,cardType);
             bbb = new B{IsVisible = false,Children ={v}};
             b = new B{Opacity = 0,BackgroundColor = Color.LightGray};
             bb = new B1(){Children ={b,bbb}};
-            PRODUCT = product;
             Padding = 0;
             CornerRadius = 30;
             HeightRequest = 300;
@@ -79,7 +87,7 @@ namespace RetrieveApp.Elements.Card
             HorizontalOptions = LayoutOptions.FillAndExpand;
             Content = new AbsoluteLayout {
               Children={
-                    new I(PRODUCT.Image){Aspect = Aspect.AspectFill},
+                    new I(binary.PRODUCT.Image){Aspect = Aspect.AspectFill},
                     new B(0.1,0.1,0.1,0.1){
                         Children =
                         {
@@ -87,7 +95,7 @@ namespace RetrieveApp.Elements.Card
                         }
                     },
                     new L(){
-                        Text = DBActions._p(product).SName,
+                        Text = DBActions._p(binary.PRODUCT).SName,
                         TextColor = Color.Black,
                         HorizontalOptions = LayoutOptions.CenterAndExpand,
                         VerticalOptions = LayoutOptions.CenterAndExpand,
