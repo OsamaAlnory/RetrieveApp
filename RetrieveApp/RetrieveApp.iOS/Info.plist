@@ -70,7 +70,7 @@
 		</dict>
 	</dict>
 	<key>MinimumOSVersion</key>
-	<string>11.3.1</string>
+	<string>11.4</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Launchscreen</string>
 	<key>XSAppIconAssets</key>
@@ -79,9 +79,7 @@
 	<true/>
 	<key>UIStatusBarHidden</key>
 	<true/>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
-	<key>XSLaunchImageAssets</key>
-	<string>Assets.xcassets/LaunchImages.launchimage</string>
+  <key>UIViewControllerBasedStatusBarAppearance</key>
+  <false/>
 </dict>
 </plist>

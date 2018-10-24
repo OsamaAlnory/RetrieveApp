@@ -33,11 +33,21 @@ namespace RetrieveApp.Pages
                 icon.Source = ImageSource.FromResource(App.PATH + "logo.png",
                  Assembly.GetExecutingAssembly());
                 btn.Clicked += (e, args) => OnButtonClicked();
-                btn1.Clicked += (e, args) => OnButtonClicked();
+                btn1.Clicked += (e, args) => OnButtonClicked2();
+                btn2.Clicked += (e, args) => OnButtonClicked3();
                 icon1.Source = ImageSource.FromResource(App.PATH + "logo.png");
+                icon2.Source = ImageSource.FromResource(App.PATH + "map.PNG");
+                icon3.Source = ImageSource.FromResource(App.PATH + "ss1.png");
+                
             }
             log_btn.Clicked += (e, args) => ProcessLogin();
+            fsk.Clicked += (e, args) => SkippaClicked();
+            sskp.Clicked += (e, args) => SkippaClicked();
+            tskp.Clicked += (e, args) => SkippaClicked();
+            fjskp.Clicked += (e, args) => SkippaClicked();
             crt_btn.Clicked += (e, args) => CreateAccoutClicked();
+            lstbtn.Clicked += (e, args) => CreateAccoutClicked();
+
             animationView.OnFinish += (e, s) => {
                 animationView.IsVisible = false;
                 Navigation.PushAsync(new MapPage(ad));
@@ -61,7 +71,20 @@ namespace RetrieveApp.Pages
             CurrentPage = Children[1];
         }
 
-        // Fika knappen "Nästa"
+        private void OnButtonClicked2()
+        {
+            CurrentPage = Children[2];
+        }
+        private void OnButtonClicked3()
+        {
+            CurrentPage = Children[3];
+        }
+        private void SkippaClicked()
+        {
+            CurrentPage = Children[4];
+        }
+
+       
         private void ProcessLogin()
         {
             string u = e_name.Text;
@@ -100,11 +123,11 @@ namespace RetrieveApp.Pages
                     }
                 } else
                 {
-                    DisplayAlert("Login Error", "Invalid username or password!", "cancel");
+                    DisplayAlert("Misslyckad Inloggning", "Ogiltigt användernamn eller lösenord!", "Avbryt");
                 }
             } else
             {
-                DisplayAlert("Login Error","Enter your username and password","ok");
+                DisplayAlert("Misslyckad Inloggning", "Mata in ditt användernamn och lösenord","Okej");
             }
         }
         private void CreateAccoutClicked()

@@ -116,21 +116,21 @@
     <ContentPage Title="Inställningar" Icon="settings.png">
         <StackLayout Padding="10">
             <StackLayout Orientation="Horizontal" Spacing="0" Margin="20,40,20,20">
-                <StackLayout BackgroundColor="Gold" HorizontalOptions="FillAndExpand">
+                <StackLayout BackgroundColor="#CC51F1" HorizontalOptions="FillAndExpand">
                     <Label Text="Inloggad som"
                        HorizontalOptions="CenterAndExpand"
                        VerticalOptions="CenterAndExpand"
                        TextColor="White" FontSize="22" FontAttributes="Bold"
                        FontFamily="{StaticResource MFont}"/>
                 </StackLayout>
-                <StackLayout BackgroundColor="White" HorizontalOptions="FillAndExpand">
-                    <Label x:Name="lbl_lg" TextColor="Gold" FontAttributes="Bold"
+                <StackLayout BackgroundColor="#CC51F1" HorizontalOptions="FillAndExpand">
+                    <Label x:Name="lbl_lg" TextColor="White" FontAttributes="Bold"
                        FontSize="22" HorizontalOptions="CenterAndExpand"
                        VerticalOptions="CenterAndExpand"
                        FontFamily="{StaticResource MFont}"/>
                 </StackLayout>
-            </StackLayout>
-            <Frame Padding="0" CornerRadius="10" IsClippedToBounds="True" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
+             </StackLayout>
+             <Frame Padding="0" CornerRadius="10" IsClippedToBounds="True" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
                 <Button Text="Logga ut" HorizontalOptions="FillAndExpand"
                     VerticalOptions="EndAndExpand" BackgroundColor="Crimson"
                     TextColor="White" FontAttributes="Bold" FontSize="30"

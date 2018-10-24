@@ -54,9 +54,12 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchArch>ARM64</MtouchArch>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>iPhone Developer: mohanad.owidat@hotmail.com (QYS65JQY68)</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <CodesignProvision>iOS Team Provisioning Profile: com.Mohanad.testing</CodesignProvision>
+    <CodesignExtraArgs />
+    <CodesignResourceRules />
+    <CodesignEntitlements />
     <!--<CodesignEntitlements>Entitlements.plist</CodesignEntitlements>-->
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
