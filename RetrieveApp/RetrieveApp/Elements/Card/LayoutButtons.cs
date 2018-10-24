@@ -17,8 +17,8 @@ namespace RetrieveApp.Elements.Card
         Color.FromHex("#8300b7")};
         private StackLayout fl;
         private ScrollView sc;
-        public List<Products> visible = new List<Products>();
-        private string cardType;
+        public List<Binary> visible = new List<Binary>();
+        public string cardType = "default";
 
 
         public LayoutButtons(StackLayout stk_btns, StackLayout fl,
@@ -38,12 +38,11 @@ namespace RetrieveApp.Elements.Card
         public void AddItems()
         {
             fl.Children.Clear();
-            for(int x = (page-1)*MAX; x < page*MAX; x++)
+            for (int x = (page - 1) * MAX; x < page * MAX; x++)
             {
-                if(visible.Count > x)
+                if (visible.Count > x)
                 {
-                    Products pr = visible[x];
-                    fl.Children.Add(new ProductCard(pr,cardType));
+                    fl.Children.Add(new ProductCard(visible[x], cardType));
                 }
             }
         }

@@ -13,5 +13,6 @@ namespace RetrieveApp.Database
         public object Icon { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
+        public bool Login { get; set; }
     }
 }

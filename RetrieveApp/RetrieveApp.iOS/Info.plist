@@ -28,6 +28,8 @@
 	</array>
 	<key>CFBundleDisplayName</key>
 	<string>Retrieve It</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.Mohanad.testing</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>CFBundleIconFiles</key>
@@ -49,7 +51,7 @@
 		<string>Icon-Small@3x</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
+	<string>Launchscreen</string>
 	<key>CFBundleName</key>
 	<string>RetrieveApp</string>
 	<key>NSAppTransportSecurity</key>
@@ -68,7 +70,7 @@
 		</dict>
 	</dict>
 	<key>MinimumOSVersion</key>
-	<string>11.1</string>
+	<string>11.4</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Launchscreen</string>
 	<key>XSAppIconAssets</key>
@@ -77,9 +79,7 @@
 	<true/>
 	<key>UIStatusBarHidden</key>
 	<true/>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
-	<key>CFBundleIdentifier</key>
-	<string>com.Mohanad.testing</string>
+  <key>UIViewControllerBasedStatusBarAppearance</key>
+  <false/>
 </dict>
 </plist>

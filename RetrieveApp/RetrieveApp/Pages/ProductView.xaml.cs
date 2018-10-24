@@ -53,6 +53,9 @@ namespace RetrieveApp.Pages
                     btn.BackgroundColor = Color.Crimson;
                     btn.Text = "Avboka";
                 }
+            } else
+            {
+                btn.IsVisible = false;
             }
             btn.Clicked += async (s, e) => {
                 if (!loading)

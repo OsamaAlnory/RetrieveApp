@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<StackLayout xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RetrieveApp.Design.CardUser" HorizontalOptions="FillAndExpand"
+             VerticalOptions="CenterAndExpand">
+    <Button Style="{StaticResource Btn}" BackgroundColor="#51ff74"
+            Text="Retrieved" FontFamily="{StaticResource MFont}"
+            x:Name="btn1" Clicked="ButtonRetrieved"/>
+    <Button Style="{StaticResource Btn}" BackgroundColor="Crimson"
+            Text="Not Retrieved" FontFamily="{StaticResource MFont}"
+            x:Name="btn2" Clicked="ButtonUnRetrieved"/>
+</StackLayout>

@@ -47,12 +47,19 @@ namespace RetrieveApp
                 return i;
             }
         }
+
+        public static async Task<bool> SendSure(Page page)
+        {
+            return (await page.DisplayAlert("Meddelande", "Är du säker?", "Ja", "Avbryt"));
+        }
+
         public static ImageSource ByteToImage(byte[] b)
         {
             return ImageSource.FromStream(() => new MemoryStream(b));
         }
         public static async Task ReloadPins()
         {
+            IPin.pins.Clear();
             foreach (Admins place in DBActions.admins)
             {
                 new IPin(place)
@@ -65,6 +72,11 @@ namespace RetrieveApp
         {
             Geocoder g = new Geocoder();
             return (await g.GetPositionsForAddressAsync(address)).ToList();
+        }
+        public static async Task<string> GetAddress(Position pos)
+        {
+            Geocoder g = new Geocoder();
+            return (await g.GetAddressesForPositionAsync(pos)).ToList()[0];
         }
         private static async Task getLocation()
         {

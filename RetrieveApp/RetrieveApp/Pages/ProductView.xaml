@@ -32,7 +32,8 @@
                     <Label x:Name="tid"/>
                 </StackLayout>
                 <Button Text="Bekräfta bokningen" x:Name="btn"
-                       Style="{StaticResource Btn}" FontFamily="{StaticResource MFont}"/>
+                       Style="{StaticResource Btn}" FontFamily="{StaticResource MFont}"
+                        BackgroundColor="{StaticResource P}"/>
                 <StackLayout HeightRequest="100" HorizontalOptions="FillAndExpand">
                     <an:AnimationView HeightRequest="100" IsVisible="False"
                      HorizontalOptions="FillAndExpand" Animation="loading.json"

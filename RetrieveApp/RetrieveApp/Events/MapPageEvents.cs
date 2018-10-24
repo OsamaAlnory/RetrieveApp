@@ -12,7 +12,8 @@ namespace RetrieveApp.Events
         private LayoutButtons layout_b;
         private LayoutButtons la_2;
         private List<Products> vis1 = new List<Products>();
-        private List<Products> vis_admin = new List<Products>();
+        private List<Binary> vis_admin = new List<Binary>();
+        private string filter = "all";
 
 
         public MapPageEvents(LayoutButtons l1, LayoutButtons l2)
@@ -24,32 +25,86 @@ namespace RetrieveApp.Events
         public void AddItems()
         {
             layout_b.AddItems();
-            la_2.AddItems();
+            //la_2.AddItems();
+        }
+
+        public void ChangeFilter(string filter)
+        {
+            this.filter = filter;
+            rel(MapPage.mapPage.TXT());
+            // Refresh
+        }
+
+        public void rel_guestB()
+        {
+
         }
 
         public void rel(string f)
         {
             vis1.Clear();
+            Account acc = MapPage._g;
+            if(filter == "all")
+            {
+                layout_b.cardType = "default";
+            } else if(filter == "b")
+            {
+                layout_b.cardType = "admin";
+            }
             if (f != null && f != "")
             {
                 f = f.ToLower();
-                foreach (Products p in DBActions.products)
+                if(filter == "all")
                 {
-                    Admins ad = DBActions._p(p);
-                    if (ad.SName.ToLower().StartsWith(f))
+                    foreach (Products p in DBActions.products)
                     {
-                        vis1.Add(p);
+                        Admins ad = DBActions._p(p);
+                        if (ad.SName.ToLower().StartsWith(f))
+                        {
+                            vis1.Add(p);
+                        }
+                    }
+                } else if(filter == "b")
+                {
+                    if(acc is Admins)
+                    {
+                        var acc1 = acc as Admins;
+                        var list = DBActions._a(acc1);
+                        foreach (Products p in list)
+                        {
+                            if (p.PName.ToLower().StartsWith(f))
+                            {
+                                vis1.Add(p);
+                            }
+                        }
                     }
                 }
             }
             else
             {
-                foreach (Products p in DBActions.products)
+                if(filter == "all")
                 {
-                    vis1.Add(p);
+                    foreach (Products p in DBActions.products)
+                    {
+                        vis1.Add(p);
+                    }
+                } else if(filter == "b")
+                {
+                    if(acc is Admins)
+                    {
+                        vis1 = DBActions._a(acc as Admins);
+                    } else
+                    {
+                        vis1 = DBActions.GetProducts(acc as Guests);
+                    }
                 }
             }
-            layout_b.visible = vis1;
+            var tst = new List<Binary>();
+            foreach(Products p in vis1)
+            {
+                tst.Add(new Binary { PRODUCT=p});
+            }
+            layout_b.visible = tst;
             layout_b.OpenPage(1);
         }
 
@@ -62,22 +117,38 @@ namespace RetrieveApp.Events
                 f = f.ToLower();
                 foreach (Products p in list)
                 {
-                    Admins ad = DBActions._p(p);
-                    if (ad.SName.ToLower().StartsWith(f))
+                    if (Check_A(p, f))
                     {
-                        vis_admin.Add(p);
+                        //vis_admin.Add(p);
                     }
                 }
             }
             else
             {
-                foreach (Products p in list)
+                foreach(Guests g in DBActions.guests)
                 {
-                    vis_admin.Add(p);
+                    var l1 = DBActions.GetProducts(g);
+                    foreach(Products p in l1)
+                    {
+                        if (list.Contains(p))
+                        {
+                            vis_admin.Add(new Binary { OWNER=g, PRODUCT=p});
+                        }
+                    }
                 }
             }
             la_2.visible = vis_admin;
             la_2.OpenPage(1);
         }
+
+        private bool Check_A(Products p, string text)
+        {
+            if (p.PName.ToLower().StartsWith(text))
+            {
+                return true;
+            }
+            return false;
+        }
+
     }
 }
