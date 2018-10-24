@@ -12,15 +12,19 @@
   <ItemGroup>
     <None Remove="Images\b2.png" />
     <None Remove="Images\logo.png" />
+    <None Remove="Images\map.PNG" />
     <None Remove="Images\noimage.png" />
     <None Remove="Images\sign.png" />
+    <None Remove="Images\ss1.png" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Images\b2.png" />
     <EmbeddedResource Include="Images\logo.png" />
+    <EmbeddedResource Include="Images\map.PNG" />
     <EmbeddedResource Include="Images\noimage.png" />
     <EmbeddedResource Include="Images\sign.png" />
+    <EmbeddedResource Include="Images\ss1.png" />
   </ItemGroup>
 
   <ItemGroup>
