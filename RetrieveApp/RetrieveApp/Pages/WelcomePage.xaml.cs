@@ -37,8 +37,12 @@ namespace RetrieveApp.Pages
                 btn1.Clicked += (e, args) => OnButtonClicked2();
                 btn2.Clicked += (e, args) => OnButtonClicked3();
                 icon1.Source = App.GetSource("logo.png");
-                icon2.Source = App.GetSource("map.PNG");
-                icon3.Source = App.GetSource("ss1.png");
+                icon2.Source = App.GetSource("map.png");
+                icon3.Source = App.GetSource("logo_word.png");
+            }
+            if(state == "Guide")
+            {
+                Children.RemoveAt(Children.Count - 1);
             }
             log_btn.Clicked += (e, args) => ProcessLogin();
             crt_btn.Clicked += (e, args) => CreateAccoutClicked();

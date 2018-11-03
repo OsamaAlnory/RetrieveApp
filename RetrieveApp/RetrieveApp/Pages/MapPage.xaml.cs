@@ -43,8 +43,8 @@ namespace RetrieveApp.Pages
                     mapPage = this;
                 }
             InitializeComponent();
-                lbl_lg.Text = (_d is Admins) ? ((Admins)_d).SName
-                 : ((Guests)_d).Name;
+            lbl_lg.Text = (_d is Admins) ? ((Admins)_d).SName
+             : ((Guests)_d).Name;
                 if (_d is Guests)
                 {
                     Children.Remove(pg_admin);
@@ -89,6 +89,16 @@ namespace RetrieveApp.Pages
             quantity.HeightRequest = App.ScreenHeight / 16;
             price.HeightRequest = App.ScreenHeight / 16;
             oprice.HeightRequest = App.ScreenHeight / 16;
+        }
+
+        private void OpenGuide(object s, EventArgs args)
+        {
+            Navigation.PushAsync(new WelcomePage("Guide"));
+        }
+
+        private void OpenAbout(object s, EventArgs args)
+        {
+            Navigation.PushAsync(new About());
         }
 
         private void PageChanged(object s, EventArgs args)

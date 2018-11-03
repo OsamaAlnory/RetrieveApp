@@ -167,25 +167,32 @@
             <StackLayout Padding="10" AbsoluteLayout.LayoutFlags="All"
                          AbsoluteLayout.LayoutBounds="0,0,1,1">
                 <ScrollView>
-                    <StackLayout>
-                        <StackLayout Orientation="Horizontal" Spacing="0" Margin="20,40,20,20">
-                            <StackLayout BackgroundColor="#CC51F1" HorizontalOptions="FillAndExpand">
-                                <Label Text="Inloggad som"
-                       HorizontalOptions="CenterAndExpand"
+                    <StackLayout Spacing="10">
+                        <Frame Padding="10" CornerRadius="12" IsClippedToBounds="True" Opacity="0.6"
+                               Margin="0,40,0,0">
+                            <StackLayout Orientation="Horizontal" Spacing="0">
+                                <StackLayout HorizontalOptions="FillAndExpand">
+                                    <Label Text="Inloggad som" HorizontalOptions="CenterAndExpand"
+                                     VerticalOptions="CenterAndExpand" TextColor="Black" FontSize="22"
+                                     FontAttributes="Bold" FontFamily="{StaticResource MFont}"
+                                           HorizontalTextAlignment="Center"/>
+                                </StackLayout>
+                                <StackLayout HorizontalOptions="FillAndExpand">
+                                    <Label x:Name="lbl_lg" TextColor="Blue" FontAttributes="Bold"
+                       FontSize="22" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"
                        VerticalOptions="CenterAndExpand"
-                       TextColor="White" FontSize="22" FontAttributes="Bold"
                        FontFamily="{StaticResource MFont}"/>
+                                </StackLayout>
                             </StackLayout>
-                            <StackLayout BackgroundColor="#CC51F1" HorizontalOptions="FillAndExpand">
-                                <Label x:Name="lbl_lg" TextColor="White" FontAttributes="Bold"
-                       FontSize="22" HorizontalOptions="CenterAndExpand"
-                       VerticalOptions="CenterAndExpand"
-                       FontFamily="{StaticResource MFont}"/>
-                            </StackLayout>
-                        </StackLayout>
+                        </Frame>
+                        <Button Style="{StaticResource Btn}" Text="Guide" FontAttributes="Bold"
+                         FontFamily="{StaticResource MFont}" Clicked="OpenGuide"/>
+                        <Button Style="{StaticResource Btn}" Text="Om" FontAttributes="Bold"
+                         FontFamily="{StaticResource MFont}" Clicked="OpenAbout"/>
                     </StackLayout>
                 </ScrollView>
-                <Frame Padding="0" CornerRadius="10" IsClippedToBounds="True" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
+                <Frame Padding="0" CornerRadius="10" IsClippedToBounds="True" HorizontalOptions="FillAndExpand"
+                 VerticalOptions="EndAndExpand" Margin="0,0,0,10">
                     <Button Text="Logga ut" HorizontalOptions="FillAndExpand"
                     VerticalOptions="EndAndExpand" BackgroundColor="Crimson"
                     TextColor="White" FontAttributes="Bold" FontSize="30"

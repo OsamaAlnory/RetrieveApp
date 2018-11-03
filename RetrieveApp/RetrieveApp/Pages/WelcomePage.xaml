@@ -14,7 +14,7 @@
     <ContentPage>
         <dir:GradientLayout ColorsList="#CC51F1,#502189"
          Mode="ToBottom" Spacing="10">
-            <!--`Skip button-->
+            <!--Skip button-->
             <Button Text="Skippa" Clicked="SkippaClicked"
                     Style="{StaticResource Skip}"/>
 

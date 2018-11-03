@@ -11,16 +11,7 @@ namespace RetrieveApp.Elements.Card
     {
 
     }
-    public class L : Label
-    {
-        public L()
-        {
-            AbsoluteLayout.SetLayoutFlags(this, AbsoluteLayoutFlags.All);
-            AbsoluteLayout.SetLayoutBounds(this, new Rectangle(0.5, 0.5, 1, 1));
-            FontFamily = Application.Current.Resources["MFont"] as string;
-            FontSize = 30;
-        }
-    }
+
     public class I : Image
     {
         public I()

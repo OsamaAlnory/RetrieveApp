@@ -50,12 +50,14 @@ namespace RetrieveApp.Pages
                 SetText();
                 load.IsVisible = true;
                 load.Play();
+                progress.IsVisible = true;
             }
         }
 
         private void SetText()
         {
-            double p = (((double)CURRENT_STAGE) / ((double)STAGES))*100.0;
+            double p = CURRENT_STAGE / ((double)STAGES)*100.0;
+            progress.ProgressTo(p / 100, 250, Easing.Linear);
             state.Text = "Hämtar data "+p+"%";
         }
 

@@ -97,8 +97,10 @@ namespace RetrieveApp.Pages
                     {
                         if (await App.SendSure())
                         {
-                            //await DBActions.Unbook(binary.OWNER, binary.PRODUCT, true);
+                            loading = true;
+                            await DBActions.Unbook(g, product, true);
                             MapPage.mapPage.ReloadAll();
+                            App.RemovePage(this);
                         }
                     }
                     //App.FinishLoading("Confirm");

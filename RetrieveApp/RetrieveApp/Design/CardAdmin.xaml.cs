@@ -15,6 +15,7 @@ namespace RetrieveApp.Design
 	public partial class CardAdmin : StackLayout
 	{
         private Binary binary;
+        private bool loading = false;
 
 		public CardAdmin(Binary binary)
 		{
@@ -24,12 +25,18 @@ namespace RetrieveApp.Design
 
         private async void RemoveProduct(object s, EventArgs a)
         {
+            if (loading)
+            {
+                return;
+            }
+            loading = true;
             var A = await App.SendSure(MapPage.mapPage);
             if (A)
             {
                 await DBActions.FullyRemoveProduct(binary.PRODUCT);
                 MapPage.mapPage.ReloadAll();
             }
+            loading = false;
         }
 
         private void ShowProduct(object s, EventArgs a)
