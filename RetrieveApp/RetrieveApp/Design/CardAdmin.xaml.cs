@@ -14,11 +14,11 @@ namespace RetrieveApp.Design
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CardAdmin : StackLayout
 	{
-        public Products product;
+        private Binary binary;
 
-		public CardAdmin(Products product)
+		public CardAdmin(Binary binary)
 		{
-            this.product = product;
+            this.binary = binary;
 			InitializeComponent ();
 		}
 
@@ -27,9 +27,15 @@ namespace RetrieveApp.Design
             var A = await App.SendSure(MapPage.mapPage);
             if (A)
             {
-                DBActions.RemoveProduct(product);
+                await DBActions.FullyRemoveProduct(binary.PRODUCT);
+                MapPage.mapPage.ReloadAll();
             }
         }
 
-	}
+        private void ShowProduct(object s, EventArgs a)
+        {
+            MapPage.mapPage.OpenProduct(binary.PRODUCT);
+        }
+
+    }
 }

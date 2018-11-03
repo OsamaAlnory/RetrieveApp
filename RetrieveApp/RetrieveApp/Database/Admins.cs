@@ -10,7 +10,6 @@ namespace RetrieveApp.Database
         public string Password { get; set; }
         public string SName { get; set; }
         public string Address { get; set; }
-        public object Icon { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
         public bool Login { get; set; }

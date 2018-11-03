@@ -17,34 +17,50 @@ namespace RetrieveApp.Pages
         private Products product;
         private bool loading;
 
-		public ProductView (Products product)
+		public ProductView (Products product, string type)
 		{
             App.Register(this);
             this.product = product;
 			InitializeComponent ();
-            if(product.Image != null)
-            {
-                img.Source = App.ByteToImage(product.Image);
-            } else
-            {
-                img.Source = ImageSource.FromResource(App.PATH + "noimage.png");
-            }
-            /*
+            img_main.Source = App.GetSource("background.png");
+            Load();
             if(MapPage._g is Admins)
             {
                 btn.IsVisible = false;
+                amount.IsVisible = false;
+                amount_admin.IsVisible = true;
             }
-             */
             for (int x = 0; x < product.Quantity; x++)
             {
                 qu.Items.Add(""+(x+1));
             }
+            if(type == "b")
+            {
+                amount.IsVisible = false;
+                amount_admin.IsVisible = true;
+            }
             qu.SelectedIndex = 0;
+            var admin = DBActions._p(product);
+            seller.Text = admin.SName;
+            address.Text = admin.Address;
+            email.Text = admin.Email;
+            mobile.Text = admin.Phone;
             p_o.Text = product.OldPrice + " kr";
             p_n.Text = product.NewPrice + " kr";
             lbl_name.Text = product.PName;
             lbl_desc.Text = product.Description;
-            tid.Text = product.ExpireTime.ToString();
+            kvar.Text = product.Quantity+"";
+            var v1 = product.ExpireTime.Hours+"";
+            var v2 = product.ExpireTime.Minutes + "";
+            if(product.ExpireTime.Hours < 10)
+            {
+                v1 = "0" + v1;
+            }
+            if(product.ExpireTime.Minutes < 10)
+            {
+                v2 = "0" + v2;
+            }
+            tid.Text = v1 + ":" + v2;
             Account acc = MapPage._g;
             if(acc is Guests)
             {
@@ -69,19 +85,41 @@ namespace RetrieveApp.Pages
                     if(!DBActions.hasBooked(g, product))
                     {
                         int Q = int.Parse(qu.SelectedItem.ToString());
-                        DBActions.book(g, product, Q);
+                        await DBActions.book(g, product, Q);
+                        anim.IsVisible = false;
+                        anim.Pause();
+                        MapPage.mapPage.ReloadAll();
                         await DisplayAlert("Success","You've booked "+Q+" of "
                             +product.PName+"!\n"+"You've saved "+
                             ((product.OldPrice-product.NewPrice)*Q)+" kr!","Ok");
-                        Navigation.RemovePage(this);
+                        App.RemovePage(this);
                     } else
                     {
-                        DisplayAlert("Error", "You've already booked this!", "Cancel");
+                        if (await App.SendSure())
+                        {
+                            //await DBActions.Unbook(binary.OWNER, binary.PRODUCT, true);
+                            MapPage.mapPage.ReloadAll();
+                        }
                     }
                     //App.FinishLoading("Confirm");
                 }
             };
 		}
+
+        private async void Load()
+        {
+            Images images = await DBActions.LoadProductImage(product);
+            if (images != null)
+            {
+                img.Source = App.ByteToImage(images.Image);
+            }
+            else
+            {
+                img.Source = App.GetSource("noimage.png");
+            }
+            image_loading.Pause();
+            image_an_layout.IsVisible = false;
+        }
 
         public void OnLoadFinished(string type)
         {

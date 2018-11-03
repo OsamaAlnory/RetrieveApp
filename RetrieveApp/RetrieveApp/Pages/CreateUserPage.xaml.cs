@@ -15,6 +15,7 @@ namespace RetrieveApp.Pages
 	public partial class CreateUserPage : ContentPage, Loadable
 	{
         private bool created;
+        private bool success = false;
         private const int MIN_U_LENGTH = 6;
         private const int MAX_U_LENGTH = 20;
         private const int MIN_P_LENGTH = 6;
@@ -24,6 +25,7 @@ namespace RetrieveApp.Pages
 		{
 			InitializeComponent ();
             App.Register(this);
+            img.Source = App.GetSource("background1.png");
             e_name.HeightRequest = App.ScreenHeight / 13;
             e_pass.HeightRequest = App.ScreenHeight / 13;
             fr.Margin = new Thickness(App.ScreenWidth/24,
@@ -37,27 +39,37 @@ namespace RetrieveApp.Pages
 
         public void OnLoadStarted(string type)
         {
-            an.IsVisible = true;
-            an.Play();
+            if(type == "Register")
+            {
+                an.IsVisible = true;
+                an.Play();
+            }
         }
 
-        public void OnLoadFinished(string type)
+        public void OnLoadFinished(string type) {
+            if(type == "Register")
+            {
+                //an.Pause();
+                //an.IsVisible = false;
+            }
+        }
+
+        private void PlaySuccess()
         {
+            an.Pause();
             an.Loop = false;
             an.Animation = "done_button.json";
+            an.IsVisible = true;
             an.HeightRequest = 160;
             an.WidthRequest = 160;
             an.Speed = 0.5f;
             an.Play();
-            an.OnFinish += (s, e) => {
-                Device.StartTimer(TimeSpan.FromSeconds(1), () => {
-                    //await DisplayAlert("Success", "Kontot skapades!", "Ok");
-                    an.IsVisible = false;
-                    Navigation.PushAsync(new WelcomePage("LoginOnly"));
-                    Navigation.RemovePage(this);
-                    return false;
-                });
-            };
+            Device.StartTimer(TimeSpan.FromSeconds(2), () => {
+                an.IsVisible = false;
+                Navigation.PushAsync(new WelcomePage("LoginOnly"));
+                App.RemovePage(this);
+                return false;
+            });
         }
 
         private async void Button_Create_Clicked(object s, EventArgs a)
@@ -82,7 +94,7 @@ namespace RetrieveApp.Pages
                 }
                 created = true;
                 App.StartLoading("Register");
-                await DBActions.LoadAccounts();
+                await DBActions.LoadUsers();
                 bool found = true;
                 foreach(Admins admin in DBActions.admins)
                 {
@@ -102,12 +114,20 @@ namespace RetrieveApp.Pages
                 }
                 if (found)
                 {
-                    await DBActions.AddUser(new Guests {
-                        Name = n, Password = p
-                    });
-                    await DBActions.LoadAccounts();
+                    success = await DBActions.Process("adduser", new Guests {
+                    Name = n, Password = p});
+                    if (success)
+                    {
+                        await DBActions.LoadAccounts();
+                        PlaySuccess();
+                    }
+                    else
+                    {
+                        created = false;
+                    }
                 } else
                 {
+                    an.Pause();
                     created = false;
                     DisplayAlert("Fel", "Kontot finns redan!", "Ok");
                 }
@@ -119,5 +139,6 @@ namespace RetrieveApp.Pages
             }
             created = false;
         }
-	}
+
+    }
 }

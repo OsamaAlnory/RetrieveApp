@@ -10,19 +10,29 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Images\b2.png" />
+    <None Remove="Images\admin.png" />
+    <None Remove="Images\background.png" />
+    <None Remove="Images\background1.png" />
+    <None Remove="Images\icon-blank.png" />
+    <None Remove="Images\icon.png" />
     <None Remove="Images\logo.png" />
     <None Remove="Images\map.PNG" />
     <None Remove="Images\noimage.png" />
+    <None Remove="Images\noproduct.jpg" />
     <None Remove="Images\sign.png" />
     <None Remove="Images\ss1.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Images\b2.png" />
+    <EmbeddedResource Include="Images\admin.png" />
+    <EmbeddedResource Include="Images\background.png" />
+    <EmbeddedResource Include="Images\background1.png" />
+    <EmbeddedResource Include="Images\icon-blank.png" />
+    <EmbeddedResource Include="Images\icon.png" />
     <EmbeddedResource Include="Images\logo.png" />
     <EmbeddedResource Include="Images\map.PNG" />
     <EmbeddedResource Include="Images\noimage.png" />
+    <EmbeddedResource Include="Images\noproduct.jpg" />
     <EmbeddedResource Include="Images\sign.png" />
     <EmbeddedResource Include="Images\ss1.png" />
   </ItemGroup>
@@ -31,6 +41,7 @@
     <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="2.5.4" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="Refractored.XamForms.PullToRefresh" Version="2.2.2" />
+    <PackageReference Include="Rg.Plugins.Popup" Version="1.1.4.168" />
     <PackageReference Include="System.Net.Http" Version="4.3.3" />
     <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
     <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
@@ -49,6 +60,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Design\CardBooked.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Design\CardUser.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -58,16 +72,28 @@
     <EmbeddedResource Update="Design\CardAdmin.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Design\IconLayout.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Design\NoItem.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Elements\Card\Front\DefaultFrontCard.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Elements\Popup.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Elements\PopupContent\AddAdmin.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Elements\PopupContent\EditAdmin.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Pages\CreateUserPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\EditProduct.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="Pages\FirstLogin.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Pages\HomePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\LoadingPage.xaml">

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<StackLayout xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RetrieveApp.Design.NoItem" HeightRequest="300" Padding="40">
+    <Label Text="Ingen produkt hittades!" FontAttributes="Bold" FontFamily="{StaticResource MFont}"
+           TextColor="Gray" HorizontalTextAlignment="Center" LineBreakMode="WordWrap"/>
+</StackLayout>

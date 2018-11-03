@@ -19,13 +19,13 @@ namespace RetrieveApp.Elements.Card
                 card = new CardDefault(b.PRODUCT);
             } else if(cardType == "admin")
             {
-                card = new CardAdmin(b.PRODUCT);
-            } else if(cardType == "admin")
+                card = new CardAdmin(b);
+            } else if(cardType == "booked")
             {
-                
-            } else if(cardType == "book")
+                card = new CardBooked(b);
+            } else if(cardType == "user")
             {
-
+                card = new CardUser(b);
             }
             StackLayout st = new StackLayout
             {

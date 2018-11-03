@@ -7,5 +7,5 @@
            TextColor="Black"/>
     <Button x:Name="btn" BackgroundColor="{StaticResource P}"
            HorizontalOptions="FillAndExpand" TextColor="White"
-           CornerRadius="15"/>
+           CornerRadius="15" Text="VISA"/>
 </StackLayout>

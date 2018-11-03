@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<StackLayout xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RetrieveApp.Elements.PopupContent.EditAdmin" Spacing="20">
+    <Image x:Name="img"/>
+    <Frame CornerRadius="20" IsClippedToBounds="True" BorderColor="Blue" Padding="0">
+        <SearchBar x:Name="search" Placeholder="Sök id" CancelButtonColor="{StaticResource P}"
+                   FontFamily="{StaticResource MFont}" HorizontalTextAlignment="Center"/>
+    </Frame>
+    <StackLayout x:Name="stack" IsVisible="False">
+        <Button Clicked="ButtonReset" Style="{StaticResource Btn}" FontAttributes="Bold"
+                FontFamily="{StaticResource MFont}" Text="Återställ" BackgroundColor="{StaticResource P}"/>
+        <Button Clicked="ButtonRemove" Style="{StaticResource Btn}" FontAttributes="Bold"
+            FontFamily="{StaticResource MFont}" Text="Radera kontot"
+            BackgroundColor="Crimson"/>
+    </StackLayout>
+</StackLayout>

@@ -4,9 +4,9 @@
              x:Class="RetrieveApp.Design.CardUser" HorizontalOptions="FillAndExpand"
              VerticalOptions="CenterAndExpand">
     <Button Style="{StaticResource Btn}" BackgroundColor="#51ff74"
-            Text="Retrieved" FontFamily="{StaticResource MFont}"
-            x:Name="btn1" Clicked="ButtonRetrieved"/>
+            Text="Hämtat" FontFamily="{StaticResource MFont}"
+            Clicked="ButtonRetrieved"/>
     <Button Style="{StaticResource Btn}" BackgroundColor="Crimson"
-            Text="Not Retrieved" FontFamily="{StaticResource MFont}"
-            x:Name="btn2" Clicked="ButtonUnRetrieved"/>
+            Text="Ej hämtat" FontFamily="{StaticResource MFont}"
+            Clicked="ButtonUnRetrieved"/>
 </StackLayout>

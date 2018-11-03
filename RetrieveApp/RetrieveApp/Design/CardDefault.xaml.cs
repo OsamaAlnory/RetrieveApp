@@ -19,7 +19,15 @@ namespace RetrieveApp.Design
 		{
             this.product = product;
 			InitializeComponent ();
-            btn.Text = MapPage._g is Admins ? "VISA" : "RESERVERA";
+            Account acc = MapPage._g;
+            if(acc is Guests)
+            {
+                Guests g = acc as Guests;
+                if(!DBActions.hasBooked(g, product))
+                {
+                    btn.Text = "RESERVERA";
+                }
+            }
             lbl.Text = product.PName + "\n" + product.Description;
             btn.Clicked += (s, e) => {
                 MapPage.mapPage.OpenProduct(product);

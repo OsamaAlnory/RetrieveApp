@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<StackLayout xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RetrieveApp.Elements.Card.Front.DefaultFrontCard"
+             AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+    <Frame Padding="5" VerticalOptions="StartAndExpand" BackgroundColor="White"
+           CornerRadius="8" IsClippedToBounds="True" Opacity="0.6"
+           HorizontalOptions="CenterAndExpand" Margin="0,10,0,0">
+        <Label x:Name="admin" TextColor="Black" FontSize="27" FontFamily="{StaticResource MFont}"
+         HorizontalOptions="CenterAndExpand"/>
+    </Frame>
+    <Frame Padding="5" VerticalOptions="CenterAndExpand" BackgroundColor="White"
+           CornerRadius="8" IsClippedToBounds="True" Opacity="0.8" x:Name="frame"
+           HorizontalOptions="CenterAndExpand" Margin="10,0,10,0">
+        <Label x:Name="user" TextColor="Black" FontSize="27" FontFamily="{StaticResource MFont}"
+         HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"/>
+    </Frame>
+</StackLayout>

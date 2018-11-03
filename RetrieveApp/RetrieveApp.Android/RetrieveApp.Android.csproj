@@ -63,6 +63,9 @@
     <PackageReference Include="Refractored.XamForms.PullToRefresh">
       <Version>2.2.2</Version>
     </PackageReference>
+    <PackageReference Include="Rg.Plugins.Popup">
+      <Version>1.1.4.168</Version>
+    </PackageReference>
     <PackageReference Include="System.Net.Http">
       <Version>4.3.3</Version>
     </PackageReference>
@@ -106,6 +109,7 @@
     <AndroidAsset Include="Assets\loading.json" />
     <AndroidAsset Include="Assets\check.json" />
     <AndroidAsset Include="Assets\done_button.json" />
+    <AndroidAsset Include="Assets\trail_loading.json" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml">

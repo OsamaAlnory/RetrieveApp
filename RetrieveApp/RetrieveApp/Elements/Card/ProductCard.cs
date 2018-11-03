@@ -1,4 +1,7 @@
-﻿using RetrieveApp.Database;
+﻿using Lottie.Forms;
+using RetrieveApp.Database;
+using RetrieveApp.Design;
+using RetrieveApp.Elements.Card.Front;
 using RetrieveApp.Pages;
 using System;
 using System.Collections.Generic;
@@ -10,76 +13,44 @@ namespace RetrieveApp.Elements.Card
 {
     public class ProductCard : Frame
     {
-        private class L : Label
-        {
-            public L()
-            {
-                AbsoluteLayout.SetLayoutFlags(this, AbsoluteLayoutFlags.All);
-                AbsoluteLayout.SetLayoutBounds(this, new Rectangle(0.5,0.5,1,1));
-                FontFamily = Application.Current.Resources["MFont"] as string;
-                FontSize = 30;
-            }
-        }
-        private class I : Image
-        {
-            public I(byte[] b)
-            {
-                //if(b != null && b.Length > 0)
-                {
-                    if(b != null)
-                    {
-                        Source = App.ByteToImage(b);
-                    } else
-                    {
-                        Source = ImageSource.FromResource("RetrieveApp.Images.b2.png",
-                        Assembly.GetExecutingAssembly());
-                    }
-                    //Source = App.ByteToImage(b);
-                    AbsoluteLayout.SetLayoutFlags(this, AbsoluteLayoutFlags.All);
-                    AbsoluteLayout.SetLayoutBounds(this, new Rectangle(0.5, 0.5, 1, 1));
-                }
-            }
-        }
-        private class B : StackLayout
-        {
-            public B()
-            {
-                AbsoluteLayout.SetLayoutFlags(this, AbsoluteLayoutFlags.All);
-                AbsoluteLayout.SetLayoutBounds(this, new Rectangle(0, 0, 1, 1));
-            }
-            public B(double a, double b, double c, double d)
-            {
-                AbsoluteLayout.SetLayoutFlags(this, AbsoluteLayoutFlags.All);
-                AbsoluteLayout.SetLayoutBounds(this, new Rectangle(a, b, c, d));
-            }
-        }
-        private class B1 : AbsoluteLayout
-        {
-            public B1()
-            {
-                SetLayoutFlags(this, AbsoluteLayoutFlags.All);
-                SetLayoutBounds(this, new Rectangle(0, 0, 1, 1));
-            }
-        }
         public Binary binary;
         private static ProductCard lastClicked;
-        private B b;
-        private B1 bb;
-        private B bbb;
+        private B fader;
+        private B1 container;
+        private B content;
+        private IconLayout icon = new IconLayout(0.1, 0.1, 0.1, 0.1);
+        private I product_image = new I();
+        private B content_loading;
+        private AnimationView animation;
         private ScrollView v;
         private bool selected;
         private int id;
         private static Random r = new Random();
+        private bool LOADING = true;
         public ProductCard(Binary binary, string cardType)
         {
             id = r.Next(9999);
             this.binary = binary;
+            animation = new AnimationView {
+                Loop = true, AutoPlay = true, Animation="loading.json",
+                HeightRequest=50, WidthRequest=50
+            };
             TapGestureRecognizer tp = new TapGestureRecognizer();
             tp.Tapped += OnTapped;
             v = new CardScrollContent(binary,tp,cardType);
-            bbb = new B{IsVisible = false,Children ={v}};
-            b = new B{Opacity = 0,BackgroundColor = Color.LightGray};
-            bb = new B1(){Children ={b,bbb}};
+            content = new B{IsVisible = false,Children ={v}};
+            fader = new B{Opacity = 0,BackgroundColor = Color.LightGray};
+            container = new B1(){Children ={fader,content}};
+            content_loading = new B(0, 0, 1, 1)
+            {
+                Children = {new StackLayout{Children={
+                new Label { Text="Hämtar",FontAttributes=FontAttributes.Bold,
+                FontSize=30,
+                TextColor =Color.White},animation},
+                HorizontalOptions =LayoutOptions.CenterAndExpand,VerticalOptions=
+                LayoutOptions.CenterAndExpand},},
+                BackgroundColor=Color.LightGray
+            };
             Padding = 0;
             CornerRadius = 30;
             HeightRequest = 300;
@@ -87,26 +58,54 @@ namespace RetrieveApp.Elements.Card
             HorizontalOptions = LayoutOptions.FillAndExpand;
             Content = new AbsoluteLayout {
               Children={
-                    new I(binary.PRODUCT.Image){Aspect = Aspect.AspectFill},
-                    new B(0.1,0.1,0.1,0.1){
-                        Children =
-                        {
-                            new Image {Source=App.GetSource("sign.png")}
-                        }
-                    },
+                    product_image,
+                    icon,new DefaultFrontCard(binary)
+                    /*
                     new L(){
                         Text = DBActions._p(binary.PRODUCT).SName,
                         TextColor = Color.Black,
                         HorizontalOptions = LayoutOptions.CenterAndExpand,
                         VerticalOptions = LayoutOptions.CenterAndExpand,
-                        HorizontalTextAlignment = TextAlignment.Center},bb}
+                        HorizontalTextAlignment = TextAlignment.Center}*/,container,
+                content_loading}
             };
             TapGestureRecognizer tap = new TapGestureRecognizer();
             tap.Tapped += OnTapped;
             GestureRecognizers.Add(tap);
+            LoadContent();
+        }
+        private async void LoadContent()
+        {
+            ImageSource src = null;
+            ImageSource src1 = null;
+            AdminIcon ai = await DBActions.LoadAdminIcon(DBActions._p(binary.PRODUCT));
+            Images img = await DBActions.LoadProductImage(binary.PRODUCT);
+            if(ai != null)
+            {
+                src = App.ByteToImage(ai.Image);
+            } else
+            {
+                src = App.GetSource("icon-blank.png");
+            }
+            if(img != null)
+            {
+                src1 = App.ByteToImage(img.Image);
+            } else
+            {
+                src1 = App.GetSource("noproduct.jpg");
+            }
+            icon.SetSRC(src);
+            product_image.SetSRC(src1);
+            content_loading.IsVisible = false;
+            animation.Pause();
+            LOADING = false;
         }
         private void OnTapped(object s, object a)
         {
+            if (LOADING)
+            {
+                return;
+            }
             if (selected)
             {
                 lastClicked = null;
@@ -126,14 +125,14 @@ namespace RetrieveApp.Elements.Card
             if (selected)
             {
                 selected = false;
-                bbb.IsVisible = false;
-                b.FadeTo(0, 400);
+                content.IsVisible = false;
+                fader.FadeTo(0, 400);
             }
             else
             {
                 selected = true;
-                bbb.IsVisible = true;
-                b.FadeTo(0.7, 400);
+                content.IsVisible = true;
+                fader.FadeTo(0.7, 400);
             }
         }
 

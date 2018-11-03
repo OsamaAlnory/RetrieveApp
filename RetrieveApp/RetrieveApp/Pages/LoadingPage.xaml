@@ -10,8 +10,11 @@
          Mode="ToBottom">
         <StackLayout HorizontalOptions="CenterAndExpand"
                VerticalOptions="CenterAndExpand" Spacing="20">
-            <Label x:Name="state"
-               FontSize="30" FontFamily="{StaticResource MFont}"
+            <Label Text="Var god vänta" FontSize="32" FontAttributes="Bold"
+                   FontFamily="{StaticResource MFont}" TextColor="White"
+                   HorizontalOptions="CenterAndExpand" VerticalOptions="Start"
+                   Margin="0,40,0,0"/>
+            <Label x:Name="state" FontSize="30" FontFamily="{StaticResource MFont}"
                TextColor="White" HorizontalOptions="CenterAndExpand"/>
             <forms:AnimationView x:Name="load" WidthRequest="150" HeightRequest="150"
                   Animation="loading.json" IsVisible="false"

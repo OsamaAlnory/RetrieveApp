@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace RetrieveApp.Pages
+namespace RetrieveApp.Design
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class EditProduct : ContentPage
+	public partial class NoItem : StackLayout
 	{
-		public EditProduct ()
+		public NoItem ()
 		{
 			InitializeComponent ();
 		}

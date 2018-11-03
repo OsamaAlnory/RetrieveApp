@@ -4,6 +4,17 @@
              x:Class="RetrieveApp.App">
     <Application.Resources>
         <ResourceDictionary>
+            <Style x:Key="IB" TargetType="Label">
+                <Setter Property="FontAttributes" Value="Bold, Italic" />
+            </Style>
+            <Style x:Key="Skip" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="TextColor" Value="Blue"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontSize" Value="19"/>
+                <Setter Property="Margin" Value="20,20,20,20"/>
+                <Setter Property="HorizontalOptions" Value="End"/>
+            </Style>
             <Color x:Key="P">#9e42f4</Color>
             <Color x:Key="P_Selected">#660bb9</Color>
             <OnPlatform x:TypeArguments="x:String" x:Key="Harlow"

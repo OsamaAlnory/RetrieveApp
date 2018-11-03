@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RetrieveApp.Design.CardAdmin" VerticalOptions="CenterAndExpand">
 
-    <Button Style="{StaticResource Btn}" Text="Edit" BackgroundColor="#ffe900"
-            FontFamily="{StaticResource MFont}" x:Name="edit"/>
-    <Button Style="{StaticResource Btn}" Text="Remove" BackgroundColor="Crimson"
-            FontFamily="{StaticResource MFont}" x:Name="remove"
+    <Button Style="{StaticResource Btn}" Text="Visa" BackgroundColor="{StaticResource P}"
+            FontFamily="{StaticResource MFont}" Clicked="ShowProduct"/>
+    <Button Style="{StaticResource Btn}" Text="Ta bort" BackgroundColor="Crimson"
+            FontFamily="{StaticResource MFont}"
             Clicked="RemoveProduct"/>
     
 </StackLayout>

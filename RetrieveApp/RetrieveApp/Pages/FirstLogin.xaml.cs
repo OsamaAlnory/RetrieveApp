@@ -21,65 +21,98 @@ namespace RetrieveApp.Pages
         private MediaFile file;
         private bool loading = false;
         private Admins _a;
+        public static FirstLogin firstLogin;
+        bool hadAdminIcon = false;
 
 		public FirstLogin (Admins _a)
 		{
+            firstLogin = this;
             this._a = _a;
 			InitializeComponent ();
-            icon.Source = App.GetSource("b2.png");
+            SetIcon();
+            img.Source = App.GetSource("background.png");
             TapGestureRecognizer tap = new TapGestureRecognizer();
             tap.Tapped += async (s, e) =>
             {
-                await CrossMedia.Current.Initialize();
-                var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
-                var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
-                if (cameraStatus != PermissionStatus.Granted || storageStatus != PermissionStatus.Granted)
+                file = await App.OpenCamera(true);
+                if (file != null)
                 {
-                    var results = await CrossPermissions.Current.RequestPermissionsAsync(new[] { Permission.Camera, Permission.Storage });
-                    cameraStatus = results[Permission.Camera];
-                    storageStatus = results[Permission.Storage];
+                    icon.Source = ImageSource.FromStream(() => { return file.GetStream(); });
                 }
-                if (cameraStatus == PermissionStatus.Granted && storageStatus == PermissionStatus.Granted)
-                {
-                    try
-                    {
-                        file = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions{});
-                        if(file != null)
-                        {
-                            icon.Source = ImageSource.FromStream(() => {return file.GetStream();});
-                        }
-                    }catch {
-                        DisplayAlert("Fel", "ERR!", "Avbryt");
-                    }
-                } else
-                {
-                    DisplayAlert("Fel", "Åtkomst har blockerats!", "Avbryt");
-                }
-                };
+            };
             icon.GestureRecognizers.Add(tap);
-            //loc.HeightRequest = App.ScreenHeight / 15;
-            //btn.HeightRequest = App.ScreenHeight / 14;
             btn.FontSize = Device.GetNamedSize(NamedSize.Large, btn);
-            loc.FontSize = Device.GetNamedSize(NamedSize.Large, loc);
             info.FontSize = Device.GetNamedSize(NamedSize.Medium, info);
+            info1.FontSize = Device.GetNamedSize(NamedSize.Medium, info);
+            info2.FontSize = Device.GetNamedSize(NamedSize.Medium, info);
+            loc.FontSize = Device.GetNamedSize(NamedSize.Large, loc);
+            phone.FontSize = Device.GetNamedSize(NamedSize.Large, phone);
+            name.FontSize = Device.GetNamedSize(NamedSize.Large, name);
+            email.FontSize = Device.GetNamedSize(NamedSize.Large, email);
+            Calc(loc); Calc(phone); Calc(name); Calc(email);
+        }
+
+        private async void SetIcon()
+        {
+            var v = await DBActions.LoadAdminIcon(_a);
+            if(v != null)
+            {
+                hadAdminIcon = true;
+                icon.Source = App.ByteToImage(v.Image);
+            } else
+            {
+                icon.Source = App.GetSource("icon.png");
+            }
+        }
+
+        private void Calc(View e)
+        {
+            e.HeightRequest = App.ScreenHeight / 16;
+            e.Margin = new Thickness(App.ScreenWidth/30, 0, App.ScreenWidth/30, 0);
         }
 
         private async void ButtonClicked(object s, EventArgs a)
         {
-            var x = loc.Text;
-            loading = true;
-            if (x != null)
+            if (loading)
             {
+                return;
+            }
+            var x = loc.Text; var x1 = name.Text; var x2 = email.Text; var x3 = phone.Text;
+            loading = true;
+            if(file == null)
+            {
+                DisplayAlert("Fel", "Ange ikonen", "Avbryt");
+                loading = false;
+                return;
+            }
+            if (x != null && x1 != null && x2 != null && x3 != null)
+            {
+                an.IsVisible = true;
+                an.Play();
                 var list = await App.GetPositions(x);
                 if(list.Count == 1)
                 {
                     _a.Address = await App.GetAddress(list[0]);
+                    _a.SName = x1; _a.Email = x2; _a.Phone = x3; _a.Login = true;
+                    await DBActions.EditAdmin(_a);
+                    var aicon = new AdminIcon { ID=_a.ID, Image=App.ImageToByte(file)};
+                    if (hadAdminIcon)
+                    {
+                        await DBActions.EditAdminIcon(aicon);
+                    } else
+                    {
+                        await DBActions.AddAdminIcon(aicon);
+                    }
                     await App.ReloadPins();
-                    await Navigation.PushAsync(new MapPage(_a));
-                    Navigation.RemovePage(this);
+                    an.IsVisible = false;
+                    an.Pause();
+                    Navigation.PushAsync(new MapPage(_a));
+                    App.RemovePage(this);
                     return;
                 }
             }
+            an.IsVisible = false;
+            an.Pause();
             loading = false;
             await DisplayAlert("Fel", "Ange giltig adress!", "Avbryt");
         }

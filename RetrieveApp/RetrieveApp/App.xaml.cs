@@ -13,13 +13,18 @@ using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
 using System.Linq;
+using Plugin.Media;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace RetrieveApp
 {
     public partial class App : Application
     {
+        private const bool allowRemoving = true;
         public const string VERSION = "1.0.0";
+        public static string ACCOUNT_NAME = "RetrieveIt";
         public static int ScreenHeight { get; set; }
         public static int ScreenWidth { get; set; }
         public static Page CURRENT_PAGE;
@@ -48,9 +53,29 @@ namespace RetrieveApp
             }
         }
 
+        public static void RemovePage(Page page)
+        {
+            if (allowRemoving)
+            {
+                page.Navigation.RemovePage(page);
+            }
+        }
+
+        public static async Task LogOut(Page page)
+        {
+            Current.Properties.Remove("Logged");
+            await page.Navigation.PushAsync(new WelcomePage("LoginOnly"));
+            page.Navigation.RemovePage(page);
+        }
+
         public static async Task<bool> SendSure(Page page)
         {
             return (await page.DisplayAlert("Meddelande", "Är du säker?", "Ja", "Avbryt"));
+        }
+
+        public static async Task<bool> SendSure()
+        {
+            return await SendSure(MapPage.mapPage);
         }
 
         public static ImageSource ByteToImage(byte[] b)
@@ -62,10 +87,13 @@ namespace RetrieveApp
             IPin.pins.Clear();
             foreach (Admins place in DBActions.admins)
             {
-                new IPin(place)
+                if(place.Address != null)
                 {
-                    Position = (await App.GetPositions(place.Address))[0]
-                };
+                    new IPin(place)
+                    {
+                        Position = (await App.GetPositions(place.Address))[0]
+                    };
+                }
             }
         }
         public static async Task<List<Position>> GetPositions(string address)
@@ -128,6 +156,42 @@ namespace RetrieveApp
             {
                 return false;
             }
+        }
+
+        public static async Task<MediaFile> OpenCamera(bool gallery)
+        {
+            MediaFile file = null;
+            await CrossMedia.Current.Initialize();
+            var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
+            var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
+            if (cameraStatus != PermissionStatus.Granted || storageStatus != PermissionStatus.Granted)
+            {
+                var results = await CrossPermissions.Current.RequestPermissionsAsync(new[] { Permission.Camera, Permission.Storage });
+                cameraStatus = results[Permission.Camera];
+                storageStatus = results[Permission.Storage];
+            }
+            if (cameraStatus == PermissionStatus.Granted && storageStatus == PermissionStatus.Granted)
+            {
+                try
+                {
+                    if (gallery)
+                    {
+                        file = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions { });
+                    } else
+                    {
+                        file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
+                        {
+                            AllowCropping = true,
+                            PhotoSize = PhotoSize.MaxWidthHeight
+                        });
+                    }
+                }
+                catch (Exception ex)
+                {
+                    //await DisplayAlert("Fel", ex.Message, "Avbryt");
+                }
+            }
+            return file;
         }
 
         protected override void OnStart()

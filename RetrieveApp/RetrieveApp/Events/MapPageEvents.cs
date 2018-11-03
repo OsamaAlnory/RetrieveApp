@@ -4,6 +4,7 @@ using RetrieveApp.Pages;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace RetrieveApp.Events
 {
@@ -11,9 +12,9 @@ namespace RetrieveApp.Events
     {
         private LayoutButtons layout_b;
         private LayoutButtons la_2;
-        private List<Products> vis1 = new List<Products>();
+        private List<Binary> vis1 = new List<Binary>();
         private List<Binary> vis_admin = new List<Binary>();
-        private string filter = "all";
+        public string filter = "all";
 
 
         public MapPageEvents(LayoutButtons l1, LayoutButtons l2)
@@ -25,19 +26,17 @@ namespace RetrieveApp.Events
         public void AddItems()
         {
             layout_b.AddItems();
-            //la_2.AddItems();
+            if(MapPage._g is Admins)
+            {
+                la_2.AddItems();
+            }
         }
 
         public void ChangeFilter(string filter)
         {
             this.filter = filter;
+            MapPage.mapPage.current_state = filter;
             rel(MapPage.mapPage.TXT());
-            // Refresh
-        }
-
-        public void rel_guestB()
-        {
-
         }
 
         public void rel(string f)
@@ -49,7 +48,13 @@ namespace RetrieveApp.Events
                 layout_b.cardType = "default";
             } else if(filter == "b")
             {
-                layout_b.cardType = "admin";
+                if(acc is Admins)
+                {
+                    layout_b.cardType = "admin";
+                } else if(acc is Guests)
+                {
+                    layout_b.cardType = "booked";
+                }
             }
             if (f != null && f != "")
             {
@@ -58,10 +63,13 @@ namespace RetrieveApp.Events
                 {
                     foreach (Products p in DBActions.products)
                     {
-                        Admins ad = DBActions._p(p);
-                        if (ad.SName.ToLower().StartsWith(f))
+                        if(p.Quantity > 0)
                         {
-                            vis1.Add(p);
+                            Admins ad = DBActions._p(p);
+                            if (ad.SName.ToLower().StartsWith(f))
+                            {
+                                vis1.Add(new Binary { PRODUCT = p, ADMIN = ad});
+                            }
                         }
                     }
                 } else if(filter == "b")
@@ -74,7 +82,7 @@ namespace RetrieveApp.Events
                         {
                             if (p.PName.ToLower().StartsWith(f))
                             {
-                                vis1.Add(p);
+                                vis1.Add(new Binary { PRODUCT = p });
                             }
                         }
                     }
@@ -86,68 +94,75 @@ namespace RetrieveApp.Events
                 {
                     foreach (Products p in DBActions.products)
                     {
-                        vis1.Add(p);
+                        if(p.Quantity > 0)
+                        {
+                            vis1.Add(new Binary { PRODUCT = p });
+                        }
                     }
                 } else if(filter == "b")
                 {
                     if(acc is Admins)
                     {
-                        vis1 = DBActions._a(acc as Admins);
+                        var ap = DBActions._a(acc as Admins);
+                        foreach(Products prd in ap)
+                        {
+                            vis1.Add(new Binary { PRODUCT = prd});
+                        }
                     } else
                     {
-                        vis1 = DBActions.GetProducts(acc as Guests);
+                        var ap = DBActions.GetProducts(acc as Guests);
+                        var ap1 = DBActions.GetQuantities(acc as Guests);
+                        for(int x = 0; x < ap.Count; x++)
+                        {
+                            vis1.Add(new Binary { PRODUCT = ap[x],
+                                QUANTITY = ap1[x], OWNER = acc as Guests});
+                        }
                     }
                 }
             }
-            var tst = new List<Binary>();
-            foreach(Products p in vis1)
-            {
-                tst.Add(new Binary { PRODUCT=p});
-            }
-            layout_b.visible = tst;
+            layout_b.visible = vis1;
             layout_b.OpenPage(1);
         }
 
         public void rel_admin(string f)
         {
+            la_2.cardType = "user";
             vis_admin.Clear();
             List<Products> list = DBActions._a((Admins)MapPage._g);
             if (f != null && f != "")
             {
                 f = f.ToLower();
-                foreach (Products p in list)
+                foreach (Guests g in DBActions.guests)
                 {
-                    if (Check_A(p, f))
+                    if (g.Name.StartsWith(f))
                     {
-                        //vis_admin.Add(p);
+                        var l1 = DBActions.GetProducts(g);
+                        foreach (Products p in l1)
+                        {
+                            if (list.Contains(p))
+                            {
+                                vis_admin.Add(new Binary { OWNER = g, PRODUCT = p });
+                            }
+                        }
                     }
                 }
             }
             else
             {
-                foreach(Guests g in DBActions.guests)
+                foreach (Guests g in DBActions.guests)
                 {
                     var l1 = DBActions.GetProducts(g);
-                    foreach(Products p in l1)
+                    foreach (Products p in l1)
                     {
                         if (list.Contains(p))
                         {
-                            vis_admin.Add(new Binary { OWNER=g, PRODUCT=p});
+                            vis_admin.Add(new Binary { OWNER = g, PRODUCT = p });
                         }
                     }
                 }
             }
             la_2.visible = vis_admin;
             la_2.OpenPage(1);
-        }
-
-        private bool Check_A(Products p, string text)
-        {
-            if (p.PName.ToLower().StartsWith(text))
-            {
-                return true;
-            }
-            return false;
         }
 
     }

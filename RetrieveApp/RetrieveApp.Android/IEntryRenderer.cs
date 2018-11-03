@@ -35,6 +35,11 @@ namespace RetrieveApp.Droid
                     gd.SetColor(global::Android.Graphics.Color.Transparent);
                     Control.SetBackgroundDrawable(gd);
                     Control.SetRawInputType(InputTypes.TextFlagNoSuggestions);
+                var PADDING = (e.NewElement as IEntry).PADDING;
+                if(PADDING != null)
+                {
+                    Control.SetPadding(PADDING[0],PADDING[1],PADDING[2],PADDING[3]);
+                }
                     //Control.SetHintTextColor(ColorStateList.ValueOf(global::Android.Graphics.Color.White));
                 }
         }

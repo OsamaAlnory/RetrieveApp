@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace RetrieveApp.Elements.Card
 {
-    public class ICardBooked
+    public class ICardBooked12
     {
         Products product;
 
@@ -35,7 +35,7 @@ namespace RetrieveApp.Elements.Card
                     "Delete", "Cancel");
                 if (allert == true)
                 {
-                    DBActions.RemoveProduct(product);
+                    //DBActions.RemoveProduct(product);
                 }
             };
             return new StackLayout

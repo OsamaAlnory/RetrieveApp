@@ -16,20 +16,15 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>CFBundleDisplayName</key>
 	<string>Retrieve It</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.Mohanad.testing</string>
+	<string>com.Osama.retrieve.Retrieve</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>CFBundleIconFiles</key>
@@ -70,7 +65,7 @@
 		</dict>
 	</dict>
 	<key>MinimumOSVersion</key>
-	<string>11.4</string>
+	<string>11.3.1</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Launchscreen</string>
 	<key>XSAppIconAssets</key>
@@ -79,7 +74,9 @@
 	<true/>
 	<key>UIStatusBarHidden</key>
 	<true/>
-  <key>UIViewControllerBasedStatusBarAppearance</key>
-  <false/>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+	<key>XSLaunchImageAssets</key>
+	<string>Assets.xcassets/LaunchImages.launchimage</string>
 </dict>
 </plist>

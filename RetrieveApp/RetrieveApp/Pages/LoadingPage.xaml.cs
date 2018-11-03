@@ -15,17 +15,19 @@ namespace RetrieveApp.Pages
 	public partial class LoadingPage : ContentPage, Loadable
 	{
         public static LoadingPage page;
+        private int STAGES = 4;
+        private int CURRENT_STAGE = 0;
 
 		public LoadingPage ()
 		{
             page = this;
 			InitializeComponent ();
             App.Register(this);
-            state.Text = "Laddar";
+            state.Text = "Hämtar data";
             Device.StartTimer(TimeSpan.FromSeconds(1), () => {
                 if (App.CheckInternetConnection())
                 {
-                    DBActions.GetAccounts();
+                    DBActions.LoadData();
                 } else
                 {
                     Crash("Appen kunde inte startas!\n\nKolla ditt nätverk.");
@@ -45,27 +47,64 @@ namespace RetrieveApp.Pages
         {
             if (type == "Users")
             {
+                SetText();
                 load.IsVisible = true;
                 load.Play();
-            } else if (type == "Products") {
-                state.Text = "Laddar produkter";
-            } else if (type == "Pins")
-            {
-                //state.Text = "Laddar pins";
             }
         }
 
-        public void OnLoadFinished(string type)
+        private void SetText()
         {
+            double p = (((double)CURRENT_STAGE) / ((double)STAGES))*100.0;
+            state.Text = "Hämtar data "+p+"%";
+        }
+
+        public async void OnLoadFinished(string type)
+        {
+            if(type == "Users")
+            {
+                CURRENT_STAGE++;
+                SetText();
+            }
+            if(type == "Admins")
+            {
+                CURRENT_STAGE++;
+                SetText();
+            }
+            if(type == "Products")
+            {
+                CURRENT_STAGE++;
+                SetText();
+            }
             if(type == "Pins")
             {
+                CURRENT_STAGE++;
+                SetText();
+            }
+            if(type == "Pins")
+            {
+                foreach(Admins a in DBActions.admins)
+                {
+                    //a.Login = false;
+                    //await DBActions.RemoveAdminIcon(a);
+                    //await DBActions.EditAdmin(a);
+                }
+                foreach(Guests g in DBActions.guests)
+                {
+                    //g.Cart = null;
+                    //await DBActions.EditUser(g);
+                }
+                foreach(Products p in DBActions.products)
+                {
+                    
+                }
                 load.Pause();
                 load.IsVisible = false;
+                //Navigation.PushAsync(new ManagePage());
                 //Navigation.PushAsync(new FirstLogin(DBActions.admins[0]));
                 //Navigation.PushAsync(new WelcomePage("Default"));
-                Navigation.PushAsync(new MapPage(DBActions.admins[1]));
+                Navigation.PushAsync(new MapPage(DBActions.admins[0]));
                 //Navigation.PushAsync(new MapPage(DBActions.guests[0]));
-                //Navigation.PushAsync(new ProductView(DBActions.products[0]));
                 /*
                 if(Application.Current.Properties.ContainsKey("Logged"))
                 {
@@ -76,7 +115,7 @@ namespace RetrieveApp.Pages
                 {
                     Navigation.PushAsync(new WelcomePage("Default"));
                 }*/
-                Navigation.RemovePage(this);
+                App.RemovePage(this);
             }
         }
 

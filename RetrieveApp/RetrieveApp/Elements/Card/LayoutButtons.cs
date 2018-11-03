@@ -1,4 +1,5 @@
 ﻿using RetrieveApp.Database;
+using RetrieveApp.Design;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -44,6 +45,10 @@ namespace RetrieveApp.Elements.Card
                 {
                     fl.Children.Add(new ProductCard(visible[x], cardType));
                 }
+            }
+            if(fl.Children.Count == 0)
+            {
+                fl.Children.Add(new NoItem());
             }
         }
 

@@ -1,8 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="RetrieveApp.Pages.ManagePage">
-    <StackLayout>
-        
-    </StackLayout>
+             x:Class="RetrieveApp.Pages.ManagePage" NavigationPage.HasNavigationBar="False">
+    <AbsoluteLayout>
+        <Image x:Name="img" AbsoluteLayout.LayoutFlags="All" Aspect="Fill"
+               AbsoluteLayout.LayoutBounds="0,0,1,1"/>
+        <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"
+                     Padding="20">
+            <StackLayout Margin="0,42,0,0">
+                    <Label Text="Retrieve It Förvaltning" TextColor="White" FontAttributes="Bold"
+                   FontFamily="{StaticResource MFont}" FontSize="34" Margin="0,0,0,35"
+                           HorizontalTextAlignment="Center"/>
+                <ScrollView VerticalOptions="FillAndExpand">
+                    <StackLayout VerticalOptions="FillAndExpand" Spacing="30">
+                        <Button Text="Registrera Admin" BackgroundColor="White" HorizontalOptions="FillAndExpand"
+                Clicked="OnClicked1" TextColor="{StaticResource P}" Style="{StaticResource Btn}"
+                    FontFamily="{StaticResource MFont}" FontAttributes="Bold" Padding="14"/>
+                        <Button Text="Redigera Admin" BackgroundColor="White" HorizontalOptions="FillAndExpand"
+                 TextColor="{StaticResource P}" Style="{StaticResource Btn}" Padding="14" Clicked="OnClicked2"
+                 FontFamily="{StaticResource MFont}" FontAttributes="Bold"/>
+                        <Button Text="Logga ut" BackgroundColor="Crimson" TextColor="White" Padding="14"
+                     Style="{StaticResource Btn}" FontFamily="{StaticResource MFont}"
+                            FontAttributes="Bold" HorizontalOptions="FillAndExpand" Clicked="LogOut"/>
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
+            <Image x:Name="icon" VerticalOptions="EndAndExpand"/>
+        </StackLayout>
+    </AbsoluteLayout>
 </ContentPage>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<StackLayout xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:dir="clr-namespace:RetrieveApp.Elements"
+             x:Class="RetrieveApp.Elements.PopupContent.AddAdmin" Spacing="20">
+    <Image x:Name="img"/>
+    <Frame CornerRadius="20" IsClippedToBounds="True" BorderColor="Blue" Padding="0">
+        <dir:IEntry x:Name="id" Placeholder="AdminID" HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center" FontSize="30"
+         FontFamily="{StaticResource MFont}"/>
+    </Frame>
+    <Frame CornerRadius="20" IsClippedToBounds="True" BorderColor="Blue" Padding="0">
+        <dir:IEntry x:Name="pass" Placeholder="Lösenord" HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center" FontSize="30"
+          FontFamily="{StaticResource MFont}"/>
+    </Frame>
+    <Button Style="{StaticResource Btn}" Text="Registrera" FontAttributes="Bold" Clicked="OnClicked"
+            FontFamily="{StaticResource MFont}" BackgroundColor="{StaticResource P}"/>
+</StackLayout>

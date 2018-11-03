@@ -4,6 +4,7 @@ using System.Linq;
 
 using Foundation;
 using Plugin.Media;
+using Refractored.XamForms.PullToRefresh.iOS;
 using UIKit;
 
 namespace RetrieveApp.iOS
@@ -23,8 +24,10 @@ namespace RetrieveApp.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            Rg.Plugins.Popup.Popup.Init();
             global::Xamarin.Forms.Forms.Init();
             Xamarin.FormsMaps.Init();
+            PullToRefreshLayoutRenderer.Init();
             Camera();
             App.ScreenHeight = (int)UIScreen.MainScreen.Bounds.Height;
             App.ScreenWidth = (int)UIScreen.MainScreen.Bounds.Width;

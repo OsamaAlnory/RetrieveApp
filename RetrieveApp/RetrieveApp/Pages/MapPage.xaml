@@ -4,8 +4,9 @@
              x:Class="RetrieveApp.Pages.MapPage" BarBackgroundColor="DarkOrchid"
             xmlns:element="clr-namespace:RetrieveApp.Elements"
             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+            xmlns:local="clr-namespace:RetrieveApp.Pages;assembly=RetrieveApp"
             xmlns:pull="clr-namespace:Refractored.XamForms.PullToRefresh;assembly=Refractored.XamForms.PullToRefresh"
-            NavigationPage.HasNavigationBar="False">
+            NavigationPage.HasNavigationBar="False" CurrentPageChanged="PageChanged">
     <ContentPage Title="Karta" Icon="places.png">
         <AbsoluteLayout>
             <StackLayout AbsoluteLayout.LayoutFlags="All"
@@ -16,7 +17,7 @@
     </ContentPage>
     <ContentPage Title="Flöde" Icon="posts.png">
         <StackLayout Padding="5" Spacing="0">
-            <StackLayout Orientation="Horizontal" Spacing="0">
+            <StackLayout Orientation="Horizontal" Spacing="0" Margin="10,35,10,0">
                 <Button Text="Alla" HorizontalOptions="FillAndExpand" x:Name="filter_all"
                         BackgroundColor="{StaticResource P}" CornerRadius="0"
                         TextColor="White" FontFamily="{StaticResource MFont}"
@@ -26,13 +27,14 @@
                         TextColor="White" FontFamily="{StaticResource MFont}"
                         Clicked="FilterButtonB"/>
             </StackLayout>
-            <StackLayout Padding="15">
-            <Frame Padding="0" BorderColor="#50abe8" CornerRadius="20">
-                <SearchBar x:Name="search" Placeholder="Sök ställen"
+            <StackLayout Padding="10">
+            <Frame Padding="0" BorderColor="#50abe8" CornerRadius="20"
+                   IsClippedToBounds="True">
+                <SearchBar x:Name="search" Placeholder="Sök restauranger"
                  CancelButtonColor="#CC51F1" FontFamily="{StaticResource MFont}"/>
             </Frame>
             <pull:PullToRefreshLayout IsPullToRefreshEnabled="True" x:Name="refr"
-                                      RefreshColor="Blue">
+                                      RefreshColor="Blue" Padding="5">
                 <ScrollView x:Name="sc">
                     <StackLayout x:Name="fl" Spacing="10"/>
                 </ScrollView>
@@ -50,8 +52,9 @@
     <ContentPage x:Name="pg_b" Title="Beställningar" Icon="reservations.png">
         <StackLayout Padding="5">
             <StackLayout Padding="15">
-                <Frame Padding="0" BorderColor="#50abe8" CornerRadius="20">
-                    <SearchBar x:Name="search1" Placeholder="Sök ställen"
+                <Frame Padding="0" BorderColor="#50abe8" CornerRadius="20"
+                       IsClippedToBounds="True" Margin="0,20,0,0">
+                    <SearchBar x:Name="search1" Placeholder="Sök namn"
                  CancelButtonColor="#CC51F1" FontFamily="{StaticResource MFont}"/>
                 </Frame>
                 <pull:PullToRefreshLayout IsPullToRefreshEnabled="True" x:Name="refr1"
@@ -75,68 +78,120 @@
     </ContentPage>
 
     <ContentPage Title="Lägg till" Icon="add.png" x:Name="pg_admin">
-        <StackLayout Padding="15">
-            <ScrollView>
-                <StackLayout>
-                    <Label Text="Vad säljer du?" HorizontalOptions="CenterAndExpand"
+        <AbsoluteLayout>
+            <Image x:Name="lg_img" Aspect="Fill" AbsoluteLayout.LayoutFlags="All"
+                   AbsoluteLayout.LayoutBounds="0,0,1,1"/>
+            <StackLayout Padding="15" AbsoluteLayout.LayoutFlags="All"
+                         AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <ScrollView>
+                    <StackLayout>
+                        <Label Text="Vad säljer du?" HorizontalOptions="CenterAndExpand"
                            TextColor="White" FontSize="28"
                            FontFamily="{StaticResource MFont}"/>
-                    <element:IEntry x:Name="prd_name" Placeholder="Produktnamn"
-                   BackgroundColor="White" TextColor="Black"
-                   FontFamily="{StaticResource MFont}"
-                   HorizontalTextAlignment="Center"/>
-                    <Image x:Name="image" HorizontalOptions="CenterAndExpand"
+                        <Image x:Name="image" HorizontalOptions="CenterAndExpand"
                    HeightRequest="150" WidthRequest="150"/>
-                    <Button Text="Ta en bild" x:Name="btn_img"/>
-                    <StackLayout HorizontalOptions="CenterAndExpand"
-                                 Orientation="Horizontal">
-                        <element:IEntry Placeholder="Antal"
-                                        BackgroundColor="White"/>
-                        <element:IEntry Placeholder="Pris"
-                                        BackgroundColor="White"/>
-                        <element:IEntry Placeholder="Originalpris"
-                                        BackgroundColor="White"/>
-                    </StackLayout>
-                    <element:ITimer x:Name="tmr" BackgroundColor="White"/>
-                    <Editor Placeholder="Produkt beskrivning" MaxLength="128"
-                    TextColor="Black" AutoSize="TextChanges" x:Name="desc"
-                    BackgroundColor="White"/>
-                    <Button Text="Lägg till" Clicked="Btn_add"/>
-                    <StackLayout WidthRequest="100" HeightRequest="100"
+                        <Button Text="Kamera" Clicked="Camera_Clicked" Margin="0,15,0,0"
+                                Style="{StaticResource Btn}" FontAttributes="Bold"
+                            FontFamily="{StaticResource MFont}"
+                                BackgroundColor="#42f4bf"/>
+                        <Label Text="Tänk på att mobilen ska vara lodrätt stående" TextColor="Gray"
+                     FontAttributes="Italic" FontFamily="{StaticResource MFont}"
+                     HorizontalOptions="CenterAndExpand"/>
+                        <Button Text="Galleri" Clicked="Gallery_Clicked"
+                     Style="{StaticResource Btn}" FontAttributes="Bold"
+                     FontFamily="{StaticResource MFont}" BackgroundColor="#42f4bf"/>
+                        <Frame Padding="0" CornerRadius="18" OutlineColor="Gray"
+                           IsClippedToBounds="True" Margin="{x:Static local:MapPage.GET_MARGIN}">
+                            <element:IEntry x:Name="prd_name" Placeholder="Produktnamn"
+                         PlaceholderColor="Accent" HorizontalOptions="FillAndExpand"
+                         MaxLength="42" TextColor="Accent" FontSize="29"
+                   FontFamily="{StaticResource MFont}" HorizontalTextAlignment="Center"/>
+                        </Frame>
+                        <Frame Padding="0" CornerRadius="18" OutlineColor="Gray"
+                     IsClippedToBounds="True" Margin="{x:Static local:MapPage.GET_MARGIN}">
+                            <element:IEntry Placeholder="Antal" x:Name="quantity" 
+                         PlaceholderColor="Accent" HorizontalTextAlignment="Center"
+                     IsTextPredictionEnabled="False" Keyboard="Numeric" HorizontalOptions="FillAndExpand" FontSize="29"
+                     MaxLength="4" FontFamily="{StaticResource MFont}" TextColor="Accent"/>
+                        </Frame>
+                        <Frame Padding="0" CornerRadius="18" OutlineColor="Gray"
+                           IsClippedToBounds="True" Margin="{x:Static local:MapPage.GET_MARGIN}">
+                            <element:IEntry Placeholder="Pris" x:Name="price" PlaceholderColor="Accent"
+                     FontSize="29" FontFamily="{StaticResource MFont}" TextColor="Accent" IsTextPredictionEnabled="False"
+                     Keyboard="Numeric" MaxLength="5" HorizontalOptions="FillAndExpand"
+                          HorizontalTextAlignment="Center"/>
+                        </Frame>
+                        <Frame Padding="0" CornerRadius="18" OutlineColor="Gray"
+                           IsClippedToBounds="True" Margin="{x:Static local:MapPage.GET_MARGIN}">
+                            <element:IEntry Placeholder="Originalpris" x:Name="oprice" MaxLength="5"
+                     FontSize="29" Keyboard="Numeric" TextColor="Accent" IsTextPredictionEnabled="False"
+                     FontFamily="{StaticResource MFont}" PlaceholderColor="Accent"
+                     HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"/>
+                        </Frame>
+                        <Frame Margin="0,10,0,0" Padding="0" CornerRadius="12"
+                           OutlineColor="Crimson" IsClippedToBounds="True">
+                            <StackLayout Padding="7" Spacing="12">
+                                <Label Text="Hämtningstid" HorizontalOptions="CenterAndExpand"
+                             FontAttributes="Bold" FontFamily="{StaticResource MFont}"
+                                   FontSize="25" TextColor="{StaticResource P}"/>
+                                <element:ITimer x:Name="tmr" BackgroundColor="White"
+                         HorizontalOptions="CenterAndExpand" FontAttributes="Bold"
+                         FontFamily="{StaticResource MFont}"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame Padding="0" CornerRadius="16" OutlineColor="Crimson"
+                           IsClippedToBounds="True">
+                            <Editor Placeholder="Produkt beskrivning" MaxLength="256"
+                    TextColor="Black" AutoSize="TextChanges" x:Name="desc" Margin="0,7,0,7"
+                    BackgroundColor="White" HorizontalOptions="FillAndExpand"
+                         FontAttributes="Bold" FontFamily="{StaticResource MFont}"/>
+                        </Frame>
+                        <Button Text="Lägg till" Clicked="Btn_add" Style="{StaticResource Btn}"
+                            TextColor="White" BackgroundColor="{StaticResource P}"
+                            FontAttributes="Bold" FontFamily="{StaticResource MFont}"/>
+                        <StackLayout WidthRequest="100" HeightRequest="100"
                                  HorizontalOptions="CenterAndExpand">
-                        <forms:AnimationView x:Name="icon_r" AutoPlay="False"
-                     IsVisible="False" Animation="check.json"
-                         WidthRequest="100"
-                          HeightRequest="100"/>
+                            <forms:AnimationView x:Name="icon_r" AutoPlay="False"
+                     IsVisible="False" Animation="trail_loading.json" Loop="True"
+                         WidthRequest="100" HeightRequest="100"/>
+                        </StackLayout>
                     </StackLayout>
-                </StackLayout>
-            </ScrollView>
-        </StackLayout>
+                </ScrollView>
+            </StackLayout>
+        </AbsoluteLayout>
     </ContentPage>
     <ContentPage Title="Inställningar" Icon="settings.png">
-        <StackLayout Padding="10">
-            <StackLayout Orientation="Horizontal" Spacing="0" Margin="20,40,20,20">
-                <StackLayout BackgroundColor="#CC51F1" HorizontalOptions="FillAndExpand">
-                    <Label Text="Inloggad som"
+        <AbsoluteLayout>
+            <Image x:Name="bkg" Aspect="Fill" AbsoluteLayout.LayoutFlags="All"
+                   AbsoluteLayout.LayoutBounds="0,0,1,1"/>
+            <StackLayout Padding="10" AbsoluteLayout.LayoutFlags="All"
+                         AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <ScrollView>
+                    <StackLayout>
+                        <StackLayout Orientation="Horizontal" Spacing="0" Margin="20,40,20,20">
+                            <StackLayout BackgroundColor="#CC51F1" HorizontalOptions="FillAndExpand">
+                                <Label Text="Inloggad som"
                        HorizontalOptions="CenterAndExpand"
                        VerticalOptions="CenterAndExpand"
                        TextColor="White" FontSize="22" FontAttributes="Bold"
                        FontFamily="{StaticResource MFont}"/>
-                </StackLayout>
-                <StackLayout BackgroundColor="#CC51F1" HorizontalOptions="FillAndExpand">
-                    <Label x:Name="lbl_lg" TextColor="White" FontAttributes="Bold"
+                            </StackLayout>
+                            <StackLayout BackgroundColor="#CC51F1" HorizontalOptions="FillAndExpand">
+                                <Label x:Name="lbl_lg" TextColor="White" FontAttributes="Bold"
                        FontSize="22" HorizontalOptions="CenterAndExpand"
                        VerticalOptions="CenterAndExpand"
                        FontFamily="{StaticResource MFont}"/>
-                </StackLayout>
-             </StackLayout>
-             <Frame Padding="0" CornerRadius="10" IsClippedToBounds="True" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
-                <Button Text="Logga ut" HorizontalOptions="FillAndExpand"
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+                <Frame Padding="0" CornerRadius="10" IsClippedToBounds="True" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
+                    <Button Text="Logga ut" HorizontalOptions="FillAndExpand"
                     VerticalOptions="EndAndExpand" BackgroundColor="Crimson"
                     TextColor="White" FontAttributes="Bold" FontSize="30"
                     FontFamily="{StaticResource MFont}" x:Name="logout"/>
-             </Frame>
-           
-        </StackLayout>
+                </Frame>
+            </StackLayout>
+        </AbsoluteLayout>
     </ContentPage>
 </TabbedPage>

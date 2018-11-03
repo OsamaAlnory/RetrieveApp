@@ -13,7 +13,6 @@ namespace RetrieveApp.Database
         public float NewPrice { get; set; }
         public int Quantity { get; set; }
         public TimeSpan ExpireTime { get; set; }
-        public byte[] Image { get; set; }
         public string Description { get; set; }
     }
 }

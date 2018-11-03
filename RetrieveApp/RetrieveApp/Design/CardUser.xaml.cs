@@ -1,4 +1,5 @@
 ﻿using RetrieveApp.Database;
+using RetrieveApp.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,23 +14,24 @@ namespace RetrieveApp.Design
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CardUser : StackLayout
 	{
-        public Products product;
+        private Binary binary;
 
-		public CardUser (Products product)
+		public CardUser (Binary binary)
 		{
-            this.product = product;
+            this.binary = binary;
 			InitializeComponent ();
 		}
 
-        private void ButtonRetrieved(object s, EventArgs a)
+        private async void ButtonRetrieved(object s, EventArgs a)
         {
-            // Remove product from user
-            //DBActions.RemoveProduct(product);
+            await DBActions.Unbook(binary.OWNER, binary.PRODUCT, false);
+            MapPage.mapPage.ReloadAll();
         }
 
-        private void ButtonUnRetrieved(object s, EventArgs a)
+        private async void ButtonUnRetrieved(object s, EventArgs a)
         {
-            
+            await DBActions.Unbook(binary.OWNER, binary.PRODUCT, true);
+            MapPage.mapPage.ReloadAll();
         }
 
 	}

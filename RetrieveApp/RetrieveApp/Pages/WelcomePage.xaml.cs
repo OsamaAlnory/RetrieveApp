@@ -18,41 +18,31 @@ namespace RetrieveApp.Pages
     {
         private Account ad;
         private bool signed;
+        private string state;
 
         public WelcomePage(string state)
         {
+            this.state = state;
             InitializeComponent();
             if(state == "LoginOnly")
             {
-                for(int x = 0; x < Children.Count-1; x++)
+                for(int x = 0; x < Children.Count+2; x++)
                 {
-                    Children.RemoveAt(x);
+                    Children.RemoveAt(0);
                 }
             } else
             {
-                icon.Source = ImageSource.FromResource(App.PATH + "logo.png",
-                 Assembly.GetExecutingAssembly());
+                icon.Source = App.GetSource("logo.png");
                 btn.Clicked += (e, args) => OnButtonClicked();
                 btn1.Clicked += (e, args) => OnButtonClicked2();
                 btn2.Clicked += (e, args) => OnButtonClicked3();
-                icon1.Source = ImageSource.FromResource(App.PATH + "logo.png");
-                icon2.Source = ImageSource.FromResource(App.PATH + "map.PNG");
-                icon3.Source = ImageSource.FromResource(App.PATH + "ss1.png");
-                
+                icon1.Source = App.GetSource("logo.png");
+                icon2.Source = App.GetSource("map.PNG");
+                icon3.Source = App.GetSource("ss1.png");
             }
             log_btn.Clicked += (e, args) => ProcessLogin();
-            fsk.Clicked += (e, args) => SkippaClicked();
-            sskp.Clicked += (e, args) => SkippaClicked();
-            tskp.Clicked += (e, args) => SkippaClicked();
-            fjskp.Clicked += (e, args) => SkippaClicked();
             crt_btn.Clicked += (e, args) => CreateAccoutClicked();
             lstbtn.Clicked += (e, args) => CreateAccoutClicked();
-
-            animationView.OnFinish += (e, s) => {
-                animationView.IsVisible = false;
-                Navigation.PushAsync(new MapPage(ad));
-                Navigation.RemovePage(this);
-            };
             btn.Margin = new Thickness(15, 0, 15, App.ScreenHeight/24);
             e_name.HeightRequest = App.ScreenHeight / 12;
             e_pass.HeightRequest = App.ScreenHeight / 12;
@@ -62,8 +52,31 @@ namespace RetrieveApp.Pages
               App.ScreenHeight / 64, App.ScreenWidth / 24, 0);
             e_name.FontSize = IFont.Calc(e_name.HeightRequest);
             e_pass.FontSize = IFont.Calc(e_pass.HeightRequest);
-
             vnr.Text = "Version: " + App.VERSION;
+        }
+
+        private void Start()
+        {
+            animationView.IsVisible = false;
+            bool first = false;
+            if (ad is Admins)
+            {
+                if ((ad as Admins).ID == App.ACCOUNT_NAME)
+                {
+                    Navigation.PushAsync(new ManagePage());
+                    return;
+                }
+                first = !(ad as Admins).Login;
+            }
+            if (first)
+            {
+                Navigation.PushAsync(new FirstLogin(ad as Admins));
+            }
+            else
+            {
+                Navigation.PushAsync(new MapPage(ad));
+            }
+            App.RemovePage(this);
         }
 
         private void OnButtonClicked()
@@ -79,12 +92,17 @@ namespace RetrieveApp.Pages
         {
             CurrentPage = Children[3];
         }
-        private void SkippaClicked()
+        private void SkippaClicked(object s, EventArgs args)
         {
-            CurrentPage = Children[4];
+            if(state == "Guide")
+            {
+                Navigation.RemovePage(this);
+            } else
+            {
+                CurrentPage = Children[4];
+            }
         }
 
-       
         private void ProcessLogin()
         {
             string u = e_name.Text;
@@ -120,6 +138,10 @@ namespace RetrieveApp.Pages
                         }
                         animationView.IsVisible = true;
                         animationView.Play();
+                        Device.StartTimer(TimeSpan.FromSeconds(2), () => {
+                            Start();
+                            return false;
+                        });
                     }
                 } else
                 {

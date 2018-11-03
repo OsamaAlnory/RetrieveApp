@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 
 namespace RetrieveApp.Database
@@ -14,19 +15,42 @@ namespace RetrieveApp.Database
     internal class DBActions
     {
         private const string LINK = "http://windows.u7979705.fsdata.se/api/";
+        private const string IMAGES = "Images";
+        private const string USERS = "Users";
+        private const string PRODUCTS = "Products";
+        private const string ADMINS = "Admins";
+        private const string AIMAGE = "AdminsImage";
+        private const string OPTIONS = "Options";
         public static List<Admins> admins = new List<Admins>();
         public static List<Guests> guests = new List<Guests>();
         public static List<Products> products = new List<Products>();
         public static Dictionary<string, object> options = new Dictionary<string, object>();
 
-        public static async void GetAccounts()
+        public static async void LoadData()
         {
+            if(await LoadOptions())
+            {
+                return;
+            }
+            await LoadAccounts();
+            await LoadProducts();
+            //UnrealData.Load();
+            App.StartLoading("Pins");
+            await App.ReloadPins();
+            App.FinishLoading("Pins");
+        }
 
-            //await LoadAccounts();
-            /*
+        public static async Task LoadAccounts()
+        {
+            await LoadAdmins();
+            await LoadUsers();
+        }
+
+        public static async Task<bool> LoadOptions()
+        {
             HttpClient client = new HttpClient();
-            var responce4 = await client.GetStringAsync("http://fannylovisa.somee.com/api/options");
-            List<Options> op = JsonConvert.DeserializeObject<List<Options>>(responce4);
+            var responce = await client.GetStringAsync(LINK + OPTIONS);
+            List<Options> op = JsonConvert.DeserializeObject<List<Options>>(responce);
             foreach (Options o in op)
             {
                 options.Add(o.Name, o.Value);
@@ -35,42 +59,28 @@ namespace RetrieveApp.Database
                 options["IsDev"] as string == "true")
             {
                 LoadingPage.page.Quit();
-                return;
+                return true;
             }
-            */
-            await LoadProducts();
-            App.StartLoading("Pins");
-            admins.Add(new Admins
-            {
-                ID = "Admin",Address = "Helsingborg Rönnegatan 5e",
-                SName = "WOW", Password = "123"
-            });
-            admins.Add(new Admins { ID="Test", Address="Lund Storgatan",
-                SName ="Lidl",Password="123"});
-            guests.Add(new Guests {
-                ID = 5, Name = "Osama",
-                Password = "123"
-            });
-            products.Add(new Products { ID = 12432, AdminID = "Test", PName="Burger",
-            Description="dwad"});
-            TimeSpan t = TimeSpan.FromHours(9);
-            products.Add(new Products{ID=11,AdminID="Admin",PName="Cookie",
-            OldPrice=10, NewPrice=5, Quantity=18, Description="Hello!"});
-            addToCart(guests[0], products[0], 10);
-            await App.ReloadPins();
-            App.FinishLoading("Pins");
+            return false;
         }
 
-        public static async Task LoadAccounts()
+        public static async Task LoadAdmins()
+        {
+            App.StartLoading("Admins");
+            admins.Clear();
+            HttpClient client = new HttpClient();
+            var responce = await client.GetStringAsync(LINK+ADMINS);
+            admins = JsonConvert.DeserializeObject<List<Admins>>(responce);
+            App.FinishLoading("Admins");
+        }
+
+        public static async Task LoadUsers()
         {
             App.StartLoading("Users");
-            admins.Clear();
             guests.Clear();
             HttpClient client = new HttpClient();
-            //var responce1 = await client.GetStringAsync("http://windows.u7979705.fsdata.se/api/Users");
-            //admins = JsonConvert.DeserializeObject<List<Admins>>(responce1);
-            var responce2 = await client.GetStringAsync(LINK+"Users");
-            guests = JsonConvert.DeserializeObject<List<Guests>>(responce2);
+            var responce = await client.GetStringAsync(LINK + USERS);
+            guests = JsonConvert.DeserializeObject<List<Guests>>(responce);
             App.FinishLoading("Users");
         }
 
@@ -79,11 +89,35 @@ namespace RetrieveApp.Database
             App.StartLoading("Products");
             products.Clear();
             HttpClient client = new HttpClient();
-            var responce3 = await client.GetStringAsync(LINK+"Products");
-            products = JsonConvert.DeserializeObject<List<Products>>(responce3);
+            var responce = await client.GetStringAsync(LINK+PRODUCTS);
+            products = JsonConvert.DeserializeObject<List<Products>>(responce);
             App.FinishLoading("Products");
         }
-
+        public static async Task<AdminIcon> LoadAdminIcon(Admins ad)
+        {
+            HttpClient client = new HttpClient();
+            try
+            {
+                var responce = await client.GetStringAsync(LINK+AIMAGE+"/"+ad.ID);
+                return JsonConvert.DeserializeObject<AdminIcon>(responce);
+            } catch(Exception e)
+            {
+                return null;
+            }
+        }
+        public static async Task<Images> LoadProductImage(Products product)
+        {
+            HttpClient client = new HttpClient();
+            try
+            {
+                var responce = await client.GetStringAsync(LINK+IMAGES+"/"+product.ID);
+                return JsonConvert.DeserializeObject<Images>(responce);
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
         public static Guests GetUserById(int id)
         {
             foreach(Guests g in guests)
@@ -91,6 +125,30 @@ namespace RetrieveApp.Database
                 if(g.ID == id)
                 {
                     return g;
+                }
+            }
+            return null;
+        }
+
+        public static Admins GetAdminById(string id)
+        {
+            foreach(Admins a in admins)
+            {
+                if(a.ID == id)
+                {
+                    return a;
+                }
+            }
+            return null;
+        }
+
+        public static Products GetProductById(int id)
+        {
+            foreach(Products p in products)
+            {
+                if(p.ID == id)
+                {
+                    return p;
                 }
             }
             return null;
@@ -125,30 +183,83 @@ namespace RetrieveApp.Database
         public static List<int> getCart(Guests g)
         {
             List<int> ints = new List<int>();
-            if(g.Cart != null)
-            {
-                string[] s = g.Cart.Split(';');
-                foreach(string a in s)
+                if (!string.IsNullOrEmpty(g.Cart))
                 {
-                    string[] d = a.Split(',');
-                    ints.Add(int.Parse(d[0]));
+                    string[] s = g.Cart.Split(';');
+                    foreach (string a in s)
+                    {
+                        string[] d = a.Split(',');
+                        ints.Add(int.Parse(d[0]));
+                    }
                 }
-            }
             return ints;
         }
-        public static void book(Guests user, Products product, int quantity)
+        public static async Task Unbook(Guests user, Products product, bool restore)
+        {
+            if(hasBooked(user, product))
+            {
+                var cart = user.Cart.Split(';');
+                var newCart = "";
+                int quantity = 0;
+                for(int x = 0; x < cart.Length; x++)
+                {
+                    var f = cart[x].Split(',');
+                    int a = int.Parse(f[0]);
+                    if(a != product.ID)
+                    {
+                        if(x > 0)
+                        {
+                            newCart += ";";
+                        }
+                        newCart += cart[x];
+                    } else
+                    {
+                        quantity = int.Parse(f[1]);
+                    }
+                }
+                if (string.IsNullOrEmpty(newCart))
+                {
+                    newCart = null;
+                }
+                user.Cart = newCart;
+                await EditUser(user);
+                if (restore)
+                {
+                    product.Quantity += quantity;
+                    await FullEditProduct(product);
+                }
+            }
+        }
+        public static async Task<HttpResponseMessage> book(Guests user, Products product, int quantity)
         {
             addToCart(user, product, quantity);
             product.Quantity -= quantity;
-            // Save to db
+            return await EditUser(user);
         }
         public static void addToCart(Guests user, Products product, int quantity)
         {
-            user.Cart += product.ID+","+quantity;
+            if(!string.IsNullOrEmpty(user.Cart))
+            {
+                user.Cart += ";";
+            }
+            user.Cart += product.ID + "," + quantity;
         }
         public static bool hasBooked(Guests user, Products product)
         {
             return getCart(user).Contains(product.ID);
+        }
+        public static List<int> GetQuantities(Guests user)
+        {
+            var list = new List<int>();
+            if(!string.IsNullOrEmpty(user.Cart))
+            {
+                var cart = user.Cart.Split(';');
+                for (int x = 0; x < cart.Length; x++)
+                {
+                    list.Add(int.Parse(cart[x].Split(',')[1]));
+                }
+            }
+            return list;
         }
         public static Admins _p(Products p) {
             foreach(Admins a in admins)
@@ -159,6 +270,23 @@ namespace RetrieveApp.Database
                 }
             }
             return null;
+        }
+        public static async Task<bool> Process(string actionName,params object[] values)
+        {
+            HttpResponseMessage response = null;
+            if(actionName == "adduser")
+            {
+                response = await AddUser(values[0] as Guests);
+            } else if(actionName == "addproduct")
+            {
+
+            }
+            if(response != null && response.StatusCode != HttpStatusCode.Created)
+            {
+                 App.CURRENT_PAGE.DisplayAlert("Fel", response.StatusCode.ToString()
+                    +"\nKontakta ???", "Avbryt");
+            }
+            return response != null && response.StatusCode == HttpStatusCode.Created;
         }
         public static List<Products> _a(Admins a)
         {
@@ -173,34 +301,131 @@ namespace RetrieveApp.Database
             return list;
         }
 
-        public static async Task AddUser(Guests user)
+        public static async Task<HttpResponseMessage> AddUser(Guests user)
         {
             var json = JsonConvert.SerializeObject(user);
             var c = new StringContent(json, Encoding.UTF8, "application/json");
             HttpClient client = new HttpClient();
-            var r = await client.PostAsync(LINK+"Users", c);
-            if(r.StatusCode == HttpStatusCode.Created)
-            {
-                
-            }
+            return await client.PostAsync(LINK+USERS, c);
         }
-        public static async void RemoveProduct(Products product)
+        public static async Task<HttpResponseMessage> RemoveUser(Guests user)
         {
-            products.Remove(product);
+            var json = JsonConvert.SerializeObject(user);
+            var c = new StringContent(json, Encoding.UTF8, "application/json");
             HttpClient client = new HttpClient();
-            var r = await client.DeleteAsync(LINK+"Products/"+product.ID);
+            return await client.DeleteAsync(LINK+USERS+"/"+user.ID);
+        }
+        public static async Task<HttpResponseMessage> RemoveProduct(int id)
+        {
+            HttpClient client = new HttpClient();
+            return await client.DeleteAsync(LINK+PRODUCTS+"/"+id);
+        }
+        public static async Task<HttpResponseMessage> RemoveAdminIcon(Admins admin)
+        {
+            HttpClient client = new HttpClient();
+            return await client.DeleteAsync(LINK+AIMAGE+"/"+admin.ID);
+        }
+        public static async Task<HttpResponseMessage> RemoveProductImage(int id)
+        {
+            HttpClient client = new HttpClient();
+            return await client.DeleteAsync(LINK+IMAGES+"/"+id);
+        }
+        public static async Task<HttpResponseMessage> RemoveAdmin(Admins admin)
+        {
+            HttpClient client = new HttpClient();
+            return await client.DeleteAsync(LINK+ADMINS+"/"+admin.ID);
+        }
+        public static async Task FullyRemoveAdmin(Admins admin)
+        {
+            await RemoveAdmin(admin);
+            await RemoveAdminIcon(admin);
+            await LoadAdmins();
+        }
+        public static async Task FullyAddProduct(Products product, byte[] img)
+        {
+            await AddProduct(product);
+            await AddProductImage(new Images { ID = product.ID, Image = img});
+            await LoadProducts();
         }
         public static async Task AddProduct(Products product)
         {
             var json = JsonConvert.SerializeObject(product);
             var c = new StringContent(json, Encoding.UTF8, "application/json");
             HttpClient client = new HttpClient();
-            var r = await client.PostAsync(LINK+"Products", c);
-            if (r.StatusCode == HttpStatusCode.Created)
-            {
-                //
-            }
-            MapPage.mapPage.DisplayAlert("dwad", ""+r.StatusCode,"dwa");
+            var r = await client.PostAsync(LINK+PRODUCTS, c);
+        }
+        public static async Task AddAdmin(Admins admin)
+        {
+            var json = JsonConvert.SerializeObject(admin);
+            var c = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpClient client = new HttpClient();
+            var r = await client.PostAsync(LINK+ADMINS, c);
+        }
+        public static async Task FullyAddAdmin(Admins admin)
+        {
+            await AddAdmin(admin);
+            await LoadAdmins();
+        }
+        public static async Task AddAdminIcon(AdminIcon img)
+        {
+            var json = JsonConvert.SerializeObject(img);
+            var c = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpClient client = new HttpClient();
+            var r = await client.PostAsync(LINK+AIMAGE, c);
+        }
+        public static async Task AddProductImage(Images img)
+        {
+            var json = JsonConvert.SerializeObject(img);
+            var c = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpClient client = new HttpClient();
+            var r = await client.PostAsync(LINK+IMAGES, c);
+        }
+        public static async Task<HttpResponseMessage> EditAdmin(Admins admin)
+        {
+            var json = JsonConvert.SerializeObject(admin);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpClient client = new HttpClient();
+            var responce = await client.PutAsync(LINK+ADMINS+"/" + admin.ID, content);
+            return responce;
+        }
+        public static async Task FullyEditAdmin(Admins admin)
+        {
+            await EditAdmin(admin);
+            await LoadAdmins();
+        }
+        public static async Task<HttpResponseMessage> EditUser(Guests g)
+        {
+            //if (string.IsNullOrEmpty(g.Cart))
+            //{
+            //    g.Cart = null;
+            //}
+            var json = JsonConvert.SerializeObject(g);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpClient client = new HttpClient();
+            var responce = await client.PutAsync(LINK+USERS+"/"+g.ID, content);
+            return responce;
+        }
+        public static async Task<HttpResponseMessage> EditAdminIcon(AdminIcon icon)
+        {
+            var json = JsonConvert.SerializeObject(icon);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpClient client = new HttpClient();
+            var responce = await client.PutAsync(LINK+AIMAGE+"/"+icon.ID, content);
+            return responce;
+        }
+        public static async Task<HttpResponseMessage> FullEditProduct(Products product)
+        {
+            var json = JsonConvert.SerializeObject(product);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpClient client = new HttpClient();
+            var responce = await client.PutAsync(LINK+PRODUCTS+"/"+product.ID, content);
+            return responce;
+        }
+        public static async Task FullyRemoveProduct(Products product)
+        {
+            products.Remove(product);
+            await RemoveProduct(product.ID);
+            await RemoveProductImage(product.ID);
         }
 
     }
