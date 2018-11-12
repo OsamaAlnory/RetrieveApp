@@ -81,7 +81,7 @@ namespace RetrieveApp.Pages
             loading = true;
             if(file == null)
             {
-                DisplayAlert("Fel", "Ange ikonen", "Avbryt");
+                DisplayAlert("Fel", "Välj en ikon!", "Avbryt");
                 loading = false;
                 return;
             }
@@ -114,7 +114,7 @@ namespace RetrieveApp.Pages
             an.IsVisible = false;
             an.Pause();
             loading = false;
-            await DisplayAlert("Fel", "Ange giltig adress!", "Avbryt");
+            await DisplayAlert("Fel", "Ange en giltig adress!", "Avbryt");
         }
 	}
 }

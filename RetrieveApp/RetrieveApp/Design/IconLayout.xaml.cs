@@ -12,11 +12,11 @@ namespace RetrieveApp.Design
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class IconLayout : StackLayout
     {
-        public IconLayout(double i1, double i2, double i3, double i4)
+        public IconLayout()
         {
             InitializeComponent();
             AbsoluteLayout.SetLayoutFlags(this, AbsoluteLayoutFlags.All);
-            AbsoluteLayout.SetLayoutBounds(this, new Rectangle(i1,i2,i3,i4));
+            AbsoluteLayout.SetLayoutBounds(this, new Rectangle(0,0,1,1));
         }
         public void SetSRC(ImageSource src)
         {

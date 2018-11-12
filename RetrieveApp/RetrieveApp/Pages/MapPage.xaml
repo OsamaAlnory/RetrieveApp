@@ -19,18 +19,19 @@
         <StackLayout Padding="5" Spacing="0">
             <StackLayout Orientation="Horizontal" Spacing="0" Margin="10,35,10,0">
                 <Button Text="Alla" HorizontalOptions="FillAndExpand" x:Name="filter_all"
-                        BackgroundColor="{StaticResource P}" CornerRadius="0"
+                        BackgroundColor="{StaticResource P}" CornerRadius="0" FontSize="Large"
                         TextColor="White" FontFamily="{StaticResource MFont}"
-                        Clicked="FilterButtonAll"/>
+                        Clicked="FilterButtonAll" FontAttributes="Bold"/>
                 <Button Text="Mina produkter" HorizontalOptions="FillAndExpand"
                  x:Name="filter_b" BackgroundColor="{StaticResource P}" CornerRadius="0"
-                        TextColor="White" FontFamily="{StaticResource MFont}"
-                        Clicked="FilterButtonB"/>
+                        TextColor="White" FontFamily="{StaticResource MFont}" FontSize="Large"
+                        Clicked="FilterButtonB" FontAttributes="Bold"/>
             </StackLayout>
             <StackLayout Padding="10">
-            <Frame Padding="0" BorderColor="#50abe8" CornerRadius="20"
+            <Frame Padding="0" BorderColor="{StaticResource P}" CornerRadius="20"
                    IsClippedToBounds="True">
                 <SearchBar x:Name="search" Placeholder="Sök restauranger"
+                 BackgroundColor="Transparent"
                  CancelButtonColor="#CC51F1" FontFamily="{StaticResource MFont}"/>
             </Frame>
             <pull:PullToRefreshLayout IsPullToRefreshEnabled="True" x:Name="refr"
@@ -49,12 +50,12 @@
         </StackLayout>
     </ContentPage>
 
-    <ContentPage x:Name="pg_b" Title="Beställningar" Icon="reservations.png">
+    <ContentPage x:Name="pg_b" Title="Reservationer" Icon="reservations.png">
         <StackLayout Padding="5">
             <StackLayout Padding="15">
-                <Frame Padding="0" BorderColor="#50abe8" CornerRadius="20"
+                <Frame Padding="0" BorderColor="{StaticResource P}" CornerRadius="20"
                        IsClippedToBounds="True" Margin="0,20,0,0">
-                    <SearchBar x:Name="search1" Placeholder="Sök namn"
+                    <SearchBar x:Name="search1" Placeholder="Sök namn" BackgroundColor="Transparent"
                  CancelButtonColor="#CC51F1" FontFamily="{StaticResource MFont}"/>
                 </Frame>
                 <pull:PullToRefreshLayout IsPullToRefreshEnabled="True" x:Name="refr1"
@@ -93,13 +94,13 @@
                         <Button Text="Kamera" Clicked="Camera_Clicked" Margin="0,15,0,0"
                                 Style="{StaticResource Btn}" FontAttributes="Bold"
                             FontFamily="{StaticResource MFont}"
-                                BackgroundColor="#42f4bf"/>
-                        <Label Text="Tänk på att mobilen ska vara lodrätt stående" TextColor="Gray"
+                                BackgroundColor="{StaticResource P}"/>
+                        <Label Text="Tänk på att mobilen ska vara i liggande läge." TextColor="Gray"
                      FontAttributes="Italic" FontFamily="{StaticResource MFont}"
                      HorizontalOptions="CenterAndExpand"/>
                         <Button Text="Galleri" Clicked="Gallery_Clicked"
                      Style="{StaticResource Btn}" FontAttributes="Bold"
-                     FontFamily="{StaticResource MFont}" BackgroundColor="#42f4bf"/>
+                     FontFamily="{StaticResource MFont}" BackgroundColor="{StaticResource P}"/>
                         <Frame Padding="0" CornerRadius="18" OutlineColor="Gray"
                            IsClippedToBounds="True" Margin="{x:Static local:MapPage.GET_MARGIN}">
                             <element:IEntry x:Name="prd_name" Placeholder="Produktnamn"
@@ -162,12 +163,10 @@
     </ContentPage>
     <ContentPage Title="Inställningar" Icon="settings.png">
         <AbsoluteLayout>
-            <Image x:Name="bkg" Aspect="Fill" AbsoluteLayout.LayoutFlags="All"
-                   AbsoluteLayout.LayoutBounds="0,0,1,1"/>
             <StackLayout Padding="10" AbsoluteLayout.LayoutFlags="All"
-                         AbsoluteLayout.LayoutBounds="0,0,1,1">
-                <ScrollView>
-                    <StackLayout Spacing="10">
+                         AbsoluteLayout.LayoutBounds="0,0,1,1" BackgroundColor="White">
+                <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <StackLayout Spacing="20">
                         <Frame Padding="10" CornerRadius="12" IsClippedToBounds="True" Opacity="0.6"
                                Margin="0,40,0,0">
                             <StackLayout Orientation="Horizontal" Spacing="0">

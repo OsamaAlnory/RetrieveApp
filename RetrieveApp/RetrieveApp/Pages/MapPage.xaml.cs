@@ -31,17 +31,14 @@ namespace RetrieveApp.Pages
         private MediaFile file;
         private MapPageEvents events;
         private static Random random = new Random();
-        public string current_state = "all";
+        public FilterState current_state = FilterState.ALL;
 
 		public MapPage (Account _d)
 		{
             GET_MARGIN = new Thickness(App.ScreenWidth / 20, 0, App.ScreenWidth / 20, 0);
             _g = _d;
             App.CURRENT_PAGE = this;
-            if (mapPage == null)
-                {
-                    mapPage = this;
-                }
+            mapPage = this;
             InitializeComponent();
             lbl_lg.Text = (_d is Admins) ? ((Admins)_d).SName
              : ((Guests)_d).Name;
@@ -49,10 +46,9 @@ namespace RetrieveApp.Pages
                 {
                     Children.Remove(pg_admin);
                     Children.Remove(pg_b);
-                    filter_b.Text = "Beställningar";
+                    filter_b.Text = "Reservationer";
                 }
             image.Source = App.GetSource("noimage.png");
-            bkg.Source = App.GetSource("background1.png");
                 var map = new Map(MapSpan.FromCenterAndRadius(
                     new Position(56.05883, 12.7326381), Distance.FromMiles(3)))
                 {
@@ -64,11 +60,8 @@ namespace RetrieveApp.Pages
                 map.Pins.Add(pin);
             }
             logout.Clicked += ProcessLogOut;
-            search.TextChanged += TextChanged;
-            search1.TextChanged += TextChanged1;
             events = new MapPageEvents(new LayoutButtons(stk_btns, fl, sc, null),new LayoutButtons(stk_btns2, fl1, sc1, "admin"));
             ReloadAll();
-            events.AddItems();
             Designer.DesignPageButtons(stk_btns);
             Designer.DesignPageButtons(stk_btns2);
             filter_all.FontSize = Device.GetNamedSize(NamedSize.Small, filter_all);
@@ -89,6 +82,10 @@ namespace RetrieveApp.Pages
             quantity.HeightRequest = App.ScreenHeight / 16;
             price.HeightRequest = App.ScreenHeight / 16;
             oprice.HeightRequest = App.ScreenHeight / 16;
+            search.TextChanged += TextChanged;
+            search1.TextChanged += TextChanged1;
+            search.SearchCommand = new Command(SearchCommand);
+            search1.SearchCommand = new Command(SearchCommand1);
         }
 
         private void OpenGuide(object s, EventArgs args)
@@ -104,9 +101,10 @@ namespace RetrieveApp.Pages
         private void PageChanged(object s, EventArgs args)
         {
             var title = CurrentPage.Title;
-            if(title == "Beställningar")
+            if(title == "Reservationer")
             {
-                current_state = "bookers";
+                current_state = FilterState.BOOKERS;
+                events.rel_admin(search1.Text);
             } else if(title == "Flöde")
             {
                 current_state = events.filter;
@@ -115,7 +113,9 @@ namespace RetrieveApp.Pages
 
         private async void RCommand()
         {
+            await DBActions.LoadAdmins();
             await DBActions.LoadProducts();
+            await DBActions.LoadUsers();
             events.rel(TXT());
             refr.IsRefreshing = false;
         }
@@ -124,32 +124,46 @@ namespace RetrieveApp.Pages
         {
             await DBActions.LoadProducts();
             await DBActions.LoadUsers();
-            events.rel_admin(TXT());
+            events.rel_admin(search1.Text);
             refr1.IsRefreshing = false;
         }
 
         private void FilterButtonAll(Button s, EventArgs args)
         {
-            if(events.filter == "all")
-            {
-                return;
-            }
-            s.BackgroundColor = (Color)App.Current.Resources["P_Selected"];
-            filter_b.BackgroundColor = (Color)App.Current.Resources["P"];
-            events.ChangeFilter("all");
-            search.Placeholder = "Sök restauranger";
+            ChangeFilter(FilterState.ALL);
         }
 
         private void FilterButtonB(Button s, EventArgs args)
         {
-            if(events.filter == "b")
+            ChangeFilter(FilterState.B);
+        }
+
+        public void ChangeFilter(FilterState state)
+        {
+            if(events.filter == state)
             {
                 return;
             }
-            s.BackgroundColor = (Color)App.Current.Resources["P_Selected"];
-            filter_all.BackgroundColor = (Color)App.Current.Resources["P"];
-            events.ChangeFilter("b");
-            search.Placeholder = "Sök produkter";
+            Button b1 = null; Button b2 = null;
+            if(state == FilterState.ALL)
+            {
+                b1 = filter_all;
+                b2 = filter_b;
+            } else if(state == FilterState.B)
+            {
+                b2 = filter_all;
+                b1 = filter_b;
+            }
+            b1.BackgroundColor = (Color)App.Current.Resources["P_Selected"];
+            b2.BackgroundColor = (Color)App.Current.Resources["P"];
+            events.ChangeFilter(state);
+            if(state == FilterState.ALL)
+            {
+                search.Placeholder = "Sök restauranger";
+            } else if(state == FilterState.B)
+            {
+                search.Placeholder = "Sök produkter";
+            }
         }
 
         public void ReloadAll()
@@ -161,14 +175,32 @@ namespace RetrieveApp.Pages
             }
         }
 
+        public void SearchCommand()
+        {
+            events.rel(search.Text);
+        }
+
+        public void SearchCommand1()
+        {
+            events.rel_admin(search1.Text);
+        }
+
         private void TextChanged(object s, TextChangedEventArgs a)
         {
-            events.rel(a.NewTextValue);
+            var v = a.NewTextValue;
+            if(string.IsNullOrEmpty(v))
+            {
+                events.rel(v);
+            }
         }
 
         private void TextChanged1(object s, TextChangedEventArgs a)
         {
-            events.rel_admin(a.NewTextValue);
+            var v = a.NewTextValue;
+            if (string.IsNullOrEmpty(v))
+            {
+                events.rel_admin(v);
+            }
         }
 
         public string TXT()
@@ -201,6 +233,10 @@ namespace RetrieveApp.Pages
 
         private async void Btn_add(object s, EventArgs a)
         {
+            if(await DBActions.Check(_g as Admins, this))
+            {
+                return;
+            }
             if (clicked)
             {
                 return;
@@ -211,7 +247,7 @@ namespace RetrieveApp.Pages
             if(file == null || a1 == null || a2 == null || a3 == null || a4 == null || a5 == null ||
                 string.IsNullOrEmpty(a6))
             {
-                DisplayAlert("Fel", "Fyll i", "Avbryt");
+                App.Send("Fel", "Fyll i alla fälten!", "Avbryt");
                 clicked = false;
                 return;
             }
@@ -220,7 +256,7 @@ namespace RetrieveApp.Pages
                 double.Parse(a2); double.Parse(a3); int.Parse(a4); 
             } catch(Exception e)
             {
-                DisplayAlert("Fel", "Ange tal", "Avbryt");
+                App.Send("Fel", "Ange ett tal!", "Avbryt");
                 clicked = false;
                 return;
             }
@@ -290,10 +326,12 @@ namespace RetrieveApp.Pages
         }
         public static void PinSearch(string txt)
         {
+            mapPage.ChangeFilter(FilterState.ALL);
             mapPage.CurrentPage = GetPageByName("Flöde");
             mapPage.search.Text = txt;
+            mapPage.events.rel(txt);
         }
-        public void OpenProduct(Products p)
+        public void OpenProduct(Binary p)
         {
             Navigation.PushAsync(new ProductView(p, current_state));
         }

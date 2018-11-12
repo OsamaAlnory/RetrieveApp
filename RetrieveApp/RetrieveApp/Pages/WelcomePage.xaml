@@ -18,22 +18,17 @@
             <Button Text="Skippa" Clicked="SkippaClicked"
                     Style="{StaticResource Skip}"/>
 
-
-            <Label Text="Retrieve It" HorizontalOptions="CenterAndExpand"
-                   FontSize="52" TextColor="White" 
-                       FontFamily="{StaticResource MFont}"
-                       />
             <Image x:Name="icon1"  />
-            <Label Text="Välkommen till RetrieveIt appen!"
+            <Label Text="Välkommen till Retrieve It!"
                        FontFamily="{StaticResource MFont}"
                        HorizontalOptions="CenterAndExpand"
                        HorizontalTextAlignment="Center"
                        FontSize="29" TextColor="White"
                        />
-            
-                        
-            
-            <Label VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand" x:Name="vnr" 
+
+
+
+            <Label HorizontalOptions="CenterAndExpand" x:Name="vnr" 
                   FontFamily="{StaticResource MFont}" TextColor="White"  />
 
             <Button Text="KOM IGÅNG"
@@ -68,7 +63,7 @@
                        FontFamily="{StaticResource MFont}" FontSize="Large"></Label>
 
 
-                        <Label Text="Varmt välkommen till Retrieve it" HorizontalOptions="CenterAndExpand" 
+                        <Label Text="Varmt välkommen till Retrieve It" HorizontalOptions="CenterAndExpand" 
                        HorizontalTextAlignment="Center" TextColor="White" 
                        Margin="10,0,10,0" FontAttributes="Bold" 
                        FontFamily="{StaticResource MFont}" FontSize="Medium"></Label>
@@ -232,7 +227,7 @@
                 </StackLayout>
                 <StackLayout HeightRequest="120" WidthRequest="120">
                     <forms:AnimationView x:Name="animationView" Speed="1.3"
-	             Animation="success.json" Loop="False" AutoPlay="False"
+	             Animation="check.json" Loop="False" AutoPlay="False"
                  IsVisible="False" HeightRequest="120" WidthRequest="120"/>
                 </StackLayout>
             </StackLayout>

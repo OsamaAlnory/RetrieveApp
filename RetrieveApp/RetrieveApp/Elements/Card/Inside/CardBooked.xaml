@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RetrieveApp.Design.CardBooked" VerticalOptions="CenterAndExpand">
 
-    <Button Text="Visa" Style="{StaticResource Btn}" Clicked="ShowProduct"
+    <Button Text="Visa" Style="{StaticResource Btn}" Clicked="ShowProduct" FontAttributes="Bold"
             BackgroundColor="{StaticResource P}"/>
-    <Button Text="Avboka" Style="{StaticResource Btn}"
+    <Button Text="Avboka" Style="{StaticResource Btn}" FontAttributes="Bold"
             BackgroundColor="Crimson" Clicked="UnbookClicked"/>
     
 </StackLayout>

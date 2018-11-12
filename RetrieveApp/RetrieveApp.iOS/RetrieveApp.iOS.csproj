@@ -28,8 +28,8 @@
     <MtouchArch>x86_64</MtouchArch>
     <MtouchLink>SdkOnly</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
-    <CodesignKey>iPhone Developer: mohanad.owidat@hotmail.com (QYS65JQY68)</CodesignKey>
-    <CodesignProvision>iOS Team Provisioning Profile: com.Mohanad.testing</CodesignProvision>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignProvision>iOS Team Provisioning Profile: osama.Retrieve</CodesignProvision>
     <CodesignExtraArgs />
     <CodesignResourceRules />
     <CodesignEntitlements />
@@ -56,7 +56,7 @@
     <MtouchArch>ARM64</MtouchArch>
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
-    <CodesignProvision>iOS Team Provisioning Profile: com.Osama.retrieve.Retrieve</CodesignProvision>
+    <CodesignProvision>iOS Team Provisioning Profile: osama.Retrieve</CodesignProvision>
     <CodesignExtraArgs />
     <CodesignResourceRules />
     <CodesignEntitlements />
@@ -118,9 +118,14 @@
     <BundleResource Include="Resources\success.json" />
     <BundleResource Include="Resources\loading.json" />
     <BundleResource Include="Resources\Logo.png" />
-    <BundleResource Include="Resources\check.json" />
+    <BundleResource Include="Resources\check_.json" />
     <BundleResource Include="Resources\done_button.json" />
     <BundleResource Include="Resources\trail_loading.json" />
+    <BundleResource Include="Resources\check.json" />
+    <BundleResource Include="Resources\Fonts\oswald-r.ttf" />
+    <BundleResource Include="Resources\Fonts\oswald-bold.ttf" />
+    <BundleResource Include="Resources\Fonts\oswald-italic.ttf" />
+    <BundleResource Include="Resources\Fonts\oswald-bold-italic.ttf" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\1024.png">

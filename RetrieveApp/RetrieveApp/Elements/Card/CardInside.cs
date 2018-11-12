@@ -16,7 +16,7 @@ namespace RetrieveApp.Elements.Card
             StackLayout card = null;
             if(cardType == "default")
             {
-                card = new CardDefault(b.PRODUCT);
+                card = new CardDefault(b);
             } else if(cardType == "admin")
             {
                 card = new CardAdmin(b);

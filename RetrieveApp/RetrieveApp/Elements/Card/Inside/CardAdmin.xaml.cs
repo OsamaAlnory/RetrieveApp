@@ -29,6 +29,10 @@ namespace RetrieveApp.Design
             {
                 return;
             }
+            if (await DBActions.Check(MapPage._g as Admins, MapPage.mapPage))
+            {
+                return;
+            }
             loading = true;
             var A = await App.SendSure(MapPage.mapPage);
             if (A)
@@ -39,9 +43,13 @@ namespace RetrieveApp.Design
             loading = false;
         }
 
-        private void ShowProduct(object s, EventArgs a)
+        private async void ShowProduct(object s, EventArgs a)
         {
-            MapPage.mapPage.OpenProduct(binary.PRODUCT);
+            if(await DBActions.Check(MapPage._g as Admins, MapPage.mapPage))
+            {
+                return;
+            }
+            MapPage.mapPage.OpenProduct(binary);
         }
 
     }

@@ -5,9 +5,8 @@
              xmlns:dir="clr-namespace:RetrieveApp.Elements"
              xmlns:an="clr-namespace:Lottie.Forms;assembly=Lottie.Forms">
     <AbsoluteLayout>
-        <Image x:Name="img" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"
-               Aspect="Fill"/>
-        <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+        <dir:GradientLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"
+          ColorsList="#CC51F1,#502189" Mode="ToBottom" Spacing="10">
             <StackLayout VerticalOptions="CenterAndExpand" Padding="10">
                 <Label HorizontalOptions="CenterAndExpand"
                        HorizontalTextAlignment="Center" FontSize="47"
@@ -35,6 +34,6 @@
                                   x:Name="an"/>
                 </StackLayout>
             </StackLayout>
-        </StackLayout>
+        </dir:GradientLayout>
     </AbsoluteLayout>
 </ContentPage>

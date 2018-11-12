@@ -44,7 +44,7 @@ namespace RetrieveApp
 
         public static byte[] ImageToByte(MediaFile file)
         {
-            using (var memoryStream = new System.IO.MemoryStream())
+            using (var memoryStream = new MemoryStream())
             {
                 file.GetStream().CopyTo(memoryStream);
                 // file.Dispose();
@@ -63,7 +63,10 @@ namespace RetrieveApp
 
         public static async Task LogOut(Page page)
         {
-            Current.Properties.Remove("Logged");
+            if (Current.Properties.ContainsKey("Logged"))
+            {
+                Current.Properties.Remove("Logged");
+            }
             await page.Navigation.PushAsync(new WelcomePage("LoginOnly"));
             page.Navigation.RemovePage(page);
         }
@@ -82,6 +85,7 @@ namespace RetrieveApp
         {
             return ImageSource.FromStream(() => new MemoryStream(b));
         }
+
         public static async Task ReloadPins()
         {
             IPin.pins.Clear();
@@ -91,21 +95,24 @@ namespace RetrieveApp
                 {
                     new IPin(place)
                     {
-                        Position = (await App.GetPositions(place.Address))[0]
+                        Position = (await GetPositions(place.Address))[0]
                     };
                 }
             }
         }
+
         public static async Task<List<Position>> GetPositions(string address)
         {
             Geocoder g = new Geocoder();
             return (await g.GetPositionsForAddressAsync(address)).ToList();
         }
+
         public static async Task<string> GetAddress(Position pos)
         {
             Geocoder g = new Geocoder();
             return (await g.GetAddressesForPositionAsync(pos)).ToList()[0];
         }
+
         private static async Task getLocation()
         {
             var loc = CrossGeolocator.Current;
@@ -186,12 +193,25 @@ namespace RetrieveApp
                         });
                     }
                 }
-                catch (Exception ex)
-                {
-                    //await DisplayAlert("Fel", ex.Message, "Avbryt");
-                }
+                catch { }
             }
             return file;
+        }
+
+        public static async Task Send(string title, string msg, string ok)
+        {
+             await MapPage.mapPage.DisplayAlert(title, msg, ok);
+        }
+
+        public static async Task<bool> Send(string title, string msg, string yes, string no)
+        {
+            return (await Send(title, msg, yes, no, MapPage.mapPage));
+        }
+
+        public static async Task<bool> Send(string title, string msg, string yes, string no,
+            Page page)
+        {
+            return (await page.DisplayAlert(title, msg, yes, no));
         }
 
         protected override void OnStart()

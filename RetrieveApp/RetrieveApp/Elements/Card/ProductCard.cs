@@ -18,7 +18,7 @@ namespace RetrieveApp.Elements.Card
         private B fader;
         private B1 container;
         private B content;
-        private IconLayout icon = new IconLayout(0.1, 0.1, 0.1, 0.1);
+        private IconLayout icon = new IconLayout();
         private I product_image = new I();
         private B content_loading;
         private AnimationView animation;
@@ -27,6 +27,7 @@ namespace RetrieveApp.Elements.Card
         private int id;
         private static Random r = new Random();
         private bool LOADING = true;
+
         public ProductCard(Binary binary, string cardType)
         {
             id = r.Next(9999);
@@ -48,8 +49,7 @@ namespace RetrieveApp.Elements.Card
                 FontSize=30,
                 TextColor =Color.White},animation},
                 HorizontalOptions =LayoutOptions.CenterAndExpand,VerticalOptions=
-                LayoutOptions.CenterAndExpand},},
-                BackgroundColor=Color.LightGray
+                LayoutOptions.CenterAndExpand}},BackgroundColor=Color.LightGray
             };
             Padding = 0;
             CornerRadius = 30;
@@ -59,14 +59,7 @@ namespace RetrieveApp.Elements.Card
             Content = new AbsoluteLayout {
               Children={
                     product_image,
-                    icon,new DefaultFrontCard(binary)
-                    /*
-                    new L(){
-                        Text = DBActions._p(binary.PRODUCT).SName,
-                        TextColor = Color.Black,
-                        HorizontalOptions = LayoutOptions.CenterAndExpand,
-                        VerticalOptions = LayoutOptions.CenterAndExpand,
-                        HorizontalTextAlignment = TextAlignment.Center}*/,container,
+                    icon,new DefaultFrontCard(binary),container,
                 content_loading}
             };
             TapGestureRecognizer tap = new TapGestureRecognizer();
@@ -124,15 +117,22 @@ namespace RetrieveApp.Elements.Card
         {
             if (selected)
             {
-                selected = false;
-                content.IsVisible = false;
-                fader.FadeTo(0, 400);
+                UnSelect();
             }
             else
             {
                 selected = true;
                 content.IsVisible = true;
                 fader.FadeTo(0.7, 400);
+            }
+        }
+        public void UnSelect()
+        {
+            if (selected)
+            {
+                selected = false;
+                content.IsVisible = false;
+                fader.FadeTo(0, 400);
             }
         }
 

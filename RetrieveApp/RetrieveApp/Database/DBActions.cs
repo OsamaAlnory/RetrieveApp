@@ -38,6 +38,23 @@ namespace RetrieveApp.Database
             App.StartLoading("Pins");
             await App.ReloadPins();
             App.FinishLoading("Pins");
+            App.StartLoading("Fixing");
+            await CheckProducts();
+            App.FinishLoading("Fixnig");
+        }
+
+        public static async Task<int> CheckProducts()
+        {
+            int total = 0;
+            foreach (Products p in products)
+            {
+                if(GetAdminById(p.AdminID) == null)
+                {
+                    total++;
+                    await FullyRemoveProduct(p);
+                }
+            }
+            return total;
         }
 
         public static async Task LoadAccounts()
@@ -59,6 +76,18 @@ namespace RetrieveApp.Database
                 options["IsDev"] as string == "true")
             {
                 LoadingPage.page.Quit();
+                return true;
+            }
+            return false;
+        }
+
+        public static async Task<bool> Check(Admins admin, Page page)
+        {
+            await LoadAdmins();
+            if(GetAdminById(admin.ID) == null)
+            {
+                await App.Send("Info", "Ert konto har raderats!", "Ok");
+                await App.LogOut(page);
                 return true;
             }
             return false;
@@ -91,6 +120,13 @@ namespace RetrieveApp.Database
             HttpClient client = new HttpClient();
             var responce = await client.GetStringAsync(LINK+PRODUCTS);
             products = JsonConvert.DeserializeObject<List<Products>>(responce);
+            foreach(Products p in products)
+            {
+                if (_p(p) == null)
+                {
+                    //await FullyRemoveProduct(p);
+                }
+            }
             App.FinishLoading("Products");
         }
         public static async Task<AdminIcon> LoadAdminIcon(Admins ad)
@@ -154,14 +190,14 @@ namespace RetrieveApp.Database
             return null;
         }
 
-        public static List<Guests> GetBookers(Products p)
+        public static List<int> GetBookers(Products p)
         {
-            var list = new List<Guests>();
+            var list = new List<int>();
             foreach(Guests g in guests)
             {
                 if(hasBooked(g, p))
                 {
-                    list.Add(g);
+                    list.Add(g.ID);
                 }
             }
             return list;
@@ -172,14 +208,29 @@ namespace RetrieveApp.Database
             var list = new List<Products>();
             foreach(Products p in products)
             {
-                if (GetBookers(p).Contains(g))
+                if (GetBookers(p).Contains(g.ID))
                 {
                     list.Add(p);
                 }
             }
             return list;
         }
-
+        public static int GetQuantity(Guests user, Products product)
+        {
+            if (hasBooked(user, product))
+            {
+                var str = user.Cart.Split(';');
+                foreach(var a in str)
+                {
+                    var b = a.Split(',');
+                    if(int.Parse(b[0]) == product.ID)
+                    {
+                        return int.Parse(b[1]);
+                    }
+                }
+            }
+            return 0;
+        }
         public static List<int> getCart(Guests g)
         {
             List<int> ints = new List<int>();
@@ -201,40 +252,44 @@ namespace RetrieveApp.Database
                 var cart = user.Cart.Split(';');
                 var newCart = "";
                 int quantity = 0;
-                for(int x = 0; x < cart.Length; x++)
-                {
-                    var f = cart[x].Split(',');
-                    int a = int.Parse(f[0]);
-                    if(a != product.ID)
+                int S = 0;
+                    for (int x = 0; x < cart.Length; x++)
                     {
-                        if(x > 0)
+                        var f = cart[x].Split(',');
+                        int a = int.Parse(f[0]);
+                        if (a != product.ID)
                         {
-                            newCart += ";";
+                            if (S > 0)
+                            {
+                                newCart += ";";
+                            }
+                            newCart += cart[x];
+                        S++;
                         }
-                        newCart += cart[x];
-                    } else
-                    {
-                        quantity = int.Parse(f[1]);
+                        else
+                        {
+                            quantity = int.Parse(f[1]);
+                        }
                     }
-                }
-                if (string.IsNullOrEmpty(newCart))
-                {
-                    newCart = null;
-                }
-                user.Cart = newCart;
-                await EditUser(user);
-                if (restore)
-                {
-                    product.Quantity += quantity;
-                    await FullEditProduct(product);
-                }
+                    if (string.IsNullOrEmpty(newCart))
+                    {
+                        newCart = null;
+                    }
+                    user.Cart = newCart;
+                    await FullyEditUser(user);
+                    if (restore)
+                    {
+                        product.Quantity += quantity;
+                        await FullyEditProduct(product);
+                    }
             }
         }
-        public static async Task<HttpResponseMessage> book(Guests user, Products product, int quantity)
+        public static async Task book(Guests user, Products product, int quantity)
         {
             addToCart(user, product, quantity);
             product.Quantity -= quantity;
-            return await EditUser(user);
+            await FullyEditProduct(product);
+            await FullyEditUser(user);
         }
         public static void addToCart(Guests user, Products product, int quantity)
         {
@@ -248,6 +303,15 @@ namespace RetrieveApp.Database
         {
             return getCart(user).Contains(product.ID);
         }
+
+        public static async Task RemoveFromCarts(Products product)
+        {
+            foreach(Guests user in guests)
+            {
+                await Unbook(user, product, false);
+            }
+        }
+
         public static List<int> GetQuantities(Guests user)
         {
             var list = new List<int>();
@@ -284,16 +348,16 @@ namespace RetrieveApp.Database
             if(response != null && response.StatusCode != HttpStatusCode.Created)
             {
                  App.CURRENT_PAGE.DisplayAlert("Fel", response.StatusCode.ToString()
-                    +"\nKontakta ???", "Avbryt");
+                    +"\nKontakta oss.", "Avbryt");
             }
             return response != null && response.StatusCode == HttpStatusCode.Created;
         }
         public static List<Products> _a(Admins a)
         {
-            List<Products> list = new List<Products>();
+            var list = new List<Products>();
             foreach(Products p in products)
             {
-                if(p.AdminID == a.ID)
+                if (p.AdminID == a.ID)
                 {
                     list.Add(p);
                 }
@@ -413,19 +477,29 @@ namespace RetrieveApp.Database
             var responce = await client.PutAsync(LINK+AIMAGE+"/"+icon.ID, content);
             return responce;
         }
-        public static async Task<HttpResponseMessage> FullEditProduct(Products product)
+        public static async Task EditProduct(Products product)
         {
             var json = JsonConvert.SerializeObject(product);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             HttpClient client = new HttpClient();
-            var responce = await client.PutAsync(LINK+PRODUCTS+"/"+product.ID, content);
-            return responce;
+            var responce = await client.PutAsync(LINK + PRODUCTS + "/" + product.ID, content);
+        }
+        public static async Task FullyEditProduct(Products product)
+        {
+            await EditProduct(product);
+            await LoadProducts();
         }
         public static async Task FullyRemoveProduct(Products product)
         {
+            await RemoveFromCarts(product);
             products.Remove(product);
             await RemoveProduct(product.ID);
             await RemoveProductImage(product.ID);
+        }
+        public static async Task FullyEditUser(Guests user)
+        {
+            await EditUser(user);
+            await LoadUsers();
         }
 
     }

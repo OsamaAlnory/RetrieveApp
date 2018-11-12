@@ -7,23 +7,22 @@
             <Style x:Key="IB" TargetType="Label">
                 <Setter Property="FontAttributes" Value="Bold, Italic" />
             </Style>
+            <Color x:Key="P">#9e42f4</Color>
+            <Color x:Key="P_Selected">#660bb9</Color>
+            <OnPlatform x:TypeArguments="x:String" x:Key="MFont"
+                        iOS="Oswald" Android="oswald-r.ttf#Oswald">
+            </OnPlatform>
+
             <Style x:Key="Skip" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="Transparent"/>
-                <Setter Property="TextColor" Value="Blue"/>
+                <Setter Property="TextColor" Value="White"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
                 <Setter Property="FontSize" Value="19"/>
                 <Setter Property="Margin" Value="20,20,20,20"/>
                 <Setter Property="HorizontalOptions" Value="End"/>
+                <Setter Property="FontFamily" Value="{StaticResource MFont}"/>
             </Style>
-            <Color x:Key="P">#9e42f4</Color>
-            <Color x:Key="P_Selected">#660bb9</Color>
-            <OnPlatform x:TypeArguments="x:String" x:Key="Harlow"
-                        iOS="Harlow"
-                        Android="harlow.ttf#Harlow Solid Italic">
-            </OnPlatform>
-            <OnPlatform x:TypeArguments="x:String" x:Key="MFont"
-                        iOS="Oswald" Android="oswald-r.ttf#Oswald">
-            </OnPlatform>
+
             <Style x:Key="Btn" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="#27A9E1"/>
                 <Setter Property="TextColor" Value="White"/>

@@ -2,12 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RetrieveApp.Pages.ProductView"
-             xmlns:an="clr-namespace:Lottie.Forms;assembly=Lottie.Forms">
+             xmlns:an="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             xmlns:d="clr-namespace:RetrieveApp.Elements">
     <AbsoluteLayout>
-        <Image x:Name="img_main" AbsoluteLayout.LayoutFlags="All" Aspect="Fill"
-               AbsoluteLayout.LayoutBounds="0,0,1,1"/>
-        <StackLayout AbsoluteLayout.LayoutFlags="All"
-                     AbsoluteLayout.LayoutBounds="0,0,1,1">
+        <d:GradientLayout AbsoluteLayout.LayoutFlags="All" ColorsList="#CC51F1,#502189"
+         Mode="ToBottom" AbsoluteLayout.LayoutBounds="0,0,1,1" Spacing="10">
             <ScrollView HorizontalOptions="FillAndExpand"
                     VerticalOptions="FillAndExpand">
                 <StackLayout HorizontalOptions="CenterAndExpand">
@@ -22,18 +21,20 @@
                        FontFamily="{StaticResource MFont}" HorizontalOptions="CenterAndExpand"/>
                         <Label x:Name="lbl_desc" HorizontalOptions="CenterAndExpand" FontSize="22"
                            FontFamily="{StaticResource MFont}" Margin="0,30,0,20"/>
-                        <Frame Padding="10" BackgroundColor="White" CornerRadius="12">
+                        <Frame Padding="10" BackgroundColor="White" CornerRadius="12" Margin="10,0,10,0">
                             <StackLayout>
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                                     <Label Style="{StaticResource IB}" FontFamily="{StaticResource MFont}"
                                            TextColor="{StaticResource P}">Säljare:</Label>
-                                    <Label x:Name="seller" FontFamily="{StaticResource MFont}"/>
+                                    <Label x:Name="seller" FontFamily="{StaticResource MFont}"
+                                           FontAttributes="Bold"/>
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                                     <Label Style="{StaticResource IB}" FontFamily="{StaticResource MFont}"
                              TextColor="{StaticResource P}">Originala Priset:</Label>
                                     <Grid>
-                                        <Label VerticalOptions="Center" x:Name="p_o"/>
+                                        <Label VerticalOptions="Center" x:Name="p_o"
+                                               FontFamily="{StaticResource MFont}"/>
                                         <BoxView HeightRequest="3" VerticalOptions="Center"
                          Opacity="0.5" Color="Black"/>
                                     </Grid>
@@ -41,7 +42,8 @@
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                                     <Label Style="{StaticResource IB}" FontFamily="{StaticResource MFont}"
                                      TextColor="{StaticResource P}">Nya Priset:</Label>
-                                    <Label x:Name="p_n" FontFamily="{StaticResource MFont}"/>
+                                    <Label x:Name="p_n" FontFamily="{StaticResource MFont}"
+                                           FontAttributes="Bold"/>
                                 </StackLayout>
                                 <StackLayout x:Name="amount">
                                     <Label Style="{StaticResource IB}" TextColor="{StaticResource P}"
@@ -57,13 +59,15 @@
                                 <StackLayout x:Name="amount_admin" IsVisible="False" Orientation="Horizontal"
                                              HorizontalOptions="CenterAndExpand">
                                     <Label Style="{StaticResource IB}" TextColor="{StaticResource P}"
-                                     Text="Antalet kvar:" FontFamily="{StaticResource MFont}"/>
-                                    <Label x:Name="kvar"/>
+                                     Text="Antalet kvar:" FontFamily="{StaticResource MFont}"
+                                           x:Name="antal"/>
+                                    <Label x:Name="kvar" FontAttributes="Bold"
+                                           FontFamily="{StaticResource MFont}"/>
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                                     <Label Text="Hämtningstid:" Style="{StaticResource IB}"
                                      FontFamily="{StaticResource MFont}" TextColor="{StaticResource P}"/>
-                                    <Label x:Name="tid" FontFamily="{StaticResource MFont}"/>
+                                    <Label x:Name="tid" FontFamily="{StaticResource MFont}" FontAttributes="Bold"/>
                                 </StackLayout>
                             </StackLayout>
                         </Frame>
@@ -85,7 +89,7 @@
                             <Label x:Name="mobile" FontFamily="{StaticResource MFont}"/>
                         </StackLayout>
                     </StackLayout>
-                    <Button Text="Bekräfta bokningen" x:Name="btn" Margin="0,15,0,0"
+                    <Button Text="Reservera" x:Name="btn" Margin="0,15,0,0"
                        Style="{StaticResource Btn}" FontFamily="{StaticResource MFont}"
                         BackgroundColor="{StaticResource P}" FontAttributes="Bold"/>
                     <StackLayout HeightRequest="100" HorizontalOptions="FillAndExpand">
@@ -95,6 +99,6 @@
                     </StackLayout>
                 </StackLayout>
             </ScrollView>
-        </StackLayout>
+        </d:GradientLayout>
     </AbsoluteLayout>
 </ContentPage>

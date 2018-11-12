@@ -1,4 +1,5 @@
 ﻿using RetrieveApp.Database;
+using RetrieveApp.Elements;
 using RetrieveApp.Elements.Card;
 using RetrieveApp.Pages;
 using System;
@@ -14,7 +15,7 @@ namespace RetrieveApp.Events
         private LayoutButtons la_2;
         private List<Binary> vis1 = new List<Binary>();
         private List<Binary> vis_admin = new List<Binary>();
-        public string filter = "all";
+        public FilterState filter = FilterState.ALL;
 
 
         public MapPageEvents(LayoutButtons l1, LayoutButtons l2)
@@ -32,7 +33,7 @@ namespace RetrieveApp.Events
             }
         }
 
-        public void ChangeFilter(string filter)
+        public void ChangeFilter(FilterState filter)
         {
             this.filter = filter;
             MapPage.mapPage.current_state = filter;
@@ -43,10 +44,10 @@ namespace RetrieveApp.Events
         {
             vis1.Clear();
             Account acc = MapPage._g;
-            if(filter == "all")
+            if(filter == FilterState.ALL)
             {
                 layout_b.cardType = "default";
-            } else if(filter == "b")
+            } else if(filter == FilterState.B)
             {
                 if(acc is Admins)
                 {
@@ -59,20 +60,23 @@ namespace RetrieveApp.Events
             if (f != null && f != "")
             {
                 f = f.ToLower();
-                if(filter == "all")
+                if(filter == FilterState.ALL)
                 {
                     foreach (Products p in DBActions.products)
                     {
                         if(p.Quantity > 0)
                         {
                             Admins ad = DBActions._p(p);
-                            if (ad.SName.ToLower().StartsWith(f))
+                            if(ad != null)
                             {
-                                vis1.Add(new Binary { PRODUCT = p, ADMIN = ad});
+                                if (ad.SName.ToLower().StartsWith(f))
+                                {
+                                    vis1.Add(new Binary { PRODUCT = p, ADMIN = ad });
+                                }
                             }
                         }
                     }
-                } else if(filter == "b")
+                } else if(filter == FilterState.B)
                 {
                     if(acc is Admins)
                     {
@@ -90,7 +94,7 @@ namespace RetrieveApp.Events
             }
             else
             {
-                if(filter == "all")
+                if(filter == FilterState.ALL)
                 {
                     foreach (Products p in DBActions.products)
                     {
@@ -99,7 +103,7 @@ namespace RetrieveApp.Events
                             vis1.Add(new Binary { PRODUCT = p });
                         }
                     }
-                } else if(filter == "b")
+                } else if(filter == FilterState.B)
                 {
                     if(acc is Admins)
                     {
@@ -134,14 +138,15 @@ namespace RetrieveApp.Events
                 f = f.ToLower();
                 foreach (Guests g in DBActions.guests)
                 {
-                    if (g.Name.StartsWith(f))
+                    if (g.Name.ToLower().StartsWith(f))
                     {
                         var l1 = DBActions.GetProducts(g);
                         foreach (Products p in l1)
                         {
                             if (list.Contains(p))
                             {
-                                vis_admin.Add(new Binary { OWNER = g, PRODUCT = p });
+                                vis_admin.Add(new Binary { OWNER = g, PRODUCT = p,
+                                QUANTITY = DBActions.GetQuantity(g, p)});
                             }
                         }
                     }
@@ -156,7 +161,9 @@ namespace RetrieveApp.Events
                     {
                         if (list.Contains(p))
                         {
-                            vis_admin.Add(new Binary { OWNER = g, PRODUCT = p });
+                            vis_admin.Add(new Binary { OWNER = g, PRODUCT = p,
+                                QUANTITY = DBActions.GetQuantity(g, p)
+                            });
                         }
                     }
                 }

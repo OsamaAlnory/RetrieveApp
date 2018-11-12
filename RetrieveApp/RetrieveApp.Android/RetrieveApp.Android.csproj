@@ -107,9 +107,10 @@
     <AndroidAsset Include="Assets\success.json" />
     <AndroidAsset Include="Assets\oswald-r.ttf" />
     <AndroidAsset Include="Assets\loading.json" />
-    <AndroidAsset Include="Assets\check.json" />
+    <AndroidAsset Include="Assets\check_.json" />
     <AndroidAsset Include="Assets\done_button.json" />
     <AndroidAsset Include="Assets\trail_loading.json" />
+    <AndroidAsset Include="Assets\check.json" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml">

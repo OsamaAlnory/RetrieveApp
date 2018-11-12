@@ -8,6 +8,13 @@
 	<string>This app needs access to photos.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>This app needs access to the photo gallery.</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Fonts/oswald-r.ttf</string>
+		<string>Fonts/oswald-bold.ttf</string>
+		<string>Fonts/oswald-italic.ttf</string>
+		<string>Fonts/oswald-bold-italic.ttf</string>
+	</array>
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>1</integer>
@@ -24,7 +31,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>Retrieve It</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.Osama.retrieve.Retrieve</string>
+	<string>osama.Retrieve</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>CFBundleIconFiles</key>

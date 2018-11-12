@@ -15,7 +15,7 @@ namespace RetrieveApp.Pages
 	public partial class LoadingPage : ContentPage, Loadable
 	{
         public static LoadingPage page;
-        private int STAGES = 4;
+        private int STAGES = 5;
         private int CURRENT_STAGE = 0;
 
 		public LoadingPage ()
@@ -30,7 +30,8 @@ namespace RetrieveApp.Pages
                     DBActions.LoadData();
                 } else
                 {
-                    Crash("Appen kunde inte startas!\n\nKolla ditt nätverk.");
+                    Crash("Appen kunde inte startas!\n\nSe till att din mobil är" +
+                    " ansluten till nätverket.");
                 }
                 return false;
             });
@@ -38,7 +39,12 @@ namespace RetrieveApp.Pages
 
         private async void Crash(string reason)
         {
-            await DisplayAlert("Fel", reason, "Avbryt");
+            Crash(reason, this);
+        }
+
+        public static async void Crash(string reason, Page page)
+        {
+            await page.DisplayAlert("Fel", reason, "Avbryt");
             var closer = DependencyService.Get<ICloseApp>();
             closer?.close();
         }
@@ -50,14 +56,14 @@ namespace RetrieveApp.Pages
                 SetText();
                 load.IsVisible = true;
                 load.Play();
-                progress.IsVisible = true;
+                //progress.IsVisible = true;
             }
         }
 
         private void SetText()
         {
             double p = CURRENT_STAGE / ((double)STAGES)*100.0;
-            progress.ProgressTo(p / 100, 250, Easing.Linear);
+            //progress.ProgressTo(p / 100, 250, Easing.Linear);
             state.Text = "Hämtar data "+p+"%";
         }
 
@@ -83,8 +89,10 @@ namespace RetrieveApp.Pages
                 CURRENT_STAGE++;
                 SetText();
             }
-            if(type == "Pins")
+            if(type == "Fixing")
             {
+                CURRENT_STAGE++;
+                SetText();
                 foreach(Admins a in DBActions.admins)
                 {
                     //a.Login = false;
@@ -102,12 +110,12 @@ namespace RetrieveApp.Pages
                 }
                 load.Pause();
                 load.IsVisible = false;
+                //Navigation.PushAsync(new About());
                 //Navigation.PushAsync(new ManagePage());
-                //Navigation.PushAsync(new FirstLogin(DBActions.admins[0]));
                 //Navigation.PushAsync(new WelcomePage("Default"));
-                Navigation.PushAsync(new MapPage(DBActions.admins[0]));
+                //Navigation.PushAsync(new MapPage(DBActions.admins[0]));
                 //Navigation.PushAsync(new MapPage(DBActions.guests[0]));
-                /*
+                /**/
                 if(Application.Current.Properties.ContainsKey("Logged"))
                 {
                     int Id = (int)Application.Current.Properties["Logged"];
@@ -116,7 +124,7 @@ namespace RetrieveApp.Pages
                 else
                 {
                     Navigation.PushAsync(new WelcomePage("Default"));
-                }*/
+                }/**/
                 App.RemovePage(this);
             }
         }

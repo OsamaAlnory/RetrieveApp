@@ -25,7 +25,6 @@ namespace RetrieveApp.Pages
 		{
 			InitializeComponent ();
             App.Register(this);
-            img.Source = App.GetSource("background1.png");
             e_name.HeightRequest = App.ScreenHeight / 13;
             e_pass.HeightRequest = App.ScreenHeight / 13;
             fr.Margin = new Thickness(App.ScreenWidth/24,
@@ -58,7 +57,7 @@ namespace RetrieveApp.Pages
         {
             an.Pause();
             an.Loop = false;
-            an.Animation = "done_button.json";
+            an.Animation = "check.json";
             an.IsVisible = true;
             an.HeightRequest = 160;
             an.WidthRequest = 160;
@@ -84,12 +83,14 @@ namespace RetrieveApp.Pages
             {
                 if (!(n.Length >= MIN_U_LENGTH && n.Length <= MAX_U_LENGTH))
                 {
-                    DisplayAlert("Fel", "Användarnamn", "Ok");
+                    DisplayAlert("Fel", "ID ska vara mellan "+MIN_U_LENGTH
+                        +" och "+MAX_U_LENGTH, "Ok");
                     return;
                 }
                 if (!(p.Length >= MIN_P_LENGTH && p.Length <= MAX_P_LENGTH))
                 {
-                    DisplayAlert("Fel", "Lösenord", "Ok");
+                    DisplayAlert("Fel", "Lösenordet ska vara mellan "+
+                        MIN_P_LENGTH+" och "+MAX_P_LENGTH, "Ok");
                     return;
                 }
                 created = true;
@@ -98,7 +99,7 @@ namespace RetrieveApp.Pages
                 bool found = true;
                 foreach(Admins admin in DBActions.admins)
                 {
-                    if(admin.ID == n)
+                    if(admin.ID.ToLower() == n.ToLower())
                     {
                         found = false;
                         break;
@@ -106,7 +107,7 @@ namespace RetrieveApp.Pages
                 }
                 foreach(Guests guest in DBActions.guests)
                 {
-                    if(guest.Name == n)
+                    if(guest.Name.ToLower() == n.ToLower())
                     {
                         found = false;
                         break;
@@ -129,13 +130,13 @@ namespace RetrieveApp.Pages
                 {
                     an.Pause();
                     created = false;
-                    DisplayAlert("Fel", "Kontot finns redan!", "Ok");
+                    DisplayAlert("Fel", "Kontot med ID: "+n+" finns redan!", "Ok");
                 }
                 App.FinishLoading("Register");
                 return;
             } else
             {
-                DisplayAlert("Fel", "Ange namn och lösenord.", "Ok");
+                DisplayAlert("Fel", "Ange ID och lösenord.", "Ok");
             }
             created = false;
         }

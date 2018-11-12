@@ -51,25 +51,25 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Design\CardUser.xaml.cs">
+    <Compile Update="Elements\Card\Inside\CardUser.xaml.cs">
       <DependentUpon>CardUser.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Design\CardAdmin.xaml.cs">
+    <Compile Update="Elements\Card\Inside\CardAdmin.xaml.cs">
       <DependentUpon>CardAdmin.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Design\CardBooked.xaml">
+    <EmbeddedResource Update="Elements\Card\Inside\CardBooked.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Design\CardUser.xaml">
+    <EmbeddedResource Update="Elements\Card\Inside\CardUser.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Design\CardDefault.xaml">
+    <EmbeddedResource Update="Elements\Card\Inside\CardDefault.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Design\CardAdmin.xaml">
+    <EmbeddedResource Update="Elements\Card\Inside\CardAdmin.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Design\IconLayout.xaml">
@@ -78,16 +78,16 @@
     <EmbeddedResource Update="Design\NoItem.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Elements\Card\Front\DefaultFrontCard.xaml">
+    <EmbeddedResource Update="Elements\Card\Base\DefaultFrontCard.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Elements\Popup.xaml">
+    <EmbeddedResource Update="Elements\Popup\Popup.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Elements\PopupContent\AddAdmin.xaml">
+    <EmbeddedResource Update="Elements\Popup\Components\AddAdmin.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Elements\PopupContent\EditAdmin.xaml">
+    <EmbeddedResource Update="Elements\Popup\Components\EditAdmin.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\About.xaml">

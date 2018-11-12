@@ -16,8 +16,8 @@
                    Margin="0,40,0,0"/>
             <Label x:Name="state" FontSize="30" FontFamily="{StaticResource MFont}"
                TextColor="White" HorizontalOptions="CenterAndExpand"/>
-            <ProgressBar x:Name="progress" ProgressColor="Blue"
-                         IsVisible="False"/>
+            <!-- ProgressBar x:Name="progress" ProgressColor="Blue"
+                         IsVisible="False"/-->
             <forms:AnimationView x:Name="load" WidthRequest="150" HeightRequest="150"
                   Animation="loading.json" IsVisible="false"
                   Loop="true" AutoPlay="false"/>

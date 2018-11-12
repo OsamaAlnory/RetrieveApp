@@ -4,9 +4,10 @@
              x:Class="RetrieveApp.Design.CardAdmin" VerticalOptions="CenterAndExpand">
 
     <Button Style="{StaticResource Btn}" Text="Visa" BackgroundColor="{StaticResource P}"
-            FontFamily="{StaticResource MFont}" Clicked="ShowProduct"/>
+            FontFamily="{StaticResource MFont}" Clicked="ShowProduct"
+            FontAttributes="Bold"/>
     <Button Style="{StaticResource Btn}" Text="Ta bort" BackgroundColor="Crimson"
-            FontFamily="{StaticResource MFont}"
+            FontFamily="{StaticResource MFont}" FontAttributes="Bold"
             Clicked="RemoveProduct"/>
     
 </StackLayout>

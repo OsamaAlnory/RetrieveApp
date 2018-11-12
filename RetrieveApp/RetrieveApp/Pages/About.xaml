@@ -11,14 +11,17 @@
                     <Image x:Name="logo"/>
                     <Label Text="Retrieve It" HorizontalOptions="CenterAndExpand"
              FontSize="52" TextColor="White" FontFamily="{StaticResource MFont}"/>
-
-                    <Label Text="Skapades av" HorizontalOptions="CenterAndExpand"/>
-                    <Label Text="Osama Alnori och Mohanad alnoob mdry bzr"
-                           HorizontalOptions="CenterAndExpand"/>
-                    <Label Text="Kontakta oss om ni upplever någon bugg"/>
-                    <Label Text="mohannad-alwr3@fuck.com"/>
-                    <Label Text="osama-3mkm@outlook.com"/>
-                    <Label Text="Om appen inte funkar, försök att skriva while(true > false)"/>
+                    <Frame Padding="10" CornerRadius="12" IsClippedToBounds="True"
+                           Opacity="0.6" BackgroundColor="White" Margin="10,20,10,25">
+                        <StackLayout>
+                            <Label x:Name="label_main" HorizontalOptions="CenterAndExpand"
+                               HorizontalTextAlignment="Center" FontAttributes="Bold"
+                               FontFamily="{StaticResource MFont}"/>
+                            <Label x:Name="label" HorizontalOptions="CenterAndExpand"
+                               HorizontalTextAlignment="Center" FontAttributes="Bold"
+                               FontFamily="{StaticResource MFont}"/>
+                        </StackLayout>
+                    </Frame>
                     <Image x:Name="word_icon" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"
                    Margin="0,0,15,0"/>
                 </StackLayout>

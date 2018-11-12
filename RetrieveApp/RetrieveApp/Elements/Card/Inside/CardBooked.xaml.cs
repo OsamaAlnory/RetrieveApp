@@ -15,6 +15,7 @@ namespace RetrieveApp.Design
 	public partial class CardBooked : StackLayout
 	{
         private Binary binary;
+        private bool loading = false;
 		public CardBooked (Binary binary)
 		{
             this.binary = binary;
@@ -23,16 +24,22 @@ namespace RetrieveApp.Design
 
         private async void UnbookClicked(object s, EventArgs a)
         {
+            if (loading)
+            {
+                return;
+            }
             if (await App.SendSure())
             {
+                loading = true;
                 await DBActions.Unbook(binary.OWNER, binary.PRODUCT, true);
                 MapPage.mapPage.ReloadAll();
+                loading = false;
             }
         }
 
         private void ShowProduct(object s, EventArgs a)
         {
-            MapPage.mapPage.OpenProduct(binary.PRODUCT);
+            MapPage.mapPage.OpenProduct(binary);
         }
 
 	}

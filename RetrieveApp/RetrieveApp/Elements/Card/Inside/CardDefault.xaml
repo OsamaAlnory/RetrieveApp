@@ -4,8 +4,9 @@
              x:Class="RetrieveApp.Design.CardDefault"
              HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
     <Label x:Name="lbl" HorizontalTextAlignment="Center"
-           TextColor="Black"/>
+           TextColor="Black" FontFamily="{StaticResource MFont}"/>
     <Button x:Name="btn" BackgroundColor="{StaticResource P}"
            HorizontalOptions="FillAndExpand" TextColor="White"
-           CornerRadius="15" Text="VISA"/>
+           CornerRadius="15" Text="VISA" FontAttributes="Bold"
+           FontFamily="{StaticResource MFont}"/>
 </StackLayout>

@@ -30,12 +30,12 @@ namespace RetrieveApp.Elements.PopupContent
                 if (DBActions.GetAdminById(a1) == null)
                 {
                     await DBActions.FullyAddAdmin(new Admins { ID = a1, Password = a2, Login = false });
-                    await page.DisplayAlert("Test", "Ja", "Ok");
+                    await App.Send("Info", "Kontot med ID: "+a1+" har skapats!", "Ok");
                     Navigation.PopPopupAsync();
                 }
                 else
                 {
-                    page.DisplayAlert("Fel", "Kontot " + a1 + " finns redan!", "Avbryt");
+                    App.Send("Fel", "Kontot " + a1 + " finns redan!", "Avbryt");
                 }
             }
             else

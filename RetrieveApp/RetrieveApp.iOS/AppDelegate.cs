@@ -29,6 +29,20 @@ namespace RetrieveApp.iOS
             Xamarin.FormsMaps.Init();
             PullToRefreshLayoutRenderer.Init();
             Camera();
+            // Color of the selected tab icon:
+            UITabBar.Appearance.SelectedImageTintColor = UIColor.FromRGB(255, 255, 255);
+            // Color of the selected tab text color:
+            UITabBarItem.Appearance.SetTitleTextAttributes(
+                new UITextAttributes()
+                {
+                    TextColor = UIColor.FromRGB(255, 255, 255)
+                },UIControlState.Selected);
+            // Color of the unselected tab icon & text:
+            UITabBarItem.Appearance.SetTitleTextAttributes(
+                new UITextAttributes()
+                {
+                    TextColor = UIColor.FromRGB(255, 255, 255)
+                },UIControlState.Normal);
             App.ScreenHeight = (int)UIScreen.MainScreen.Bounds.Height;
             App.ScreenWidth = (int)UIScreen.MainScreen.Bounds.Width;
             LoadApplication(new App());

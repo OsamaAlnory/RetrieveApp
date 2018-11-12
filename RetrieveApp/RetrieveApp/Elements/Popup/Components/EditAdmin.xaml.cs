@@ -42,11 +42,11 @@ namespace RetrieveApp.Elements.PopupContent
                 } else
                 {
                     stack.IsVisible = false;
-                    page.DisplayAlert("Fel", "Kunde inte hitta "+text+"!", "Avbryt");
+                    App.Send("Fel", "Kunde inte hitta kontot med ID: "+text+"!", "Avbryt");
                 }
             } else
             {
-                page.DisplayAlert("Fel", "Ange admin id!","Avbryt");
+                App.Send("Fel", "Ange admin id!","Avbryt");
             }
         }
 
@@ -59,8 +59,8 @@ namespace RetrieveApp.Elements.PopupContent
             if(admin != null)
             {
                 clicked = true;
-                var b = await page.DisplayAlert("Meddelande", 
-                    "Vill du radera alla tillhörande produkter också?", "Ja", "Nej");
+                var b = await App.Send("Meddelande", 
+                    "Vill du också radera alla tillhörande produkter?", "Ja", "Nej");
                 await DBActions.FullyRemoveAdmin(admin);
                 if (b)
                 {
@@ -71,7 +71,7 @@ namespace RetrieveApp.Elements.PopupContent
                     }
                 }
                 search.Text = null;
-                page.DisplayAlert("Success", "Deleted "+admin.ID, "Ok");
+                App.Send("Info", "Kontot med ID: "+admin.ID+" har raderats!", "Ok");
                 stack.IsVisible = false;
                 clicked = false;
             }
@@ -89,7 +89,7 @@ namespace RetrieveApp.Elements.PopupContent
                 admin.Login = false;
                 await DBActions.FullyEditAdmin(admin);
                 search.Text = null;
-                page.DisplayAlert("Meddelande", "Success!", "Ok");
+                App.Send("Info", "Kontot med ID: "+admin.ID+" har återställts!", "Ok");
                 stack.IsVisible = false;
                 clicked = false;
             }

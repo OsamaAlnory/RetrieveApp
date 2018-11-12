@@ -1,4 +1,5 @@
 ﻿using RetrieveApp.Database;
+using RetrieveApp.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,10 +20,19 @@ namespace RetrieveApp.Elements.Card.Front
         {
             this.binary = binary;
             InitializeComponent();
-            //admin.Text = DBActions._p(binary.PRODUCT).SName;
             admin.Text = binary.PRODUCT.PName;
-            //user.Text = "Hello there! I like this thing. Hey there";
-            frame.IsVisible = false;
+            var state = MapPage.mapPage.current_state;
+            if(state == FilterState.B && MapPage._g is Admins
+                && binary.PRODUCT.Quantity < 1)
+            {
+                zero.IsVisible = true;
+                shade.IsVisible = true;
+            }
+            if(state == FilterState.BOOKERS)
+            {
+                user.Text = binary.OWNER.Name;
+                frame.IsVisible = true;
+            }
         }
 	}
 }
