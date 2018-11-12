@@ -13,7 +13,7 @@
              FontSize="52" TextColor="White" FontFamily="{StaticResource MFont}"/>
                     <Frame Padding="10" CornerRadius="12" IsClippedToBounds="True"
                            Opacity="0.6" BackgroundColor="White" Margin="10,20,10,25">
-                        <StackLayout>
+                        <StackLayout Margin="0,10,0,15">
                             <Label x:Name="label_main" HorizontalOptions="CenterAndExpand"
                                HorizontalTextAlignment="Center" FontAttributes="Bold"
                                FontFamily="{StaticResource MFont}"/>

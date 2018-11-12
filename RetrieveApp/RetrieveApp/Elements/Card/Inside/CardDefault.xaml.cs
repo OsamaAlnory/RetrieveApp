@@ -36,9 +36,12 @@ namespace RetrieveApp.Design
                 {
                     return;
                 }
-                if (await DBActions.Check(MapPage._g as Admins, MapPage.mapPage))
+                if(MapPage._g is Admins)
                 {
-                    return;
+                    if (await DBActions.Check(MapPage._g as Admins, MapPage.mapPage))
+                    {
+                        return;
+                    }
                 }
                 loading = true;
                 await DBActions.LoadProducts();

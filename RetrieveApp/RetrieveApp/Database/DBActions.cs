@@ -40,7 +40,7 @@ namespace RetrieveApp.Database
             App.FinishLoading("Pins");
             App.StartLoading("Fixing");
             await CheckProducts();
-            App.FinishLoading("Fixnig");
+            App.FinishLoading("Fixing");
         }
 
         public static async Task<int> CheckProducts()
