@@ -129,6 +129,7 @@ namespace RetrieveApp.Pages
                 } else
                 {
                     an.Pause();
+                    an.IsVisible = false;
                     created = false;
                     DisplayAlert("Fel", "Kontot med ID: "+n+" finns redan!", "Ok");
                 }

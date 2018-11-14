@@ -40,6 +40,7 @@ namespace RetrieveApp.Database
             App.FinishLoading("Pins");
             App.StartLoading("Fixing");
             await CheckProducts();
+            //await CheckUsersProducts();
             App.FinishLoading("Fixing");
         }
 
@@ -55,6 +56,48 @@ namespace RetrieveApp.Database
                 }
             }
             return total;
+        }
+
+        public static async Task CheckUsersProducts()
+        {
+            foreach(Guests guest in guests)
+            {
+                bool found = false;
+                var ids = getCart(guest);
+                foreach(int id in ids)
+                {
+                    if(GetProductById(id) == null)
+                    {
+                        found = true;
+                        var cart = guest.Cart.Split(';');
+                        var newCart = "";
+                        int S = 0;
+                        for (int x = 0; x < cart.Length; x++)
+                        {
+                            var f = cart[x].Split(',');
+                            int a = int.Parse(f[0]);
+                            if (a != id)
+                            {
+                                if (S > 0)
+                                {
+                                    newCart += ";";
+                                }
+                                newCart += cart[x];
+                                S++;
+                            }
+                        }
+                        if (string.IsNullOrEmpty(newCart))
+                        {
+                            newCart = null;
+                        }
+                        guest.Cart = newCart;
+                    }
+                }
+                if (found)
+                {
+                    await FullyEditUser(guest);
+                }
+            }
         }
 
         public static async Task LoadAccounts()
@@ -106,7 +149,6 @@ namespace RetrieveApp.Database
         public static async Task LoadUsers()
         {
             App.StartLoading("Users");
-            guests.Clear();
             HttpClient client = new HttpClient();
             var responce = await client.GetStringAsync(LINK + USERS);
             guests = JsonConvert.DeserializeObject<List<Guests>>(responce);

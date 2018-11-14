@@ -28,7 +28,7 @@ namespace RetrieveApp.Elements.Card
         private static Random r = new Random();
         private bool LOADING = true;
 
-        public ProductCard(Binary binary, string cardType)
+        public ProductCard(Binary binary, string cardType, FilterState state)
         {
             id = r.Next(9999);
             this.binary = binary;
@@ -38,8 +38,8 @@ namespace RetrieveApp.Elements.Card
             };
             TapGestureRecognizer tp = new TapGestureRecognizer();
             tp.Tapped += OnTapped;
-            v = new CardScrollContent(binary,tp,cardType);
-            content = new B{IsVisible = false,Children ={v}};
+            v = new CardScrollContent(binary,tp,cardType,state);
+            content = new B{IsVisible = false,Children={v}};
             fader = new B{Opacity = 0,BackgroundColor = Color.LightGray};
             container = new B1(){Children ={fader,content}};
             content_loading = new B(0, 0, 1, 1)
@@ -59,7 +59,7 @@ namespace RetrieveApp.Elements.Card
             Content = new AbsoluteLayout {
               Children={
                     product_image,
-                    icon,new DefaultFrontCard(binary),container,
+                    icon,new DefaultFrontCard(binary, state),container,
                 content_loading}
             };
             TapGestureRecognizer tap = new TapGestureRecognizer();

@@ -17,7 +17,7 @@ namespace RetrieveApp.Pages
 		public About ()
 		{
 			InitializeComponent ();
-            background.Source = App.GetSource("background.png");
+            background.Source = App.GetSource("background1.png");
             logo.Source = App.GetSource("logo.png");
             word_icon.Source = App.GetSource("logo_word.png");
             label_main.Text = "Skapades av:\n";
@@ -32,7 +32,7 @@ namespace RetrieveApp.Pages
                 "E-post:\n"+
                 "osama-alnori@outlook.com\n"+
                 "mohanad.oweidat@elev.ga.ntig.se\n"+
-                "0768307878"+
+                "0768307878\n"+
                 "Copyrights 2018 © all rights reserved.";
         }
 

@@ -11,7 +11,7 @@ namespace RetrieveApp.Elements.Card
     class CardInside
     {
         public static StackLayout GEN(string cardType, Binary b,
-            TapGestureRecognizer tap)
+            TapGestureRecognizer tap, FilterState state)
         {
             StackLayout card = null;
             if(cardType == "default")

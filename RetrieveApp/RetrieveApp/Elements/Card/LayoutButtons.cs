@@ -1,5 +1,6 @@
 ﻿using RetrieveApp.Database;
 using RetrieveApp.Design;
+using RetrieveApp.Pages;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -36,14 +37,14 @@ namespace RetrieveApp.Elements.Card
             }
         }
 
-        public void AddItems()
+        public void AddItems(FilterState state)
         {
             fl.Children.Clear();
             for (int x = (page - 1) * MAX; x < page * MAX; x++)
             {
                 if (visible.Count > x)
                 {
-                    fl.Children.Add(new ProductCard(visible[x], cardType));
+                    fl.Children.Add(new ProductCard(visible[x], cardType, state));
                 }
             }
             if(fl.Children.Count == 0)
@@ -138,14 +139,14 @@ namespace RetrieveApp.Elements.Card
             btns[selected].IsEnabled = false;
         }
 
-        public void OpenPage(int p)
+        public void OpenPage(int p, FilterState state)
         {
             if(sc != null)
             {
                 sc.ScrollToAsync(0, 0, false);
             }
             page = p;
-            AddItems();
+            AddItems(state);
             ReloadButtons();
         }
 
@@ -158,16 +159,16 @@ namespace RetrieveApp.Elements.Card
             }
             if (txt.Equals("<<"))
             {
-                OpenPage(1);
+                OpenPage(1, MapPage.mapPage.current_state);
             }
             else if (txt.Equals(">>"))
             {
-                OpenPage(GetLastPage());
+                OpenPage(GetLastPage(), MapPage.mapPage.current_state);
             }
             else
             {
                 int n = int.Parse(txt);
-                OpenPage(n);
+                OpenPage(n, MapPage.mapPage.current_state);
             }
         }
 

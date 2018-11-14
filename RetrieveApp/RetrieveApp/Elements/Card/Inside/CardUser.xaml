@@ -10,6 +10,5 @@
             Text="Hämtat" FontFamily="{StaticResource MFont}"
             Clicked="ButtonRetrieved"/>
     <Button Style="{StaticResource Btn}" BackgroundColor="Crimson" FontAttributes="Bold"
-            Text="Ej hämtat" FontFamily="{StaticResource MFont}"
-            Clicked="ButtonUnRetrieved"/>
+            Text="Ej hämtat" FontFamily="{StaticResource MFont}" x:Name="btn_u"/>
 </StackLayout>

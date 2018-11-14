@@ -93,29 +93,8 @@ namespace RetrieveApp.Pages
             {
                 CURRENT_STAGE++;
                 SetText();
-                foreach(Admins a in DBActions.admins)
-                {
-                    //a.Login = false;
-                    //await DBActions.RemoveAdminIcon(a);
-                    //await DBActions.EditAdmin(a);
-                }
-                foreach(Guests g in DBActions.guests)
-                {
-                    //g.Cart = null;
-                    //await DBActions.EditUser(g);
-                }
-                foreach(Products p in DBActions.products)
-                {
-                    
-                }
                 load.Pause();
                 load.IsVisible = false;
-                //Navigation.PushAsync(new About());
-                //Navigation.PushAsync(new ManagePage());
-                //Navigation.PushAsync(new WelcomePage("Default"));
-                //Navigation.PushAsync(new MapPage(DBActions.admins[0]));
-                //Navigation.PushAsync(new MapPage(DBActions.guests[0]));
-                /**/
                 if(Application.Current.Properties.ContainsKey("Logged"))
                 {
                     int Id = (int)Application.Current.Properties["Logged"];

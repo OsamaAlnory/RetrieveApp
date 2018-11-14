@@ -166,9 +166,9 @@ namespace RetrieveApp.Pages
             }
         }
 
-        public void ReloadAll()
+        public async void ReloadAll()
         {
-            events.rel(TXT());
+            events.rel(search.Text);
             if(_g is Admins)
             {
                 events.rel_admin(search1.Text);

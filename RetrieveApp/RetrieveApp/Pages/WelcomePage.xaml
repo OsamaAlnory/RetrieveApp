@@ -142,7 +142,7 @@
 
                 <!--Skip button-->
                 <Button Text="Skippa" Style="{StaticResource Skip}" 
-                        Clicked="SkippaClicked"/>
+                        Clicked="SkippaClicked" x:Name="last_skip"/>
                 <ScrollView>
                     <StackLayout>
                         <Label Text="I flödet hittar du det som restaurangerna och cafeerna säljer." TextColor="White"

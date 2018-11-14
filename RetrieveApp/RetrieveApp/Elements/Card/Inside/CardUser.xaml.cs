@@ -21,6 +21,7 @@ namespace RetrieveApp.Design
 		{
             this.binary = binary;
 			InitializeComponent ();
+            btn_u.Clicked += ButtonUnRetrieved;
 		}
 
         private async void ShowProduct(object s, EventArgs args)
@@ -49,7 +50,7 @@ namespace RetrieveApp.Design
             loading = false;
         }
 
-        private async void ButtonUnRetrieved(object s, EventArgs a)
+        private async void ButtonUnRetrieved(object s, EventArgs args)
         {
             if (loading)
             {
@@ -60,7 +61,6 @@ namespace RetrieveApp.Design
                 return;
             }
             loading = true;
-            await DBActions.Check(MapPage._g as Admins, MapPage.mapPage);
             await DBActions.Unbook(binary.OWNER, binary.PRODUCT, true);
             MapPage.mapPage.ReloadAll();
             loading = false;

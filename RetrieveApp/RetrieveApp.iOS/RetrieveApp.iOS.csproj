@@ -54,9 +54,9 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchArch>ARM64</MtouchArch>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>iPhone Developer: mohanad.owidat@hotmail.com (QYS65JQY68)</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
-    <CodesignProvision>iOS Team Provisioning Profile: osama.Retrieve</CodesignProvision>
+    <CodesignProvision>iOS Team Provisioning Profile: lovisa.Retrieveit</CodesignProvision>
     <CodesignExtraArgs />
     <CodesignResourceRules />
     <CodesignEntitlements />

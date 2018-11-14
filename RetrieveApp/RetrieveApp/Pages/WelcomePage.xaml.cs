@@ -43,6 +43,8 @@ namespace RetrieveApp.Pages
             if(state == "Guide")
             {
                 Children.RemoveAt(Children.Count - 1);
+                lstbtn.IsVisible = false;
+                last_skip.Text = "Stäng";
             }
             log_btn.Clicked += (e, args) => ProcessLogin();
             crt_btn.Clicked += (e, args) => CreateAccoutClicked();

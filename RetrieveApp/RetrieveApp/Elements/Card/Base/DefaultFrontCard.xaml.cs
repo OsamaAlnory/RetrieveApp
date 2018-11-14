@@ -16,12 +16,11 @@ namespace RetrieveApp.Elements.Card.Front
 	{
         private Binary binary;
 
-        public DefaultFrontCard(Binary binary)
+        public DefaultFrontCard(Binary binary, FilterState state)
         {
             this.binary = binary;
             InitializeComponent();
             admin.Text = binary.PRODUCT.PName;
-            var state = MapPage.mapPage.current_state;
             if(state == FilterState.B && MapPage._g is Admins
                 && binary.PRODUCT.Quantity < 1)
             {

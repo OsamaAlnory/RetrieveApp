@@ -24,12 +24,12 @@ namespace RetrieveApp.Events
             la_2 = l2;
         }
 
-        public void AddItems()
+        public void AddItems(FilterState state)
         {
-            layout_b.AddItems();
+            layout_b.AddItems(state);
             if(MapPage._g is Admins)
             {
-                la_2.AddItems();
+                la_2.AddItems(state);
             }
         }
 
@@ -57,7 +57,7 @@ namespace RetrieveApp.Events
                     layout_b.cardType = "booked";
                 }
             }
-            if (f != null && f != "")
+            if (!string.IsNullOrEmpty(f))
             {
                 f = f.ToLower();
                 if(filter == FilterState.ALL)
@@ -100,7 +100,8 @@ namespace RetrieveApp.Events
                     {
                         if(p.Quantity > 0)
                         {
-                            vis1.Add(new Binary { PRODUCT = p });
+                            Binary b = new Binary { PRODUCT = p };
+                            vis1.Add(b);
                         }
                     }
                 } else if(filter == FilterState.B)
@@ -125,7 +126,13 @@ namespace RetrieveApp.Events
                 }
             }
             layout_b.visible = vis1;
-            layout_b.OpenPage(1);
+            if(MapPage.mapPage.current_state == FilterState.BOOKERS)
+            {
+                layout_b.OpenPage(1, FilterState.ALL);
+            } else
+            {
+                layout_b.OpenPage(1, filter);
+            }
         }
 
         public void rel_admin(string f)
@@ -169,7 +176,7 @@ namespace RetrieveApp.Events
                 }
             }
             la_2.visible = vis_admin;
-            la_2.OpenPage(1);
+            la_2.OpenPage(1, FilterState.BOOKERS);
         }
 
     }

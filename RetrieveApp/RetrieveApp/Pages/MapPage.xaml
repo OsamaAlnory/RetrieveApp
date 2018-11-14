@@ -185,9 +185,11 @@
                             </StackLayout>
                         </Frame>
                         <Button Style="{StaticResource Btn}" Text="Guide" FontAttributes="Bold"
-                         FontFamily="{StaticResource MFont}" Clicked="OpenGuide"/>
+                         FontFamily="{StaticResource MFont}" Clicked="OpenGuide"
+                                BackgroundColor="{StaticResource P}"/>
                         <Button Style="{StaticResource Btn}" Text="Om" FontAttributes="Bold"
-                         FontFamily="{StaticResource MFont}" Clicked="OpenAbout"/>
+                         FontFamily="{StaticResource MFont}" Clicked="OpenAbout"
+                                BackgroundColor="{StaticResource P}"/>
                     </StackLayout>
                 </ScrollView>
                 <Frame Padding="0" CornerRadius="10" IsClippedToBounds="True" HorizontalOptions="FillAndExpand"
