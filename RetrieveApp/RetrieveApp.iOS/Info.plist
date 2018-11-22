@@ -31,7 +31,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>Retrieve It</string>
 	<key>CFBundleIdentifier</key>
-	<string>lovisa.Retrieveit</string>
+	<string>ret.mohanad</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>CFBundleIconFiles</key>
@@ -72,7 +72,7 @@
 		</dict>
 	</dict>
 	<key>MinimumOSVersion</key>
-	<string>11.3.1</string>
+	<string>12.1</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Launchscreen</string>
 	<key>XSAppIconAssets</key>

@@ -54,9 +54,9 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchArch>ARM64</MtouchArch>
-    <CodesignKey>iPhone Developer: mohanad.owidat@hotmail.com (QYS65JQY68)</CodesignKey>
+    <CodesignKey>iPhone Developer: mohanad.h.owidat@gmail.com (UQ5HSLXZPU)</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
-    <CodesignProvision>iOS Team Provisioning Profile: lovisa.Retrieveit</CodesignProvision>
+    <CodesignProvision>iOS Team Provisioning Profile: ret.mohanad</CodesignProvision>
     <CodesignExtraArgs />
     <CodesignResourceRules />
     <CodesignEntitlements />
@@ -70,8 +70,10 @@
     <WarningLevel>4</WarningLevel>
     <MtouchArch>ARM64</MtouchArch>
     <ConsolePause>false</ConsolePause>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>iPhone Developer: mohanad.owidat@hotmail.com (QYS65JQY68)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CodesignProvision>iOS Team Provisioning Profile: lovisa.Retrieveit</CodesignProvision>
+    <MtouchSdkVersion>12.1</MtouchSdkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
     <DebugType>none</DebugType>
@@ -232,7 +234,9 @@
     <PackageReference Include="Xam.Plugin.Media">
       <Version>4.0.1.5</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="3.2.0.729530-pre2" />
+    <PackageReference Include="Xamarin.Forms">
+      <Version>3.4.0.1008975</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms.Maps">
       <Version>3.2.0.729530-pre2</Version>
     </PackageReference>
