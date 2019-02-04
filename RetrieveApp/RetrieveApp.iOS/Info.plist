@@ -30,8 +30,6 @@
 	</array>
 	<key>CFBundleDisplayName</key>
 	<string>Retrieve It</string>
-	<key>CFBundleIdentifier</key>
-	<string>ret.mohanad</string>
 	<key>CFBundleVersion</key>
 	<string>1.0.2</string>
 	<key>CFBundleIconFiles</key>
