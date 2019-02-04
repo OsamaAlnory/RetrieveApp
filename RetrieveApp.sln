@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetrieveApp.Android", "Retr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetrieveApp.iOS", "RetrieveApp\RetrieveApp.iOS\RetrieveApp.iOS.csproj", "{98FF49BB-B378-43AB-A781-FBE5722294DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetrieveApp", "RetrieveApp\RetrieveApp\RetrieveApp.csproj", "{8C51A74A-2DBB-41B2-8DD2-B6AD64A2A468}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RetrieveApp", "RetrieveApp\RetrieveApp\RetrieveApp.csproj", "{8C51A74A-2DBB-41B2-8DD2-B6AD64A2A468}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

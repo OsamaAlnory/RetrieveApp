@@ -29,7 +29,7 @@
     <MtouchLink>SdkOnly</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
     <CodesignKey>iPhone Developer</CodesignKey>
-    <CodesignProvision>iOS Team Provisioning Profile: osama.Retrieve</CodesignProvision>
+    <CodesignProvision>iOS Team Provisioning Profile: *</CodesignProvision>
     <CodesignExtraArgs />
     <CodesignResourceRules />
     <CodesignEntitlements />
@@ -54,12 +54,13 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchArch>ARM64</MtouchArch>
-    <CodesignKey>iPhone Developer: mohanad.h.owidat@gmail.com (UQ5HSLXZPU)</CodesignKey>
+    <CodesignKey>iPhone Distribution: Sara Dahlberg (NS9696HV44)</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
-    <CodesignProvision>iOS Team Provisioning Profile: ret.mohanad</CodesignProvision>
+    <CodesignProvision>RetrieveitApp</CodesignProvision>
     <CodesignExtraArgs />
     <CodesignResourceRules />
     <CodesignEntitlements />
+    <BuildIpa>true</BuildIpa>
     <!--<CodesignEntitlements>Entitlements.plist</CodesignEntitlements>-->
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
@@ -70,10 +71,13 @@
     <WarningLevel>4</WarningLevel>
     <MtouchArch>ARM64</MtouchArch>
     <ConsolePause>false</ConsolePause>
-    <CodesignKey>iPhone Developer: mohanad.owidat@hotmail.com (QYS65JQY68)</CodesignKey>
+    <CodesignKey>iPhone Distribution: Sara Dahlberg (NS9696HV44)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <CodesignProvision>iOS Team Provisioning Profile: lovisa.Retrieveit</CodesignProvision>
-    <MtouchSdkVersion>12.1</MtouchSdkVersion>
+    <CodesignProvision>RetrieveitApp</CodesignProvision>
+    <MtouchSdkVersion>
+    </MtouchSdkVersion>
+    <MtouchUseLlvm>false</MtouchUseLlvm>
+    <BuildIpa>true</BuildIpa>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
     <DebugType>none</DebugType>
@@ -105,6 +109,9 @@
     <LaunchForBackgroundFetch>false</LaunchForBackgroundFetch>
   </PropertyGroup>
   <PropertyGroup />
+  <PropertyGroup>
+    <StartupObject>RetrieveApp.iOS.Application</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="CloseAppIOS.cs" />
     <Compile Include="GradientLayoutRenderer.cs" />

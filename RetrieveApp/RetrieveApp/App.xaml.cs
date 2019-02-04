@@ -23,7 +23,7 @@ namespace RetrieveApp
     public partial class App : Application
     {
         private const bool allowRemoving = true;
-        public const string VERSION = "1.0.0";
+        public const string VERSION = "1.0.2";
         public static string ACCOUNT_NAME = "RetrieveIt";
         public static int ScreenHeight { get; set; }
         public static int ScreenWidth { get; set; }
@@ -33,6 +33,7 @@ namespace RetrieveApp
         private static double LAT;
         private static double LON;
         private static double ALT;
+
 
         public App()
         {

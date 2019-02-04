@@ -36,7 +36,7 @@
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                                     <Label Style="{StaticResource IB}" FontFamily="{StaticResource MFont}"
-                             TextColor="{StaticResource P}">Originala Priset:</Label>
+                             TextColor="{StaticResource P}">Original Pris:</Label>
                                     <Grid>
                                         <Label VerticalOptions="Center" x:Name="p_o"
                                                FontFamily="{StaticResource MFont}"/>
@@ -46,7 +46,7 @@
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                                     <Label Style="{StaticResource IB}" FontFamily="{StaticResource MFont}"
-                                     TextColor="{StaticResource P}">Nya Priset:</Label>
+                                     TextColor="{StaticResource P}">Nypris:</Label>
                                     <Label x:Name="p_n" FontFamily="{StaticResource MFont}"
                                            FontAttributes="Bold"/>
                                 </StackLayout>

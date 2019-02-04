@@ -30,10 +30,8 @@
 	</array>
 	<key>CFBundleDisplayName</key>
 	<string>Retrieve It</string>
-	<key>CFBundleIdentifier</key>
-	<string>ret.mohanad</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.0.2</string>
 	<key>CFBundleIconFiles</key>
 	<array>
 		<string>Icon-60@2x</string>
@@ -62,7 +60,7 @@
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>http://fannylovisa.somee.com</key>
+			<key>http://windows.u7979705.fsdata.se</key>
 			<dict>
 				<key>NSIncludesSubdomains</key>
 				<true/>
@@ -71,8 +69,6 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>MinimumOSVersion</key>
-	<string>12.1</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Launchscreen</string>
 	<key>XSAppIconAssets</key>
@@ -85,5 +81,13 @@
 	<false/>
 	<key>XSLaunchImageAssets</key>
 	<string>Assets.xcassets/LaunchImages.launchimage</string>
+	<key>CFBundleShortVersionString</key>
+	<string>2</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>This app need to access your calendar events</string>
+	<key>MinimumOSVersion</key>
+	<string>11.0</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.retrieveit.se</string>
 </dict>
 </plist>
