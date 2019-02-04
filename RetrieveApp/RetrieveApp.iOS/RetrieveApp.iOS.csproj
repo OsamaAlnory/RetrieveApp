@@ -28,8 +28,8 @@
     <MtouchArch>x86_64</MtouchArch>
     <MtouchLink>SdkOnly</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
-    <CodesignKey>iPhone Developer</CodesignKey>
-    <CodesignProvision>iOS Team Provisioning Profile: osama.Retrieve</CodesignProvision>
+    <CodesignKey>iPhone Developer: retrieveitapp@gmail.com (4A5BG84KYC)</CodesignKey>
+    <CodesignProvision>iOS Team Provisioning Profile: lovisa1.Retrieveit</CodesignProvision>
     <CodesignExtraArgs />
     <CodesignResourceRules />
     <CodesignEntitlements />
@@ -54,9 +54,9 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchArch>ARM64</MtouchArch>
-    <CodesignKey>iPhone Developer: mohanad.owidat@hotmail.com (QYS65JQY68)</CodesignKey>
+    <CodesignKey>iPhone Developer: retrieveitapp@gmail.com (4A5BG84KYC)</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
-    <CodesignProvision>iOS Team Provisioning Profile: lovisa.Retrieveit</CodesignProvision>
+    <CodesignProvision>iOS Team Provisioning Profile: lovisa1.Retrieveit</CodesignProvision>
     <CodesignExtraArgs />
     <CodesignResourceRules />
     <CodesignEntitlements />
@@ -232,7 +232,7 @@
     <PackageReference Include="Xam.Plugin.Media">
       <Version>4.0.1.5</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="3.2.0.729530-pre2" />
+    <PackageReference Include="Xamarin.Forms" Version="3.3.0.967583" />
     <PackageReference Include="Xamarin.Forms.Maps">
       <Version>3.2.0.729530-pre2</Version>
     </PackageReference>
