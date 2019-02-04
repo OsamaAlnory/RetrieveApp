@@ -20,20 +20,28 @@ namespace RetrieveApp.Pages
             background.Source = App.GetSource("background1.png");
             logo.Source = App.GetSource("logo.png");
             word_icon.Source = App.GetSource("logo_word.png");
-            label_main.Text = "Skapades av:\n";
+
+
+            label1.Text = "Skapades Av\n" +
+
+          "Retrieve it Uf\n";
+
+
+            label_main.Text = "App Tillverkare:\n";
             if (random.Next(1, 3) == 1)
-            {
-                label_main.Text += "Osama Alnori och Mohanad Oweidat";
-            } else
             {
                 label_main.Text += "Mohanad Oweidat och Osama Alnori";
             }
+            else
+            {
+                label_main.Text += "Osama Alnori och Mohanad Oweidat";
+            }
+
+            
             label.Text = "Kontakta oss\n"+
-                "E-post:\n"+
-                "osama-alnori@outlook.com\n"+
-                "mohanad.oweidat@elev.ga.ntig.se\n"+
-                "0768307878\n"+
-                "Copyrights 2018 © all rights reserved.";
+              "E-post:\n"+
+              "retrieveituf@gmail.com\n"+
+              "Copyrights 2018 © all rights reserved";
         }
 
 	}
