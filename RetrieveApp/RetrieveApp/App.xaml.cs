@@ -201,7 +201,12 @@ namespace RetrieveApp
 
         public static async Task Send(string title, string msg, string ok)
         {
-             await MapPage.mapPage.DisplayAlert(title, msg, ok);
+            await Send(title, msg, ok, MapPage.mapPage);
+        }
+
+        public static async Task Send(string title, string msg, string ok, Page page)
+        {
+            await page.DisplayAlert(title, msg, ok);
         }
 
         public static async Task<bool> Send(string title, string msg, string yes, string no)

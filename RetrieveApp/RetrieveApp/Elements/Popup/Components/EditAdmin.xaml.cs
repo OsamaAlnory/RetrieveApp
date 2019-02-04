@@ -1,4 +1,5 @@
 ﻿using RetrieveApp.Database;
+using RetrieveApp.Pages;
 using Rg.Plugins.Popup.Extensions;
 using System;
 using System.Collections.Generic;
@@ -42,11 +43,11 @@ namespace RetrieveApp.Elements.PopupContent
                 } else
                 {
                     stack.IsVisible = false;
-                    App.Send("Fel", "Kunde inte hitta kontot med ID: "+text+"!", "Avbryt");
+                    App.Send("Fel", "Kunde inte hitta kontot med ID: "+text+"!", "Avbryt", ManagePage.page);
                 }
             } else
             {
-                App.Send("Fel", "Ange admin id!","Avbryt");
+                App.Send("Fel", "Ange admin id!","Avbryt", ManagePage.page);
             }
         }
 
@@ -60,7 +61,7 @@ namespace RetrieveApp.Elements.PopupContent
             {
                 clicked = true;
                 var b = await App.Send("Meddelande", 
-                    "Vill du också radera alla tillhörande produkter?", "Ja", "Nej");
+                    "Vill du också radera alla tillhörande produkter?", "Ja", "Nej", ManagePage.page);
                 await DBActions.FullyRemoveAdmin(admin);
                 if (b)
                 {
@@ -71,7 +72,7 @@ namespace RetrieveApp.Elements.PopupContent
                     }
                 }
                 search.Text = null;
-                App.Send("Info", "Kontot med ID: "+admin.ID+" har raderats!", "Ok");
+                App.Send("Info", "Kontot med ID: "+admin.ID+" har raderats!", "Ok", ManagePage.page);
                 stack.IsVisible = false;
                 clicked = false;
             }
@@ -89,7 +90,7 @@ namespace RetrieveApp.Elements.PopupContent
                 admin.Login = false;
                 await DBActions.FullyEditAdmin(admin);
                 search.Text = null;
-                App.Send("Info", "Kontot med ID: "+admin.ID+" har återställts!", "Ok");
+                App.Send("Info", "Kontot med ID: "+admin.ID+" har återställts!", "Ok", ManagePage.page);
                 stack.IsVisible = false;
                 clicked = false;
             }

@@ -24,17 +24,19 @@ namespace RetrieveApp.Pages
 			InitializeComponent ();
             App.Register(this);
             state.Text = "Hämtar data";
-            Device.StartTimer(TimeSpan.FromSeconds(1), () => {
-                if (App.CheckInternetConnection())
+                Device.StartTimer(TimeSpan.FromSeconds(1), () =>
                 {
-                    DBActions.LoadData();
-                } else
-                {
-                    Crash("Appen kunde inte startas!\n\nSe till att din mobil är" +
-                    " ansluten till nätverket.");
-                }
-                return false;
-            });
+                    if (App.CheckInternetConnection())
+                    {
+                        DBActions.LoadData();
+                    }
+                    else
+                    {
+                        Crash("Appen kunde inte startas!\n\nSe till att din mobil är" +
+                        " ansluten till nätverket.");
+                    }
+                    return false;
+                });
 		}
 
         private async void Crash(string reason)

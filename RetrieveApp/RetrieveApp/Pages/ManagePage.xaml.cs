@@ -15,8 +15,11 @@ namespace RetrieveApp.Pages
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ManagePage : ContentPage
 	{
+        public static ManagePage page;
+
 		public ManagePage ()
 		{
+            page = this;
 			InitializeComponent ();
             img.Source = App.GetSource("background.png");
             icon.Source = App.GetSource("logo.png");
@@ -41,16 +44,7 @@ namespace RetrieveApp.Pages
 
         private async void ShowPopup(Popup page)
         {
-            // Open a PopupPage
             await Navigation.PushPopupAsync(page);
-            // Close the last PopupPage int the PopupStack
-            //await Navigation.PopPopupAsync();
-
-            // Close all PopupPages in the PopupStack
-            //await Navigation.PopAllPopupAsync();
-
-            // Close an one PopupPage in the PopupStack even if the page is not the last
-            //await Navigation.RemovePopupPageAsync(page);
         }
 
     }
