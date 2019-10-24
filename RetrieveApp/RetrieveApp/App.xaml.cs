@@ -38,8 +38,7 @@ namespace RetrieveApp
         public App()
         {
             InitializeComponent();
-            
-             MainPage = new NavigationPage(new LoadingPage());
+            MainPage = new NavigationPage(new LoadingPage());
             CURRENT_PAGE = MainPage;
         }
 

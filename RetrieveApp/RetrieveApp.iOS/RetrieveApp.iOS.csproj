@@ -28,7 +28,7 @@
     <MtouchArch>x86_64</MtouchArch>
     <MtouchLink>SdkOnly</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>iPhone Developer: Sara Dahlberg (M92U4956GC)</CodesignKey>
     <CodesignProvision>iOS Team Provisioning Profile: *</CodesignProvision>
     <CodesignExtraArgs />
     <CodesignResourceRules />
@@ -54,9 +54,9 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchArch>ARM64</MtouchArch>
-    <CodesignKey>iPhone Distribution: Sara Dahlberg (NS9696HV44)</CodesignKey>
+    <CodesignKey>iPhone Developer: Sara Dahlberg (M92U4956GC)</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
-    <CodesignProvision>RetrieveitApp</CodesignProvision>
+    <CodesignProvision>iOS Team Provisioning Profile: *</CodesignProvision>
     <CodesignExtraArgs />
     <CodesignResourceRules />
     <CodesignEntitlements />
@@ -241,7 +241,7 @@
     <PackageReference Include="Xam.Plugin.Media">
       <Version>4.0.1.5</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="3.3.0.967583" />
+    <PackageReference Include="Xamarin.Forms" Version="3.5.0.274416" />
     <PackageReference Include="Xamarin.Forms.Maps">
       <Version>3.2.0.729530-pre2</Version>
     </PackageReference>
