@@ -59,6 +59,7 @@ namespace RetrieveApp.Pages
             e_name.FontSize = IFont.Calc(e_name.HeightRequest);
             e_pass.FontSize = IFont.Calc(e_pass.HeightRequest);
             vnr.Text = "Version: " + App.VERSION;
+
             laboli.Text = "På kartan kan du se vilka restauranger och cafeer som är anslutna till Retrieve it";
         }
 
