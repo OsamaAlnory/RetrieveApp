@@ -15,7 +15,7 @@ using Refractored.XamForms.PullToRefresh.Droid;
 
 namespace RetrieveApp.Droid
 {
-    [Activity(Label = "Retrieve It", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = false, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation,
+    [Activity(Label = "Retrieve It", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation,
         ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
@@ -24,14 +24,16 @@ namespace RetrieveApp.Droid
             base.OnStart();
             if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.AccessCoarseLocation) != Permission.Granted)
             {
-                ActivityCompat.RequestPermissions(this, new String[] { Manifest.Permission.AccessCoarseLocation, Manifest.Permission.AccessFineLocation}, 0);
+                ActivityCompat.RequestPermissions(this, new String[] { Manifest.Permission.AccessCoarseLocation, Manifest.Permission.AccessFineLocation }, 0);
             }
             else
             {
                 System.Diagnostics.Debug.WriteLine("Permission Granted!");
             }
         }
+
         private static App app;
+
         protected override async void OnCreate(Bundle savedInstanceState)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
@@ -52,6 +54,7 @@ namespace RetrieveApp.Droid
             }
             LoadApplication(app);
         }
+
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
         {
             Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -68,6 +71,5 @@ namespace RetrieveApp.Droid
                 // Do something if there are not any pages in the `PopupStack`
             }
         }
-
     }
 }
