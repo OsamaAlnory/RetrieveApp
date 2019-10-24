@@ -18,6 +18,7 @@ using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
+
 namespace RetrieveApp
 {
     public partial class App : Application
@@ -34,12 +35,11 @@ namespace RetrieveApp
         private static double LON;
         private static double ALT;
 
-
         public App()
         {
             InitializeComponent();
-            
-             MainPage = new NavigationPage(new LoadingPage());
+
+            MainPage = new NavigationPage(new LoadingPage());
             CURRENT_PAGE = MainPage;
         }
 
@@ -92,7 +92,7 @@ namespace RetrieveApp
             IPin.pins.Clear();
             foreach (Admins place in DBActions.admins)
             {
-                if(place.Address != null)
+                if (place.Address != null)
                 {
                     new IPin(place)
                     {
@@ -131,12 +131,13 @@ namespace RetrieveApp
 
         public static ImageSource GetSource(string name)
         {
-            return ImageSource.FromResource(PATH+name, Assembly.GetExecutingAssembly());
+            return ImageSource.FromResource(PATH + name, Assembly.GetExecutingAssembly());
         }
 
         public static void StartLoading(string type)
         {
-            foreach(Loadable loadable in loadables){
+            foreach (Loadable loadable in loadables)
+            {
                 loadable.OnLoadStarted(type);
             }
         }
@@ -185,7 +186,8 @@ namespace RetrieveApp
                     if (gallery)
                     {
                         file = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions { });
-                    } else
+                    }
+                    else
                     {
                         file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
                         {
