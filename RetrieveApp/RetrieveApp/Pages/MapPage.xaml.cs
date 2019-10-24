@@ -128,12 +128,12 @@ namespace RetrieveApp.Pages
             refr1.IsRefreshing = false;
         }
 
-        private void FilterButtonAll(Button s, EventArgs args)
+        private void FilterButtonAll(object s, EventArgs args)
         {
             ChangeFilter(FilterState.ALL);
         }
 
-        private void FilterButtonB(Button s, EventArgs args)
+        private void FilterButtonB(object s, EventArgs args)
         {
             ChangeFilter(FilterState.B);
         }

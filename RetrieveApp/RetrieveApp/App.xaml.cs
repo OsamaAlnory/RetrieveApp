@@ -18,7 +18,6 @@ using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
-
 namespace RetrieveApp
 {
     public partial class App : Application
@@ -38,7 +37,6 @@ namespace RetrieveApp
         public App()
         {
             InitializeComponent();
-
             MainPage = new NavigationPage(new LoadingPage());
             CURRENT_PAGE = MainPage;
         }

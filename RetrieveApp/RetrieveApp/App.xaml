@@ -12,7 +12,6 @@
             <OnPlatform x:TypeArguments="x:String" x:Key="MFont"
                         iOS="Oswald" Android="oswald-r.ttf#Oswald">
             </OnPlatform>
-
             <Style x:Key="Skip" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="Transparent"/>
                 <Setter Property="TextColor" Value="White"/>

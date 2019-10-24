@@ -1,4 +1,5 @@
 ﻿using RetrieveApp.Database;
+using RetrieveApp.Pages;
 using Rg.Plugins.Popup.Extensions;
 using System;
 using System.Collections.Generic;
@@ -30,17 +31,17 @@ namespace RetrieveApp.Elements.PopupContent
                 if (DBActions.GetAdminById(a1) == null)
                 {
                     await DBActions.FullyAddAdmin(new Admins { ID = a1, Password = a2, Login = false });
-                    await App.Send("Info", "Kontot med ID: "+a1+" har skapats!", "Ok");
+                    await App.Send("Info", "Kontot med ID: "+a1+" har skapats!", "Ok", ManagePage.page);
                     Navigation.PopPopupAsync();
                 }
                 else
                 {
-                    App.Send("Fel", "Kontot " + a1 + " finns redan!", "Avbryt");
+                    App.Send("Fel", "Kontot " + a1 + " finns redan!", "Avbryt", ManagePage.page);
                 }
             }
             else
             {
-                page.DisplayAlert("Fel", "Ange id och lösenord.", "Avbryt");
+                App.Send("Fel", "Ange id och lösenord.", "Avbryt", ManagePage.page);
             }
         }
     }

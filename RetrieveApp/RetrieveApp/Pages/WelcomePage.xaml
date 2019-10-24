@@ -107,9 +107,7 @@
 
             <Frame BackgroundColor="#CC51F1" AbsoluteLayout.LayoutBounds="0.5,0.1,300,150" 
                    AbsoluteLayout.LayoutFlags="PositionProportional" Padding="10" CornerRadius="14">
-                <Label Text="På kartan kan du se vilka
-                        restauranger och cafeer som
-                        är anslutna till Retrieve it" HorizontalOptions="CenterAndExpand" 
+                <Label x:Name="laboli" HorizontalOptions="CenterAndExpand" 
                        VerticalOptions="CenterAndExpand" 
                        HorizontalTextAlignment="Center" FontSize="Medium" 
                        FontAttributes="Bold" 
