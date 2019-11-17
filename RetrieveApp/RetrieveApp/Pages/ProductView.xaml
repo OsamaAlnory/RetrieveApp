@@ -13,17 +13,17 @@
                     <StackLayout HorizontalOptions="FillAndExpand" HeightRequest="100" x:Name="image_an_layout">
                         <an:AnimationView x:Name="image_loading" Loop="True"
                      Animation="loading.json" AutoPlay="True" IsVisible="True"
-                     HorizontalOptions="FillAndExpand" HeightRequest="100"/>
+                     HorizontalOptions="FillAndExpand" HeightRequest="100" />
                     </StackLayout>
-                    <Image x:Name="img"/>
+                    <Image x:Name="img" />
                     <StackLayout Spacing="5">
                         <Label x:Name="lbl_name" FontAttributes="Bold" FontSize="33"
-                       FontFamily="{StaticResource MFont}" HorizontalOptions="CenterAndExpand"/>
+                       FontFamily="{StaticResource MFont}" HorizontalOptions="CenterAndExpand" />
                         <Frame Padding="10" BackgroundColor="LightGray" Opacity="0.5" Margin="10,20,10,30"
                                CornerRadius="12">
                             <StackLayout Margin="0,20,0,20">
                                 <Label x:Name="lbl_desc" HorizontalOptions="CenterAndExpand" FontSize="22"
-                           FontFamily="{StaticResource MFont}"/>
+                           FontFamily="{StaticResource MFont}" />
                             </StackLayout>
                         </Frame>
                         <Frame Padding="10" BackgroundColor="White" CornerRadius="12" Margin="10,0,10,0">
@@ -32,32 +32,32 @@
                                     <Label Style="{StaticResource IB}" FontFamily="{StaticResource MFont}"
                                            TextColor="{StaticResource P}">Säljare:</Label>
                                     <Label x:Name="seller" FontFamily="{StaticResource MFont}"
-                                           FontAttributes="Bold"/>
+                                           FontAttributes="Bold" />
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                                     <Label Style="{StaticResource IB}" FontFamily="{StaticResource MFont}"
                              TextColor="{StaticResource P}">Original Pris:</Label>
                                     <Grid>
                                         <Label VerticalOptions="Center" x:Name="p_o"
-                                               FontFamily="{StaticResource MFont}"/>
+                                               FontFamily="{StaticResource MFont}" />
                                         <BoxView HeightRequest="3" VerticalOptions="Center"
-                         Opacity="0.5" Color="Black"/>
+                         Opacity="0.5" Color="Black" />
                                     </Grid>
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                                     <Label Style="{StaticResource IB}" FontFamily="{StaticResource MFont}"
                                      TextColor="{StaticResource P}">Nypris:</Label>
                                     <Label x:Name="p_n" FontFamily="{StaticResource MFont}"
-                                           FontAttributes="Bold"/>
+                                           FontAttributes="Bold" />
                                 </StackLayout>
                                 <StackLayout x:Name="amount">
                                     <Label Style="{StaticResource IB}" TextColor="{StaticResource P}"
                                  FontFamily="{StaticResource MFont}" Text="Välj Antal:"
-                                       HorizontalOptions="CenterAndExpand"/>
+                                       HorizontalOptions="CenterAndExpand" />
                                     <Frame Padding="0" OutlineColor="{StaticResource P}" IsClippedToBounds="True">
                                         <Frame Padding="0" HorizontalOptions="CenterAndExpand" OutlineColor="Red" BackgroundColor="Blue" IsClippedToBounds="True">
                                             <Picker x:Name="qu" HorizontalOptions="Center" FontAttributes="Bold"
-                                        FontFamily="{StaticResource MFont}"/>
+                                        FontFamily="{StaticResource MFont}" />
                                         </Frame>
                                     </Frame>
                                 </StackLayout>
@@ -65,43 +65,43 @@
                                              HorizontalOptions="CenterAndExpand">
                                     <Label Style="{StaticResource IB}" TextColor="{StaticResource P}"
                                      Text="Antalet kvar:" FontFamily="{StaticResource MFont}"
-                                           x:Name="antal"/>
+                                           x:Name="antal" />
                                     <Label x:Name="kvar" FontAttributes="Bold"
-                                           FontFamily="{StaticResource MFont}"/>
+                                           FontFamily="{StaticResource MFont}" />
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                                     <Label Text="Hämtningstid:" Style="{StaticResource IB}"
-                                     FontFamily="{StaticResource MFont}" TextColor="{StaticResource P}"/>
-                                    <Label x:Name="tid" FontFamily="{StaticResource MFont}" FontAttributes="Bold"/>
+                                     FontFamily="{StaticResource MFont}" TextColor="{StaticResource P}" />
+                                    <Label x:Name="tid" FontFamily="{StaticResource MFont}" FontAttributes="Bold" />
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                                     <Label FontFamily="{StaticResource MFont}" Style="{StaticResource IB}"
                                      TextColor="{StaticResource P}">Adress:</Label>
                                     <Label x:Name="address" FontFamily="{StaticResource MFont}"
-                                           FontAttributes="Bold"/>
+                                           FontAttributes="Bold" />
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                                     <Label FontFamily="{StaticResource MFont}" Style="{StaticResource IB}"
                                      TextColor="{StaticResource P}">Email:</Label>
                                     <Label x:Name="email" FontFamily="{StaticResource MFont}"
-                                           FontAttributes="Bold"/>
+                                           FontAttributes="Bold" />
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                                     <Label FontFamily="{StaticResource MFont}" Style="{StaticResource IB}"
                                      TextColor="{StaticResource P}">Mobilnummer:</Label>
                                     <Label x:Name="mobile" FontFamily="{StaticResource MFont}"
-                                           FontAttributes="Bold"/>
+                                           FontAttributes="Bold" />
                                 </StackLayout>
                             </StackLayout>
                         </Frame>
                     </StackLayout>
                     <Button Text="Reservera" x:Name="btn" Margin="0,15,0,0"
                        Style="{StaticResource Btn}" FontFamily="{StaticResource MFont}"
-                        BackgroundColor="{StaticResource P}" FontAttributes="Bold"/>
+                        BackgroundColor="{StaticResource P}" FontAttributes="Bold" />
                     <StackLayout HeightRequest="100" HorizontalOptions="FillAndExpand">
                         <an:AnimationView HeightRequest="100" IsVisible="False"
                      HorizontalOptions="FillAndExpand" Animation="loading.json"
-                     AutoPlay="False" Loop="True" x:Name="anim"/>
+                     AutoPlay="False" Loop="True" x:Name="anim" />
                     </StackLayout>
                 </StackLayout>
             </ScrollView>

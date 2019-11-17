@@ -16,8 +16,9 @@ namespace RetrieveApp.Design
         {
             InitializeComponent();
             AbsoluteLayout.SetLayoutFlags(this, AbsoluteLayoutFlags.All);
-            AbsoluteLayout.SetLayoutBounds(this, new Rectangle(0,0,1,1));
+            AbsoluteLayout.SetLayoutBounds(this, new Rectangle(0, 0, 1, 1));
         }
+
         public void SetSRC(ImageSource src)
         {
             icon.Source = src;

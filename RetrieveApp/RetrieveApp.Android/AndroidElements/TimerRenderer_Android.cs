@@ -17,6 +17,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
 [assembly: ExportRenderer(typeof(ITimer), typeof(TimerRenderer_Android))]
+
 namespace RetrieveApp.Droid.AndroidElements
 {
     public class TimerRenderer_Android : TimePickerRenderer
@@ -28,7 +29,7 @@ namespace RetrieveApp.Droid.AndroidElements
         protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.TimePicker> e)
         {
             base.OnElementChanged(e);
-            if(Control != null)
+            if (Control != null)
             {
                 GradientDrawable gd = new GradientDrawable();
                 gd.SetColor(global::Android.Graphics.Color.Transparent);

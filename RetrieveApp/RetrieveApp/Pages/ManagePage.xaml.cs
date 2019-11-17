@@ -12,18 +12,19 @@ using Xamarin.Forms.Xaml;
 
 namespace RetrieveApp.Pages
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ManagePage : ContentPage
-	{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class ManagePage : ContentPage
+    {
         public static ManagePage page;
 
-		public ManagePage ()
-		{
+        public ManagePage()
+        {
             page = this;
-			InitializeComponent ();
+            InitializeComponent();
             img.Source = App.GetSource("background.png");
             icon.Source = App.GetSource("logo.png");
-		}
+        }
+
         private void OnClicked1(object s, EventArgs args)
         {
             ShowPopup(new Popup(new AddAdmin(this), this));
@@ -36,7 +37,7 @@ namespace RetrieveApp.Pages
 
         private async void LogOut(object s, EventArgs args)
         {
-            if(await App.SendSure(this))
+            if (await App.SendSure(this))
             {
                 await App.LogOut(this);
             }
@@ -46,6 +47,5 @@ namespace RetrieveApp.Pages
         {
             await Navigation.PushPopupAsync(page);
         }
-
     }
 }
